@@ -108,6 +108,124 @@ export const testimonials = [
   },
 ];
 
+export type SeedLesson = {
+  slug: string;
+  title: string;
+  duration_minutes: number;
+  mux_playback_id: string | null;
+};
+
+export type SeedModule = {
+  title: string;
+  lessons: SeedLesson[];
+};
+
+export const seedModules: Record<string, SeedModule[]> = {
+  "tu-primer-telar": [
+    {
+      title: "Introducción",
+      lessons: [
+        { slug: "bienvenida", title: "Bienvenida al curso", duration_minutes: 8, mux_playback_id: null },
+        { slug: "materiales", title: "Materiales que necesitas", duration_minutes: 12, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Primeros pasos",
+      lessons: [
+        { slug: "armar-telar", title: "Cómo armar el telar", duration_minutes: 22, mux_playback_id: null },
+        { slug: "urdimbre", title: "La urdimbre paso a paso", duration_minutes: 25, mux_playback_id: null },
+        { slug: "primera-trama", title: "Tu primera trama", duration_minutes: 20, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Técnica básica",
+      lessons: [
+        { slug: "tensado", title: "Tensado y ajuste", duration_minutes: 18, mux_playback_id: null },
+        { slug: "patrones", title: "Patrones geométricos simples", duration_minutes: 30, mux_playback_id: null },
+        { slug: "lanas", title: "Cómo elegir y combinar lanas", duration_minutes: 15, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Tu primera pieza",
+      lessons: [
+        { slug: "proyecto", title: "El proyecto final", duration_minutes: 35, mux_playback_id: null },
+        { slug: "rematar", title: "Rematar y finalizar", duration_minutes: 20, mux_playback_id: null },
+        { slug: "presentar", title: "Presentar tu obra", duration_minutes: 15, mux_playback_id: null },
+        { slug: "siguientes-pasos", title: "¿Y ahora qué?", duration_minutes: 10, mux_playback_id: null },
+      ],
+    },
+  ],
+  "telar-mapuche": [
+    {
+      title: "Contexto e historia",
+      lessons: [
+        { slug: "introduccion", title: "El witral y su significado", duration_minutes: 20, mux_playback_id: null },
+        { slug: "materiales-tradicionales", title: "Materiales tradicionales", duration_minutes: 15, mux_playback_id: null },
+        { slug: "construir-witral", title: "Construir tu propio witral", duration_minutes: 35, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Técnica witral",
+      lessons: [
+        { slug: "urdimbre-vertical", title: "Urdimbre vertical", duration_minutes: 28, mux_playback_id: null },
+        { slug: "nimin-basico", title: "Ñimin básico", duration_minutes: 40, mux_playback_id: null },
+        { slug: "motivos-geometricos", title: "Motivos geométricos ancestrales", duration_minutes: 35, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Color y fibra",
+      lessons: [
+        { slug: "tintura-natural", title: "Tintura natural de lanas", duration_minutes: 45, mux_playback_id: null },
+        { slug: "paleta-tradicional", title: "Paleta de colores tradicional", duration_minutes: 22, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Proyecto completo",
+      lessons: [
+        { slug: "diseno-nimin", title: "Diseñar tu ñimin", duration_minutes: 38, mux_playback_id: null },
+        { slug: "tejiendo-proyecto", title: "Tejiendo el proyecto", duration_minutes: 55, mux_playback_id: null },
+        { slug: "terminaciones", title: "Terminaciones y presentación", duration_minutes: 30, mux_playback_id: null },
+        { slug: "reflexion-final", title: "Reflexión final", duration_minutes: 12, mux_playback_id: null },
+      ],
+    },
+  ],
+  "diseno-propio": [
+    {
+      title: "Fundamentos del diseño",
+      lessons: [
+        { slug: "introduccion-diseno", title: "¿Qué es diseño propio?", duration_minutes: 18, mux_playback_id: null },
+        { slug: "teoria-color", title: "Teoría del color textil", duration_minutes: 35, mux_playback_id: null },
+        { slug: "composicion", title: "Composición y ritmo", duration_minutes: 30, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Identidad visual",
+      lessons: [
+        { slug: "referencias", title: "Construir un moodboard textil", duration_minutes: 25, mux_playback_id: null },
+        { slug: "lenguaje-propio", title: "Desarrollar tu lenguaje propio", duration_minutes: 40, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Técnicas mixtas",
+      lessons: [
+        { slug: "mezcla-fibras", title: "Mezcla de fibras y texturas", duration_minutes: 35, mux_playback_id: null },
+        { slug: "relieve", title: "Tejido en relieve", duration_minutes: 42, mux_playback_id: null },
+        { slug: "estructura", title: "Variaciones de estructura", duration_minutes: 38, mux_playback_id: null },
+      ],
+    },
+    {
+      title: "Proyecto y portafolio",
+      lessons: [
+        { slug: "proceso-creativo", title: "Del boceto al tapiz", duration_minutes: 30, mux_playback_id: null },
+        { slug: "proyecto-final", title: "Proyecto final", duration_minutes: 50, mux_playback_id: null },
+        { slug: "fotografia", title: "Fotografiar tu obra", duration_minutes: 22, mux_playback_id: null },
+        { slug: "portafolio", title: "Armar tu portafolio", duration_minutes: 20, mux_playback_id: null },
+        { slug: "cierre", title: "Cierre y próximos pasos", duration_minutes: 15, mux_playback_id: null },
+      ],
+    },
+  ],
+};
+
 export const faqItems = [
   {
     q: "¿Necesito experiencia previa para empezar?",
