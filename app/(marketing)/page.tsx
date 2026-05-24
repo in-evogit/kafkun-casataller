@@ -1,29 +1,64 @@
-// Fase 2: construir landing completa con todas las secciones del MASTER_INSTRUCTIONS
+import type { Metadata } from "next";
+import Hero from "@/components/sections/hero";
+import CredibilityBar from "@/components/sections/credibility-bar";
+import ForWho from "@/components/sections/for-who";
+import FeaturedCourses from "@/components/sections/featured-courses";
+import HowItWorks from "@/components/sections/how-it-works";
+import AboutMini from "@/components/sections/about-mini";
+import Testimonials from "@/components/sections/testimonials";
+import FaqSection from "@/components/sections/faq-section";
+import FinalCta from "@/components/sections/final-cta";
+
+export const metadata: Metadata = {
+  title: "Casa Taller Kafkun · Cursos de telar online en Chile",
+  description:
+    "Aprende a tejer en telar desde cero, a tu ritmo. Cursos online con acceso de por vida, soporte personalizado y garantía 7 días. Más de 200 alumnas tejiendo.",
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_SITE_URL,
+  },
+  openGraph: {
+    title: "Casa Taller Kafkun · Cursos de telar online en Chile",
+    description:
+      "Aprende a tejer en telar desde cero. Cursos online con acceso de por vida.",
+    type: "website",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#organization`,
+      name: "Casa Taller Kafkun",
+      url: process.env.NEXT_PUBLIC_SITE_URL,
+      sameAs: ["https://instagram.com/casataller_kafkun"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${process.env.NEXT_PUBLIC_SITE_URL}/#website`,
+      url: process.env.NEXT_PUBLIC_SITE_URL,
+      name: "Casa Taller Kafkun",
+    },
+  ],
+};
+
 export default function HomePage() {
   return (
-    <section className="flex flex-col items-center justify-center gap-6 px-4 py-32 text-center">
-      <h1 className="font-heading text-5xl font-semibold leading-tight text-foreground md:text-6xl">
-        Tejer puede ser tu <br />
-        <span className="text-primary">nuevo lugar favorito</span>
-      </h1>
-      <p className="max-w-xl text-lg text-muted-foreground">
-        Cursos online de telar con acceso de por vida. Aprende desde cero,
-        a tu ritmo, con Katy desde Chile.
-      </p>
-      <div className="flex gap-3">
-        <a
-          href="/cursos"
-          className="rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-accent"
-        >
-          Ver cursos
-        </a>
-        <a
-          href="/sobre-mi"
-          className="rounded-md border border-border px-6 py-3 font-medium text-foreground transition-colors hover:bg-secondary"
-        >
-          Conocer a Katy
-        </a>
-      </div>
-    </section>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Hero />
+      <CredibilityBar />
+      <ForWho />
+      <FeaturedCourses />
+      <HowItWorks />
+      <AboutMini />
+      <Testimonials />
+      <FaqSection />
+      <FinalCta />
+    </>
   );
 }
