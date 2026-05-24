@@ -1,0 +1,11 @@
+import type { Metadata } from "next";
+import { RecoverForm } from "./recover-form";
+
+export const metadata: Metadata = {
+  title: "Recuperar contraseña",
+  robots: { index: false },
+};
+
+export default function RecoverPage() {
+  return <RecoverForm />;
+}
