@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
+import { useCart } from "@/lib/store/cart";
 
 type Course = {
   slug: string;
@@ -34,6 +36,21 @@ function formatDuration(minutes: number) {
 }
 
 export default function CourseCard({ course }: { course: Course }) {
+  const add = useCart((s) => s.add);
+  const items = useCart((s) => s.items);
+  const inCart = items.some((i) => i.id === course.slug);
+
+  function handleAdd(e: React.MouseEvent) {
+    e.preventDefault();
+    add({
+      id: course.slug,
+      type: "course",
+      title: course.title,
+      price_clp: course.price_clp,
+      thumbnail_url: course.thumbnail_url,
+    });
+  }
+
   return (
     <Link
       href={`/cursos/${course.slug}`}
@@ -66,13 +83,20 @@ export default function CourseCard({ course }: { course: Course }) {
         <p className="mt-1 flex-1 text-sm text-muted-foreground">
           {course.subtitle}
         </p>
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex items-center justify-between gap-2">
           <span className="font-heading text-lg font-semibold text-foreground">
             {formatPrice(course.price_clp)}
           </span>
-          <span className="rounded-md bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-colors group-hover:bg-accent">
-            Ver curso
-          </span>
+          <button
+            onClick={handleAdd}
+            className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+              inCart
+                ? "bg-muted text-muted-foreground cursor-default"
+                : "bg-primary text-primary-foreground hover:bg-accent"
+            }`}
+          >
+            {inCart ? "En carrito" : "Agregar"}
+          </button>
         </div>
       </div>
     </Link>

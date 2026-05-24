@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import CartIcon from "@/components/cart-icon";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -44,7 +45,8 @@ export default async function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <CartIcon />
           {user ? (
             <Link
               href="/mis-cursos"
