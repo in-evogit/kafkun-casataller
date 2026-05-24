@@ -5,7 +5,7 @@ import { useCart } from "@/lib/store/cart";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  items: Array<{ id: string; type: "course" | "product"; price_clp: number; quantity: number }>;
+  items: Array<{ id: string; type: "course" | "product"; title: string; price_clp: number; quantity: number }>;
   devMode: boolean;
 };
 

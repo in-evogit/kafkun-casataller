@@ -38,7 +38,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
       );
     }
 
-    const items = [{ id: course.slug, type: "course" as const, price_clp: course.price_clp, quantity: 1 }];
+    const items = [{ id: course.slug, type: "course" as const, title: course.title, price_clp: course.price_clp, quantity: 1 }];
 
     return (
       <main className="mx-auto max-w-lg px-4 py-12 sm:px-6">

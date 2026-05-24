@@ -2,6 +2,7 @@ import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { webhookLimiter, rateLimit } from "@/lib/ratelimit";
+import { sendOrderConfirmation, sendAdminOrderAlert } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   // Rate limit por IP
@@ -125,8 +126,9 @@ export async function POST(req: NextRequest) {
     }
 
     // Crear enrollments para cursos comprados
+    type PaymentItem = { id: string; type: string; title?: string; price_clp?: number; quantity?: number };
     const metadata = payment.metadata as Record<string, unknown> | null;
-    const items = (metadata?.items as Array<{ id: string; type: string }>) ?? [];
+    const items = (metadata?.items as PaymentItem[]) ?? [];
     const courseIds = items
       .filter((i) => i.type === "course")
       .map((i) => i.id);
@@ -148,6 +150,37 @@ export async function POST(req: NextRequest) {
         );
       }
     }
+
+    // Enviar emails de confirmación
+    const customerEmail = payment.payer?.email ?? "";
+    const customerName = [payment.payer?.first_name, payment.payer?.last_name]
+      .filter(Boolean)
+      .join(" ");
+    const hasPhysicalItems = items.some((i) => i.type === "product");
+    const emailItems = items.map((i) => ({
+      title: i.title ?? i.id,
+      quantity: i.quantity ?? 1,
+      price_clp: i.price_clp ?? 0,
+    }));
+
+    await Promise.all([
+      sendOrderConfirmation({
+        orderId: order.id,
+        customerName,
+        customerEmail,
+        items: emailItems,
+        total_clp: payment.transaction_amount ?? 0,
+        hasPhysicalItems,
+      }),
+      sendAdminOrderAlert({
+        orderId: order.id,
+        customerName,
+        customerEmail,
+        items: emailItems,
+        total_clp: payment.transaction_amount ?? 0,
+        hasPhysicalItems,
+      }),
+    ]);
 
     // Actualizar audit_log con resultado
     await supabase

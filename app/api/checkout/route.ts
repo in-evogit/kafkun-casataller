@@ -9,6 +9,7 @@ const bodySchema = z.object({
       z.object({
         id: z.string().min(1),
         type: z.enum(["course", "product"]),
+        title: z.string().min(1),
         price_clp: z.number().positive().int(),
         quantity: z.number().positive().int().max(20),
       })
@@ -81,6 +82,15 @@ export async function POST(req: NextRequest) {
         auto_return: "approved",
         external_reference: user.id,
         notification_url: `${siteUrl}/api/webhooks/mercadopago`,
+        metadata: {
+          items: items.map((i) => ({
+            id: i.id,
+            type: i.type,
+            title: i.title,
+            price_clp: i.price_clp,
+            quantity: i.quantity,
+          })),
+        },
       },
     });
 
