@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { webhookLimiter, rateLimit } from "@/lib/ratelimit";
 import { sendOrderConfirmation, sendAdminOrderAlert } from "@/lib/email";
+import { emitirBoleta } from "@/lib/openfactura";
 
 export async function POST(req: NextRequest) {
   // Rate limit por IP
@@ -163,6 +164,12 @@ export async function POST(req: NextRequest) {
       price_clp: i.price_clp ?? 0,
     }));
 
+    const boletaItems = emailItems.map((i) => ({
+      description: i.title,
+      quantity: i.quantity,
+      unitPrice: i.price_clp,
+    }));
+
     await Promise.all([
       sendOrderConfirmation({
         orderId: order.id,
@@ -180,6 +187,13 @@ export async function POST(req: NextRequest) {
         total_clp: payment.transaction_amount ?? 0,
         hasPhysicalItems,
       }),
+      emitirBoleta({
+        orderId: order.id,
+        customerName,
+        customerEmail,
+        items: boletaItems,
+        total_clp: payment.transaction_amount ?? 0,
+      }).catch((err) => console.error("[webhook] Error emitiendo boleta:", err)),
     ]);
 
     // Actualizar audit_log con resultado
