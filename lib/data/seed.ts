@@ -9,8 +9,7 @@ export const seedCourses = [
     level: "principiante" as const,
     duration_minutes: 260,
     lessons_count: 12,
-    thumbnail_url:
-      "https://placehold.co/600x450/9B2335/FFFFFF?text=Tu+primer+telar",
+    thumbnail_url: "/media/curso-primer-telar.jpg",
     seo_description:
       "Aprende a tejer en telar desde cero, a tu ritmo. 12 lecciones, 4h 20min, acceso de por vida.",
   },
@@ -24,8 +23,7 @@ export const seedCourses = [
     level: "intermedio" as const,
     duration_minutes: 430,
     lessons_count: 18,
-    thumbnail_url:
-      "https://placehold.co/600x450/7C1D2B/FFFFFF?text=Telar+mapuche",
+    thumbnail_url: "/media/curso-telar-mapuche.jpg",
     seo_description:
       "Curso de telar mapuche tradicional. Witral, ñimin y técnicas ancestrales.",
   },
@@ -39,8 +37,7 @@ export const seedCourses = [
     level: "avanzado" as const,
     duration_minutes: 400,
     lessons_count: 16,
-    thumbnail_url:
-      "https://placehold.co/600x450/5C1520/FFFFFF?text=Diseño+propio",
+    thumbnail_url: "/media/curso-diseno-propio.jpg",
     seo_description:
       "Desarrolla tu propio lenguaje textil. Curso avanzado de diseño en telar.",
   },
@@ -52,7 +49,7 @@ export const seedProducts = [
     name: "Telar María mediano",
     price_clp: 38900,
     stock: 8,
-    image_url: "https://placehold.co/600x600/9B2335/FFFFFF?text=Telar+María",
+    image_url: "/media/producto-telar-maria.jpg",
     category: "telares",
   },
   {
@@ -60,7 +57,7 @@ export const seedProducts = [
     name: "Lana de oveja · 100g",
     price_clp: 5200,
     stock: 50,
-    image_url: "https://placehold.co/600x600/7C1D2B/FFFFFF?text=Lana",
+    image_url: "/media/producto-lana.jpg",
     category: "lanas",
   },
   {
@@ -68,7 +65,7 @@ export const seedProducts = [
     name: "Kit completo iniciación",
     price_clp: 67000,
     stock: 5,
-    image_url: "https://placehold.co/600x600/5C1520/FFFFFF?text=Kit",
+    image_url: "/media/producto-kit.jpg",
     category: "kits",
   },
   {
@@ -76,7 +73,7 @@ export const seedProducts = [
     name: "Set de peines de telar",
     price_clp: 12400,
     stock: 12,
-    image_url: "https://placehold.co/600x600/9B2335/FFFFFF?text=Peines",
+    image_url: "/media/producto-peines.jpg",
     category: "accesorios",
   },
 ];
@@ -86,7 +83,7 @@ export const testimonials = [
     name: "Valentina Rojas",
     city: "Santiago",
     course: "Tu primer telar",
-    avatar: "https://placehold.co/80x80/9B2335/FFFFFF?text=VR",
+    avatar: "/media/about-katy.jpg",
     quote:
       "Nunca pensé que iba a poder tejer algo tan bonito en mis primeras semanas. Katy explica todo con mucha paciencia y claridad.",
   },
@@ -94,7 +91,7 @@ export const testimonials = [
     name: "Francisca Morales",
     city: "Valparaíso",
     course: "Telar mapuche",
-    avatar: "https://placehold.co/80x80/7C1D2B/FFFFFF?text=FM",
+    avatar: "/media/curso-primer-telar.jpg",
     quote:
       "El curso de telar mapuche me cambió la perspectiva. Aprendí no solo técnica sino también historia y significado detrás de cada tejido.",
   },
@@ -102,7 +99,7 @@ export const testimonials = [
     name: "Daniela Sepúlveda",
     city: "Concepción",
     course: "Tu primer telar",
-    avatar: "https://placehold.co/80x80/5C1520/FFFFFF?text=DS",
+    avatar: "/media/curso-telar-mapuche.jpg",
     quote:
       "Acceso de por vida es lo mejor. Vuelvo a ver las lecciones cada vez que necesito repasar algo. Vale cada peso.",
   },
