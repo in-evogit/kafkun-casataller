@@ -8,6 +8,7 @@ import AboutMini from "@/components/sections/about-mini";
 import Testimonials from "@/components/sections/testimonials";
 import FaqSection from "@/components/sections/faq-section";
 import FinalCta from "@/components/sections/final-cta";
+import NewsletterForm from "@/components/newsletter-form";
 
 export const metadata: Metadata = {
   title: "Casa Taller Kafkun · Cursos de telar online en Chile",
@@ -58,6 +59,19 @@ export default function HomePage() {
       <AboutMini />
       <Testimonials />
       <FaqSection />
+      <section className="bg-secondary">
+        <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
+          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+            Novedades y descuentos exclusivos
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Suscríbete y sé la primera en enterarte de nuevos cursos, materiales y ofertas.
+          </p>
+          <div className="mt-6">
+            <NewsletterForm />
+          </div>
+        </div>
+      </section>
       <FinalCta />
     </>
   );

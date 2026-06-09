@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { checkoutLimiter, rateLimit } from "@/lib/ratelimit";
 import { z } from "zod";
 
@@ -16,17 +17,16 @@ const bodySchema = z.object({
     )
     .min(1)
     .max(20),
+  coupon_code: z.string().max(50).optional(),
 });
 
 export async function POST(req: NextRequest) {
-  // Auth — debe estar logueado
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 
-  // Rate limit
   const { allowed } = await rateLimit(checkoutLimiter, user.id);
   if (!allowed) {
     return NextResponse.json(
@@ -35,14 +35,44 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Validar body
   const rawBody = await req.json().catch(() => null);
   const parsed = bodySchema.safeParse(rawBody);
   if (!parsed.success) {
     return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
   }
 
-  const { items } = parsed.data;
+  const { items, coupon_code } = parsed.data;
+
+  // Validar cupón si se envió
+  let couponData: { id: string; discount_type: string; discount_value: number } | null = null;
+  if (coupon_code) {
+    const admin = createAdminClient();
+    const { data: coupon } = await admin
+      .from("coupons")
+      .select("id, discount_type, discount_value, max_uses, uses_count, expires_at, active")
+      .eq("code", coupon_code.toUpperCase())
+      .maybeSingle();
+
+    if (
+      coupon &&
+      coupon.active &&
+      (!coupon.expires_at || new Date(coupon.expires_at) > new Date()) &&
+      (coupon.max_uses === null || coupon.uses_count < coupon.max_uses)
+    ) {
+      couponData = coupon;
+    }
+  }
+
+  // Calcular subtotal y descuento
+  const subtotal = items.reduce((sum, i) => sum + i.price_clp * i.quantity, 0);
+  let discountAmount = 0;
+  if (couponData) {
+    discountAmount =
+      couponData.discount_type === "percent"
+        ? Math.round(subtotal * couponData.discount_value / 100)
+        : Math.min(couponData.discount_value, subtotal);
+  }
+  const totalAfterDiscount = subtotal - discountAmount;
 
   // Modo desarrollo — MP no configurado
   if (!process.env.MP_ACCESS_TOKEN) {
@@ -59,16 +89,17 @@ export async function POST(req: NextRequest) {
     });
     const preferenceApi = new Preference(mpClient);
 
-    // Construir line items
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+    // Si hay descuento, proporcional al total; si no, precio normal
+    const discountRatio = subtotal > 0 ? totalAfterDiscount / subtotal : 1;
     const mpItems = items.map((item) => ({
       id: item.id,
-      title: item.id,
+      title: item.title,
       quantity: item.quantity,
-      unit_price: item.price_clp / 100, // MP usa pesos sin centavos en CLP
+      unit_price: Math.round(item.price_clp * discountRatio) / 100,
       currency_id: "CLP",
     }));
-
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
     const preference = await preferenceApi.create({
       body: {
@@ -90,6 +121,8 @@ export async function POST(req: NextRequest) {
             price_clp: i.price_clp,
             quantity: i.quantity,
           })),
+          coupon_id: couponData?.id ?? null,
+          discount_amount: discountAmount,
         },
       },
     });

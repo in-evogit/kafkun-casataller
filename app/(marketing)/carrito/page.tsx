@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Minus, Plus, Trash2, Tag, X } from "lucide-react";
 import { useCart } from "@/lib/store/cart";
 
 function formatPrice(clp: number) {
@@ -13,8 +14,85 @@ function formatPrice(clp: number) {
   }).format(clp);
 }
 
+function CuponInput() {
+  const { coupon, setCoupon, subtotal } = useCart();
+  const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleApply() {
+    if (!code.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/cupon", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: code.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error ?? "Cupón no válido");
+      } else {
+        setCoupon(data);
+        setCode("");
+      }
+    } catch {
+      setError("Error al validar el cupón");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (coupon) {
+    const descuento =
+      coupon.discount_type === "percent"
+        ? `${coupon.discount_value}% de descuento`
+        : `${formatPrice(coupon.discount_value)} de descuento`;
+
+    return (
+      <div className="flex items-center justify-between rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm">
+        <div className="flex items-center gap-2 text-green-700">
+          <Tag className="h-3.5 w-3.5" />
+          <span className="font-medium">{coupon.code}</span>
+          <span className="text-green-600">— {descuento}</span>
+        </div>
+        <button
+          onClick={() => setCoupon(null)}
+          className="text-green-600 hover:text-green-800"
+          aria-label="Quitar cupón"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-1">
+      <div className="flex gap-2">
+        <input
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          onKeyDown={(e) => e.key === "Enter" && handleApply()}
+          placeholder="Código de descuento"
+          className="flex-1 rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+        />
+        <button
+          onClick={handleApply}
+          disabled={loading || !code.trim()}
+          className="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
+        >
+          {loading ? "..." : "Aplicar"}
+        </button>
+      </div>
+      {error && <p className="text-xs text-destructive">{error}</p>}
+    </div>
+  );
+}
+
 export default function CarritoPage() {
-  const { items, remove, updateQty, total, count } = useCart();
+  const { items, remove, updateQty, total, subtotal, discount, coupon, count } = useCart();
 
   if (items.length === 0) {
     return (
@@ -35,6 +113,8 @@ export default function CarritoPage() {
       </main>
     );
   }
+
+  const hasDiscount = coupon !== null && discount() > 0;
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
@@ -116,7 +196,7 @@ export default function CarritoPage() {
           <div className="mt-4 space-y-2">
             {items.map((item) => (
               <div key={item.id} className="flex justify-between text-sm">
-                <span className="text-muted-foreground truncate max-w-[160px]">
+                <span className="truncate max-w-[160px] text-muted-foreground">
                   {item.title}
                   {item.quantity > 1 && ` ×${item.quantity}`}
                 </span>
@@ -124,15 +204,35 @@ export default function CarritoPage() {
               </div>
             ))}
           </div>
+
+          {hasDiscount && (
+            <div className="mt-3 flex justify-between border-t border-border pt-3 text-sm text-green-700">
+              <span>Descuento ({coupon!.code})</span>
+              <span>−{formatPrice(discount())}</span>
+            </div>
+          )}
+
           <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
             <span className="font-semibold text-foreground">Total</span>
-            <span className="font-heading text-xl font-semibold text-foreground">
-              {formatPrice(total())}
-            </span>
+            <div className="text-right">
+              {hasDiscount && (
+                <p className="text-xs text-muted-foreground line-through">
+                  {formatPrice(subtotal())}
+                </p>
+              )}
+              <span className="font-heading text-xl font-semibold text-foreground">
+                {formatPrice(total())}
+              </span>
+            </div>
           </div>
+
+          <div className="mt-4">
+            <CuponInput />
+          </div>
+
           <Link
             href="/checkout"
-            className="mt-6 block rounded-md bg-primary px-6 py-3 text-center font-semibold text-primary-foreground transition-colors hover:bg-accent"
+            className="mt-4 block rounded-md bg-primary px-6 py-3 text-center font-semibold text-primary-foreground transition-colors hover:bg-accent"
           >
             Proceder al pago →
           </Link>

@@ -32,6 +32,12 @@ export default async function Navbar() {
             Tienda
           </Link>
           <Link
+            href="/diario"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Diario
+          </Link>
+          <Link
             href="/sobre-mi"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >

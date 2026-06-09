@@ -130,6 +130,22 @@ export async function POST(req: NextRequest) {
     type PaymentItem = { id: string; type: string; title?: string; price_clp?: number; quantity?: number };
     const metadata = payment.metadata as Record<string, unknown> | null;
     const items = (metadata?.items as PaymentItem[]) ?? [];
+    const couponId = (metadata?.coupon_id as string | null) ?? null;
+
+    // Incrementar uses_count del cupón si se usó uno
+    if (couponId) {
+      const { data: coup } = await supabase
+        .from("coupons")
+        .select("uses_count")
+        .eq("id", couponId)
+        .single();
+      if (coup) {
+        await supabase
+          .from("coupons")
+          .update({ uses_count: coup.uses_count + 1 })
+          .eq("id", couponId);
+      }
+    }
     const courseIds = items
       .filter((i) => i.type === "course")
       .map((i) => i.id);
