@@ -39,8 +39,8 @@ export default function Hero() {
           <div className="order-1 lg:order-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
               <Image
-                src="/media/hero.jpg"
-                alt="Alumnas tejiendo en telar en taller de Kafkun"
+                src="https://placehold.co/1200x900/9B2335/FFFFFF?text=Katy+tejiendo"
+                alt="Katy tejiendo en su telar"
                 fill
                 className="object-cover"
                 priority
