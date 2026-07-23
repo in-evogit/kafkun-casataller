@@ -62,16 +62,36 @@ export default async function ProductoPage({ params }: Props) {
 
       <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2">
-          {/* Imagen */}
-          <div className="relative aspect-square overflow-hidden rounded-2xl">
-            <Image
-              src={product.image_url}
-              alt={product.name}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          {/* Imagen + galería */}
+          <div>
+            <div className="relative aspect-square overflow-hidden rounded-2xl">
+              <Image
+                src={product.image_url}
+                alt={product.name}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            {product.images && product.images.length > 1 && (
+              <div className="mt-3 grid grid-cols-4 gap-3">
+                {product.images.map((img) => (
+                  <div
+                    key={img}
+                    className="relative aspect-square overflow-hidden rounded-lg border border-border"
+                  >
+                    <Image
+                      src={img}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                      sizes="20vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Info */}

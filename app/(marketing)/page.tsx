@@ -5,6 +5,7 @@ import ForWho from "@/components/sections/for-who";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import HowItWorks from "@/components/sections/how-it-works";
 import AboutMini from "@/components/sections/about-mini";
+import ObrasGallery from "@/components/sections/obras-gallery";
 import Testimonials from "@/components/sections/testimonials";
 import FaqSection from "@/components/sections/faq-section";
 import FinalCta from "@/components/sections/final-cta";
@@ -13,7 +14,7 @@ import NewsletterForm from "@/components/newsletter-form";
 export const metadata: Metadata = {
   title: "Casa Taller Kafkun · Cursos de telar online en Chile",
   description:
-    "Aprende a tejer en telar desde cero, a tu ritmo. Cursos online con acceso de por vida, soporte personalizado y garantía 7 días. Más de 200 alumnas tejiendo.",
+    "Aprende telar mapuche desde cero, a tu ritmo. Cursos online con acceso de por vida, soporte personalizado y garantía 7 días. Con Katy, tejedora autodidacta desde 2015.",
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL,
   },
@@ -57,6 +58,7 @@ export default function HomePage() {
       <FeaturedCourses />
       <HowItWorks />
       <AboutMini />
+      <ObrasGallery />
       <Testimonials />
       <FaqSection />
       <section className="bg-secondary">

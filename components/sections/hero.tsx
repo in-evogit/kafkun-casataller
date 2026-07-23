@@ -42,8 +42,8 @@ export default function Hero() {
           <div className="order-1 lg:order-2">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
               <Image
-                src="/images/katy-telar.jpg"
-                alt="Katy tejiendo en su telar witral"
+                src="/images/prod-bufanda-blanca-1.jpg"
+                alt="Chal tejido a mano en telar mapuche"
                 fill
                 className="object-cover"
                 priority

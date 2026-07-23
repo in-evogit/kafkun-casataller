@@ -13,10 +13,9 @@ export const metadata: Metadata = {
 
 const categories = [
   { value: "", label: "Todo" },
-  { value: "telares", label: "Telares" },
+  { value: "bufandas", label: "Bufandas" },
+  { value: "chalecos", label: "Chalecos" },
   { value: "lanas", label: "Lanas" },
-  { value: "kits", label: "Kits" },
-  { value: "accesorios", label: "Accesorios" },
 ];
 
 type Props = { searchParams: Promise<{ cat?: string }> };

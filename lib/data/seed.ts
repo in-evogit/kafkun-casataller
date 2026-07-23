@@ -43,38 +43,53 @@ export const seedCourses = [
   },
 ];
 
+// NOTA: precios y stock son PLACEHOLDER — reemplazar con los reales de Katy.
 export const seedProducts = [
   {
-    slug: "telar-maria-mediano",
-    name: "Telar María mediano",
-    price_clp: 38900,
-    stock: 8,
-    image_url: "https://placehold.co/600x600/9B2335/FFFFFF?text=Telar+María",
-    category: "telares",
+    slug: "bufanda-crema",
+    name: "Bufanda tejida a telar · crema",
+    price_clp: 45000,
+    stock: 3,
+    image_url: "/images/prod-bufanda-blanca-1.jpg",
+    images: [
+      "/images/prod-bufanda-blanca-1.jpg",
+      "/images/prod-bufanda-blanca-2.jpg",
+      "/images/prod-bufanda-blanca-3.jpg",
+    ],
+    category: "bufandas",
   },
   {
-    slug: "lana-oveja-100g",
-    name: "Lana de oveja · 100g",
-    price_clp: 5200,
-    stock: 50,
-    image_url: "https://placehold.co/600x600/7C1D2B/FFFFFF?text=Lana",
+    slug: "bufanda-roja",
+    name: "Bufanda tejida a telar · roja",
+    price_clp: 45000,
+    stock: 2,
+    image_url: "/images/prod-bufanda-roja-1.jpg",
+    images: [
+      "/images/prod-bufanda-roja-1.jpg",
+      "/images/prod-bufanda-roja-2.jpg",
+    ],
+    category: "bufandas",
+  },
+  {
+    slug: "chaleco-verde",
+    name: "Chaleco de lana · verde",
+    price_clp: 38000,
+    stock: 1,
+    image_url: "/images/prod-chaleco-verde-1.jpg",
+    images: [
+      "/images/prod-chaleco-verde-1.jpg",
+      "/images/prod-chaleco-verde-2.jpg",
+    ],
+    category: "chalecos",
+  },
+  {
+    slug: "lanas-hilos",
+    name: "Lanas e hilos de colores",
+    price_clp: 4500,
+    stock: 20,
+    image_url: "/images/lanas-1.jpg",
+    images: ["/images/lanas-1.jpg", "/images/lanas-2.jpg"],
     category: "lanas",
-  },
-  {
-    slug: "kit-iniciacion-completo",
-    name: "Kit completo iniciación",
-    price_clp: 67000,
-    stock: 5,
-    image_url: "https://placehold.co/600x600/5C1520/FFFFFF?text=Kit",
-    category: "kits",
-  },
-  {
-    slug: "set-peines-telar",
-    name: "Set de peines de telar",
-    price_clp: 12400,
-    stock: 12,
-    image_url: "https://placehold.co/600x600/9B2335/FFFFFF?text=Peines",
-    category: "accesorios",
   },
 ];
 
