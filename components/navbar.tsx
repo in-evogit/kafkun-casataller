@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import CartIcon from "@/components/cart-icon";
+import MobileNav from "@/components/mobile-nav";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -18,7 +19,7 @@ export default async function Navbar() {
           Casa Taller Kafkun
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           <Link
             href="/cursos"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -51,31 +52,34 @@ export default async function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <CartIcon />
-          {user ? (
-            <Link
-              href="/mis-cursos"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-            >
-              Mi cuenta
-            </Link>
-          ) : (
-            <>
+          <div className="hidden items-center gap-4 lg:flex">
+            {user ? (
               <Link
-                href="/login"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Ingresar
-              </Link>
-              <Link
-                href="/registro"
+                href="/mis-cursos"
                 className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
               >
-                Empezar
+                Mi cuenta
               </Link>
-            </>
-          )}
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Ingresar
+                </Link>
+                <Link
+                  href="/registro"
+                  className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
+                >
+                  Empezar
+                </Link>
+              </>
+            )}
+          </div>
+          <MobileNav isLoggedIn={!!user} />
         </div>
       </div>
     </header>

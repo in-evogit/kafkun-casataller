@@ -62,35 +62,29 @@ export default async function ProductoPage({ params }: Props) {
 
       <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2">
-          {/* Imagen + galería */}
+          {/* Imagen(es) — carrusel deslizable */}
           <div>
-            <div className="relative aspect-square overflow-hidden rounded-2xl">
-              <Image
-                src={product.image_url}
-                alt={product.name}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl pb-2">
+              {(product.images ?? [product.image_url]).map((img, i) => (
+                <div
+                  key={img}
+                  className="relative aspect-square w-full shrink-0 snap-center overflow-hidden rounded-2xl"
+                >
+                  <Image
+                    src={img}
+                    alt={product.name}
+                    fill
+                    priority={i === 0}
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              ))}
             </div>
             {product.images && product.images.length > 1 && (
-              <div className="mt-3 grid grid-cols-4 gap-3">
-                {product.images.map((img) => (
-                  <div
-                    key={img}
-                    className="relative aspect-square overflow-hidden rounded-lg border border-border"
-                  >
-                    <Image
-                      src={img}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                      sizes="20vw"
-                    />
-                  </div>
-                ))}
-              </div>
+              <p className="mt-2 text-center text-xs text-muted-foreground">
+                ← Desliza para ver más fotos →
+              </p>
             )}
           </div>
 

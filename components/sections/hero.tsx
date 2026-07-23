@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Texto */}
-          <div className="order-2 lg:order-1">
+          <div className="order-1">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/70">
               Casa Taller Kafkun
             </p>
@@ -39,7 +39,7 @@ export default function Hero() {
           </div>
 
           {/* Imagen */}
-          <div className="order-1 lg:order-2">
+          <div className="order-2">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
               <Image
                 src="/images/prod-bufanda-blanca-1.jpg"
