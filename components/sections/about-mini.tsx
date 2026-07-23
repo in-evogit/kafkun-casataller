@@ -19,7 +19,7 @@ export default function AboutMini() {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
               Sobre mí
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-semibold text-foreground md:text-4xl">
+            <h2 className="mt-3 font-heading text-4xl font-semibold text-foreground md:text-5xl">
               El telar me encontró a mí
             </h2>
             <p className="mt-4 leading-relaxed text-muted-foreground">

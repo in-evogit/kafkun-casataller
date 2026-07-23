@@ -3,7 +3,7 @@ import Link from "next/link";
 const links = {
   Aprende: [
     { href: "/cursos", label: "Todos los cursos" },
-    { href: "/cursos/tu-primer-telar", label: "Tu primer telar" },
+    { href: "/cursos/tu-primer-telar", label: "Telar mapuche inicial" },
     { href: "/cursos/telar-mapuche", label: "Telar mapuche" },
     { href: "/cursos/diseno-propio", label: "Diseño propio" },
   ],

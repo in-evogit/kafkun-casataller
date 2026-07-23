@@ -1,17 +1,17 @@
 export const seedCourses = [
   {
     slug: "tu-primer-telar",
-    title: "Tu primer telar",
-    subtitle: "De cero a tu primer tapiz",
+    title: "Taller inicial de telar mapuche",
+    subtitle: "Técnica llano · desde cero",
     description:
-      "Aprende los fundamentos del telar desde la base. En 12 lecciones vas a armar tu primer tapiz, paso a paso, sin saltarse nada.",
+      "Conoce el telar mapuche y todas sus piezas, entiende las fases de la urdimbre y aprende a urdir con la técnica de llano. Para todo tipo de persona, sin experiencia previa.",
     price_clp: 45000,
     level: "principiante" as const,
     duration_minutes: 260,
     lessons_count: 12,
-    thumbnail_url: "https://placehold.co/600x450/9B2335/FFFFFF?text=Tu+primer+telar",
+    thumbnail_url: "https://placehold.co/600x450/9B2335/FFFFFF?text=Telar+mapuche+inicial",
     seo_description:
-      "Aprende a tejer en telar desde cero, a tu ritmo. 12 lecciones, 4h 20min, acceso de por vida.",
+      "Taller inicial de telar mapuche, técnica llano. Conoce el telar y sus piezas, la urdimbre y aprende a urdir desde cero. Acceso de por vida.",
   },
   {
     slug: "telar-mapuche",

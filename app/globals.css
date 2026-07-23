@@ -149,3 +149,10 @@
     @apply font-sans;
   }
 }
+
+/* ─── Textura de urdimbre (hilos de telar) para bloques oscuros ─── */
+.textura-telar {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 14px);
+}
