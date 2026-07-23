@@ -16,8 +16,10 @@ export default function Hero() {
               <span className="text-primary">nuevo lugar favorito</span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Cursos online de telar con acceso de por vida. Aprende desde cero,
-              a tu ritmo, acompañada por Katy desde el sur de Chile.
+              Kafkún significa susurro en mapudungun. Aprende telar mapuche
+              desde cero, a tu ritmo y con acceso de por vida, de la mano de una
+              tejedora que no se guarda ningún secreto: todo lo que sabe, te lo
+              enseña.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

@@ -20,16 +20,19 @@ export default function AboutMini() {
               Sobre mí
             </p>
             <h2 className="mt-3 font-heading text-3xl font-semibold text-foreground md:text-4xl">
-              Tejer cambió cómo me relaciono con el tiempo
+              El telar me encontró a mí
             </h2>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              Soy Katy, del sur de Chile. Empecé a tejer por accidente y terminé
-              convirtiendo el telar en mi oficio. Llevo años enseñando y cada
-              alumna que termina su primera pieza me confirma que este oficio
-              le pertenece a quien quiera aprenderlo.
+              Soy Katy, tejedora autodidacta de telar mapuche, crochet y
+              palillo. <em>Kafkún</em> significa susurro en mapudungun, y creo
+              que el telar me encontró a mí. Aprendí sola, porque no encontré a
+              nadie que me enseñara: me equivoqué harto y cometí muchos errores,
+              hasta que fui perfeccionando la técnica.
             </p>
             <p className="mt-3 leading-relaxed text-muted-foreground">
-              Enseño sin secretos. Todo lo que sé, lo comparto.
+              En mis talleres no me guardo ningún dato. Todo lo que he aprendido
+              desde la práctica, lo enseño — con todos los tips, sin
+              mezquindades.
             </p>
             <Link
               href="/sobre-mi"

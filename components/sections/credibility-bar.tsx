@@ -1,7 +1,7 @@
 const stats = [
-  { value: "+200", label: "alumnas tejiendo" },
-  { value: "5.0", label: "rating promedio" },
-  { value: "+50h", label: "de contenido" },
+  { value: "+50", label: "alumnas presenciales" },
+  { value: "2015", label: "enseñando desde" },
+  { value: "Mapuche", label: "técnica ancestral" },
   { value: "∞", label: "acceso de por vida" },
 ];
 
