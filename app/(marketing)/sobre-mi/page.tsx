@@ -32,8 +32,8 @@ export default function SobreMiPage() {
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
               <Image
-                src="https://placehold.co/800x1000/9B2335/FFFFFF?text=Katy"
-                alt="Katy, tejedora de telar mapuche"
+                src="/images/katy-retrato.jpg"
+                alt="Katy en su taller"
                 fill
                 className="object-cover"
                 priority
@@ -92,10 +92,10 @@ export default function SobreMiPage() {
       {/* Primera pieza */}
       <section className="bg-secondary">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:px-8">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-md">
             <Image
-              src="https://placehold.co/900x675/7C1D2B/FFFFFF?text=Mi+primer+mural"
-              alt="El primer mural que tejió Katy en telar mapuche"
+              src="/images/telar-proceso.jpg"
+              alt="Telar mapuche (witral) de Katy con un tejido en proceso"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -103,17 +103,17 @@ export default function SobreMiPage() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Mi primera pieza
+              El oficio
             </p>
             <h2 className="mt-3 font-heading text-4xl font-semibold text-foreground md:text-5xl">
-              El mural que no vendo ni regalo
+              Del hilo a la pieza
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              En telar mapuche mi primera pieza fueron las tiritas de práctica
-              —las mismas con las que hoy parto mis clases, para aprender la
-              técnica. Mi primera pieza ornamental fue un mural que guardo hasta
-              el día de hoy: no lo vendo, no lo regalo. Fue el primero, y ese se
-              queda conmigo.
+              En telar mapuche todo empieza por la urdimbre: esos hilos tensos
+              que ves en el bastidor. Ahí parto cada clase y cada pieza. Mi
+              primera pieza ornamental fue un mural que guardo hasta el día de
+              hoy: no lo vendo, no lo regalo. Fue el primero, y ese se queda
+              conmigo.
             </p>
           </div>
         </div>

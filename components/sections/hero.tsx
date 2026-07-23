@@ -40,10 +40,10 @@ export default function Hero() {
 
           {/* Imagen */}
           <div className="order-1 lg:order-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
               <Image
-                src="https://placehold.co/1200x900/9B2335/FFFFFF?text=Katy+tejiendo"
-                alt="Katy tejiendo en su telar"
+                src="/images/katy-telar.jpg"
+                alt="Katy tejiendo en su telar witral"
                 fill
                 className="object-cover"
                 priority

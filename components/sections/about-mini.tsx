@@ -8,8 +8,8 @@ export default function AboutMini() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="relative aspect-square overflow-hidden rounded-2xl shadow-md">
             <Image
-              src="https://placehold.co/800x800/9B2335/FFFFFF?text=Katy"
-              alt="Katy, instructora de telar"
+              src="/images/katy-retrato.jpg"
+              alt="Katy, tejedora de telar mapuche"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
