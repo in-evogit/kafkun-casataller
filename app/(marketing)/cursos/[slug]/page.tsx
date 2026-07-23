@@ -123,7 +123,7 @@ export default async function CourseDetailPage({ params }: Props) {
       <section className="bg-secondary">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
           <div className="flex flex-col justify-center">
-            <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <span className="inline-block rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
               {levelLabel[course.level]}
             </span>
             <h1 className="mt-4 font-heading text-4xl font-semibold text-foreground md:text-5xl">

@@ -16,9 +16,9 @@ type Course = {
 };
 
 const levelColors = {
-  principiante: "bg-green-100 text-green-800",
-  intermedio: "bg-blue-100 text-blue-800",
-  avanzado: "bg-primary/10 text-primary",
+  principiante: "bg-primary text-primary-foreground",
+  intermedio: "bg-accent text-accent-foreground",
+  avanzado: "bg-[#5c1520] text-white",
 };
 
 function formatPrice(clp: number) {
