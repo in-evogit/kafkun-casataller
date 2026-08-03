@@ -26,6 +26,9 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  /* En Tailwind v4, un token que no se declare acá simplemente NO genera utilidad,
+     sin error ni warning. border-strong es el borde de lo interactivo (WCAG 1.4.11). */
+  --color-border-strong: var(--border-strong);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -48,41 +51,57 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Paleta Casa Taller Kafkun · Rojo carmesí + blanco ─── */
+/* ─── Paleta Casa Taller Kafkun · carmesí sobre papel cálido ───
+   El blanco puro y el rosado tenue leían a clínica. La base es papel de taller.
+   Los valores de marca anteriores estaban FUERA DE GAMUT sRGB: oklch(0.42 0.175 19)
+   se recortaba a #950023 (rojo sangre) en vez del #9B2335 de la marca. Corregidos. */
 :root {
   /* Base */
-  --background: oklch(1 0 0);               /* #FFFFFF */
-  --foreground: oklch(0.11 0.016 15);       /* #1A0A0E — texto oscuro cálido */
+  --background: oklch(0.982 0.006 83);      /* #FBF9F5 papel — nunca blanco puro */
+  --foreground: oklch(0.235 0.021 55);      /* #261C15 tinta cálida */
 
   /* Cards / Popover */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.11 0.016 15);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.11 0.016 15);
+  --card: oklch(0.982 0.006 83);
+  --card-foreground: oklch(0.235 0.021 55);
+  --popover: oklch(0.982 0.006 83);
+  --popover-foreground: oklch(0.235 0.021 55);
 
-  /* Primary — carmesí #9B2335 */
-  --primary: oklch(0.42 0.175 19);
+  /* Primary — carmesí #9B2335 exacto */
+  --primary: oklch(0.458 0.155 18);
   --primary-foreground: oklch(1 0 0);
 
-  /* Secondary — surface rosado muy tenue #FDF5F5 */
-  --secondary: oklch(0.975 0.006 15);
-  --secondary-foreground: oklch(0.11 0.016 15);
+  /* Secondary — lienzo #F4EFE7 */
+  --secondary: oklch(0.955 0.012 80);
+  --secondary-foreground: oklch(0.235 0.021 55);
 
-  /* Muted */
-  --muted: oklch(0.975 0.006 15);
-  --muted-foreground: oklch(0.52 0.025 15);
+  /* Muted — greige #E9E3D9 */
+  --muted: oklch(0.918 0.015 78);
+  --muted-foreground: oklch(0.475 0.020 60);
 
-  /* Accent — carmesí oscuro #7C1D2B (hover) */
-  --accent: oklch(0.35 0.155 17);
+  /* Accent — carmesí oscuro #7C1D2B exacto (hover) */
+  --accent: oklch(0.393 0.129 17.5);
   --accent-foreground: oklch(1 0 0);
+
+  /* ─── Movimiento. Nada dura más de 450ms salvo lo ligado al scroll. ─── */
+  --dur-toque: 120ms;   /* respuesta a :active en táctil */
+  --dur-color: 200ms;   /* color, opacidad, borde */
+  --dur-hilo: 280ms;    /* el gesto firma */
+  --dur-foto: 420ms;    /* crossfade de segunda foto */
+  --dur-panel: 320ms;   /* acordeón, menú móvil */
+
+  --ease-hilo: cubic-bezier(0.34, 1.12, 0.64, 1);  /* entra, sobrepaso mínimo */
+  --ease-salir: cubic-bezier(0.4, 0, 1, 1);        /* sale, sin sobrepaso */
+  --ease-panel: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Destructive — rojo error (distinto del primario) */
   --destructive: oklch(0.577 0.245 27.325);
 
-  /* Borders / Inputs */
-  --border: oklch(0.91 0.008 15);
-  --input: oklch(0.91 0.008 15);
-  --ring: oklch(0.42 0.175 19);
+  /* Borders / Inputs — hairline decorativa vs borde de lo que se toca */
+  --border: oklch(0.885 0.014 78);          /* #DED8CF, solo separadores */
+  --border-strong: oklch(0.62 0.020 70);    /* #8E8479, inputs y chips */
+  --input: oklch(0.62 0.020 70);
+  --ring: oklch(0.458 0.155 18);
 
   /* Charts */
   --chart-1: oklch(0.42 0.175 19);
@@ -121,7 +140,8 @@
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --border-strong: oklch(1 0 0 / 32%);
+  --input: oklch(1 0 0 / 32%);
   --ring: oklch(0.60 0.175 19);
   --chart-1: oklch(0.60 0.175 19);
   --chart-2: oklch(0.70 0.15 22);
@@ -150,9 +170,76 @@
   }
 }
 
-/* ─── Textura de urdimbre (hilos de telar) para bloques oscuros ─── */
+/* ─── Urdimbre: hilos verticales en tensión, para bloques oscuros ───
+   Antes era una retícula de 14px en los dos ejes, o sea papel milimetrado.
+   Una urdimbre real son hilos VERTICALES, y su irregularidad es lo que la hace tejido
+   y no cuadrícula: por eso tres pasos distintos superpuestos y ninguna línea horizontal. */
 .textura-telar {
   background-image:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 14px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 14px);
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 23px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 37px);
+}
+
+/* ─── Gesto firma: "tensar el hilo" ───
+   Una línea que crece desde el centro hacia los dos extremos, como el hilo de urdimbre
+   al tensarse. Aparece SOLO donde alguien decide algo: links, botones y el paso activo
+   del proceso. Entrar es un gesto; salir no, por eso vuelve sin sobrepaso. */
+.hilo {
+  position: relative;
+}
+.hilo::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: -0.15em;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    left var(--dur-hilo) var(--ease-hilo),
+    right var(--dur-hilo) var(--ease-hilo);
+}
+.hilo:hover::after,
+.hilo:focus-visible::after {
+  left: 0;
+  right: 0;
+  transition-timing-function: var(--ease-hilo);
+}
+/* En táctil no hay hover: el hilo se dibuja al tocar. */
+@media (hover: none) {
+  .hilo:active::after {
+    left: 0;
+    right: 0;
+    transition-duration: var(--dur-toque);
+  }
+}
+
+/* Dentro de un botón sólido el hilo vive adentro, no bajo el borde. */
+.hilo-boton::after {
+  bottom: 0.5rem;
+  left: 50%;
+  right: 50%;
+  height: 1.5px;
+  background: color-mix(in oklch, currentColor 55%, transparent);
+}
+
+@layer base {
+  /* No existía ningún bloque de movimiento reducido: todo se animaba igual.
+     Se conserva el cambio de estado (para que nada quede invisible) y se elimina
+     el movimiento, que es lo que produce mareo. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hilo::after {
+      left: 0;
+      right: 0;
+    }
+  }
 }
