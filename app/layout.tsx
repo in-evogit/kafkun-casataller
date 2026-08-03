@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s · Casa Taller Kafkun",
   },
   description:
-    "Aprende a tejer en telar desde cero, a tu ritmo. Cursos online de telar y productos artesanales de Chile. Acceso de por vida.",
+    "Aprende a tejer en telar desde cero, a tu ritmo. Cursos online de telar mapuche y piezas tejidas a mano en Chile.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
   ),

@@ -91,13 +91,15 @@ export async function POST(req: NextRequest) {
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-    // Si hay descuento, proporcional al total; si no, precio normal
+    // Si hay descuento, proporcional al total; si no, precio normal.
+    // CLP no tiene decimales: unit_price va en pesos enteros, NO en centavos.
+    // (Dividir por 100 acá cobraba 1/100 del precio: $45.000 se cobraba como $450.)
     const discountRatio = subtotal > 0 ? totalAfterDiscount / subtotal : 1;
     const mpItems = items.map((item) => ({
       id: item.id,
       title: item.title,
       quantity: item.quantity,
-      unit_price: Math.round(item.price_clp * discountRatio) / 100,
+      unit_price: Math.round(item.price_clp * discountRatio),
       currency_id: "CLP",
     }));
 

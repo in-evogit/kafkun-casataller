@@ -149,23 +149,59 @@ export async function POST(req: NextRequest) {
     const courseIds = items
       .filter((i) => i.type === "course")
       .map((i) => i.id);
+    const productIds = items
+      .filter((i) => i.type === "product")
+      .map((i) => i.id);
 
-    if (courseIds.length > 0) {
-      // Obtener UUIDs de cursos por slug
-      const { data: courses } = await supabase
-        .from("courses")
-        .select("id, slug")
-        .in("slug", courseIds);
+    // Resolver slugs → UUIDs. order_items exige course_id o product_id (CHECK de la tabla).
+    const [{ data: courses }, { data: products }] = await Promise.all([
+      courseIds.length > 0
+        ? supabase.from("courses").select("id, slug").in("slug", courseIds)
+        : Promise.resolve({ data: [] as { id: string; slug: string }[] }),
+      productIds.length > 0
+        ? supabase.from("products").select("id, slug").in("slug", productIds)
+        : Promise.resolve({ data: [] as { id: string; slug: string }[] }),
+    ]);
 
-      if (courses && courses.length > 0) {
-        await supabase.from("enrollments").insert(
-          courses.map((c) => ({
-            user_id: userId,
-            course_id: c.id,
-            order_id: order.id,
-          }))
+    const courseBySlug = new Map((courses ?? []).map((c) => [c.slug, c.id]));
+    const productBySlug = new Map((products ?? []).map((p) => [p.slug, p.id]));
+
+    // Detalle de la compra. Sin esto, /mis-compras muestra la orden siempre vacía.
+    const orderItemRows = items.flatMap((i) => {
+      const isCourse = i.type === "course";
+      const refId = isCourse ? courseBySlug.get(i.id) : productBySlug.get(i.id);
+      if (!refId) {
+        console.error(
+          `[webhook] Sin fila en ${isCourse ? "courses" : "products"} para el slug "${i.id}" — no se guarda su order_item`
         );
+        return [];
       }
+      return [{
+        order_id: order.id,
+        item_type: i.type,
+        course_id: isCourse ? refId : null,
+        product_id: isCourse ? null : refId,
+        quantity: i.quantity ?? 1,
+        unit_price_clp: i.price_clp ?? 0,
+      }];
+    });
+
+    if (orderItemRows.length > 0) {
+      const { error: itemsError } = await supabase.from("order_items").insert(orderItemRows);
+      if (itemsError) {
+        // No se aborta: el pago ya ocurrió y la orden existe. Se registra para reparar a mano.
+        console.error("[webhook] Error guardando order_items:", itemsError, orderItemRows);
+      }
+    }
+
+    if (courses && courses.length > 0) {
+      await supabase.from("enrollments").insert(
+        courses.map((c) => ({
+          user_id: userId,
+          course_id: c.id,
+          order_id: order.id,
+        }))
+      );
     }
 
     // Enviar emails de confirmación

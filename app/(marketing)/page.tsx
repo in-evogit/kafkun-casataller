@@ -14,14 +14,14 @@ import NewsletterForm from "@/components/newsletter-form";
 export const metadata: Metadata = {
   title: "Casa Taller Kafkun · Cursos de telar online en Chile",
   description:
-    "Aprende telar mapuche desde cero, a tu ritmo. Cursos online con acceso de por vida, soporte personalizado y garantía 7 días. Con Katy, tejedora autodidacta desde 2015.",
+    "Aprende telar mapuche desde cero y a tu ritmo, con Katy: tejedora autodidacta que enseña desde 2015, con todos los tips y sin mezquindades.",
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL,
   },
   openGraph: {
     title: "Casa Taller Kafkun · Cursos de telar online en Chile",
     description:
-      "Aprende a tejer en telar desde cero. Cursos online con acceso de por vida.",
+      "Aprende a tejer en telar mapuche desde cero, a tu ritmo.",
     type: "website",
   },
 };

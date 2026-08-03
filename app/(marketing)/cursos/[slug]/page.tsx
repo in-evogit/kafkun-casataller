@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, BookOpen, CheckCircle2, ShieldCheck } from "lucide-react";
+import { Clock, BookOpen, CheckCircle2 } from "lucide-react";
 import { seedCourses, faqItems } from "@/lib/data/seed";
 import {
   Accordion,
@@ -143,10 +143,6 @@ export default async function CourseDetailPage({ params }: Props) {
                 <BookOpen className="h-4 w-4" />
                 {course.lessons_count} lecciones
               </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="h-4 w-4" />
-                Garantía 7 días
-              </span>
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -161,7 +157,7 @@ export default async function CourseDetailPage({ params }: Props) {
               </Link>
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
-              Acceso inmediato · Acceso de por vida · Sin suscripción
+              Pago único, sin suscripción
             </p>
           </div>
 
@@ -204,11 +200,9 @@ export default async function CourseDetailPage({ params }: Props) {
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
               `${formatDuration(course.duration_minutes)} de video bajo demanda`,
-              `${course.lessons_count} lecciones en video HD`,
-              "Acceso de por vida desde cualquier dispositivo",
-              "Soporte por WhatsApp por 30 días",
-              "Garantía de devolución de 7 días",
-              "Certificado digital al completar",
+              `${course.lessons_count} lecciones en video`,
+              "Lo ves desde cualquier dispositivo",
+              "Avanzas a tu ritmo, sin fechas límite",
             ].map((item) => (
               <li key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
@@ -245,7 +239,7 @@ export default async function CourseDetailPage({ params }: Props) {
             ¿Lista para empezar?
           </h2>
           <p className="mt-2 text-primary-foreground/80">
-            Acceso inmediato · Garantía 7 días · De por vida
+            Pago único · Empiezas cuando quieras
           </p>
           <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <span className="font-heading text-2xl font-semibold text-primary-foreground">

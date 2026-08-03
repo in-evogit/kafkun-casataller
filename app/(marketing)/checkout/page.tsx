@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { seedCourses } from "@/lib/data/seed";
 import CheckoutButton from "@/components/checkout-button";
+import CheckoutCarrito from "@/components/checkout-carrito";
 
 export const metadata: Metadata = {
   title: "Checkout · Casa Taller Kafkun",
@@ -76,7 +77,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
 
         <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
           <ShieldCheck className="h-4 w-4" />
-          Pago seguro · Garantía 7 días · Acceso inmediato
+          Pago seguro con Mercado Pago
         </div>
       </main>
     );
@@ -88,15 +89,8 @@ export default async function CheckoutPage({ searchParams }: Props) {
       <h1 className="font-heading text-2xl font-semibold text-foreground">
         Confirmar compra
       </h1>
-      <p className="mt-2 text-muted-foreground">
-        Revisa tu carrito antes de continuar.
-      </p>
-      <Link
-        href="/carrito"
-        className="mt-4 inline-block text-primary hover:underline"
-      >
-        ← Volver al carrito
-      </Link>
+
+      <CheckoutCarrito devMode={devMode} />
 
       {devMode && (
         <div className="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">

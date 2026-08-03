@@ -176,7 +176,7 @@ export default function CarritoPage() {
                     </div>
                   ) : (
                     <span className="text-xs text-muted-foreground">
-                      Acceso de por vida
+                      Acceso al curso
                     </span>
                   )}
                   <span className="font-heading font-semibold text-foreground">
@@ -237,7 +237,7 @@ export default function CarritoPage() {
             Proceder al pago →
           </Link>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            Pago seguro · Garantía 7 días
+            Pago seguro con Mercado Pago
           </p>
         </div>
       </div>

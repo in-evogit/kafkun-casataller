@@ -25,13 +25,21 @@ function formatDate(iso: string) {
   }).format(new Date(iso));
 }
 
+// order_items no tiene columna `title`: el nombre viene de la fila relacionada
+// en `courses` o `products` (ver el CHECK de la tabla en MASTER_INSTRUCTIONS.md).
 type OrderItem = {
   id: string;
-  title: string;
   quantity: number;
   unit_price_clp: number;
   item_type: string;
+  // supabase-js devuelve las relaciones anidadas como arreglo.
+  courses: { title: string }[] | null;
+  products: { name: string }[] | null;
 };
+
+function itemTitle(item: OrderItem) {
+  return item.courses?.[0]?.title ?? item.products?.[0]?.name ?? "Artículo";
+}
 
 type Order = {
   id: string;
@@ -68,7 +76,9 @@ export default async function MisComprasPage() {
     const admin = createAdminClient();
     const { data } = await admin
       .from("orders")
-      .select("id, created_at, status, total_clp, mp_payment_id, order_items(id, title, quantity, unit_price_clp, item_type)")
+      .select(
+        "id, created_at, status, total_clp, mp_payment_id, order_items(id, quantity, unit_price_clp, item_type, courses(title), products(name))"
+      )
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
 
@@ -142,7 +152,7 @@ export default async function MisComprasPage() {
                         {item.quantity > 1 && (
                           <span className="mr-1 text-muted-foreground">{item.quantity}×</span>
                         )}
-                        {item.title}
+                        {itemTitle(item)}
                       </span>
                       <span className="text-sm text-muted-foreground">
                         {formatPrice(item.unit_price_clp * item.quantity)}

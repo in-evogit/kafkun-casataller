@@ -58,7 +58,10 @@ export function LoginForm() {
     const supabase = createClient();
     await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}${next}` },
+      options: {
+        // Pasa por /auth/callback: ahí se canjea el código por sesión.
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
+      },
     });
     setMagicLinkSent(true);
   }

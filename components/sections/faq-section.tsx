@@ -7,6 +7,9 @@ import {
 import { faqItems } from "@/lib/data/seed";
 
 export default function FaqSection() {
+  // Sin respuestas confirmadas por Katy, la sección no se renderiza.
+  if (faqItems.length === 0) return null;
+
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

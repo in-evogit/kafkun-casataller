@@ -3,15 +3,18 @@
 import { useState } from "react";
 import { useCart } from "@/lib/store/cart";
 import { useRouter } from "next/navigation";
+import CheckoutMagicLink from "@/components/checkout-magic-link";
 
 type Props = {
   items: Array<{ id: string; type: "course" | "product"; title: string; price_clp: number; quantity: number }>;
   devMode: boolean;
+  couponCode?: string;
 };
 
-export default function CheckoutButton({ items, devMode }: Props) {
+export default function CheckoutButton({ items, devMode, couponCode }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [necesitaLogin, setNecesitaLogin] = useState(false);
   const clear = useCart((s) => s.clear);
   const router = useRouter();
 
@@ -34,9 +37,14 @@ export default function CheckoutButton({ items, devMode }: Props) {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ items, coupon_code: couponCode }),
       });
       const data = await res.json();
+      // Sin sesión la API responde 401: se pide el correo acá mismo, no en /registro.
+      if (res.status === 401) {
+        setNecesitaLogin(true);
+        return;
+      }
       if (!res.ok) throw new Error(data.error ?? "Error al crear el pago");
       clear();
       router.push(data.init_point);
@@ -45,6 +53,10 @@ export default function CheckoutButton({ items, devMode }: Props) {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (necesitaLogin) {
+    return <CheckoutMagicLink />;
   }
 
   return (

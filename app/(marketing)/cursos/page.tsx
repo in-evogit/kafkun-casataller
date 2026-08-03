@@ -5,7 +5,7 @@ import { seedCourses } from "@/lib/data/seed";
 export const metadata: Metadata = {
   title: "Todos los cursos · Casa Taller Kafkun",
   description:
-    "Explora nuestros cursos de telar online. Desde principiante hasta avanzado, con acceso de por vida y soporte personalizado.",
+    "Explora los cursos de telar de Casa Taller Kafkun, desde principiante hasta avanzado, para aprender a tu ritmo.",
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/cursos`,
   },
@@ -45,10 +45,9 @@ export default function CursosPage() {
           </p>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { label: "Acceso de por vida", icon: "∞" },
-              { label: "Soporte 30 días", icon: "💬" },
-              { label: "Garantía 7 días", icon: "✓" },
-              { label: "Certificado digital", icon: "◎" },
+              { label: "A tu ritmo", icon: "◷" },
+              { label: "Pago único", icon: "◇" },
+              { label: "Telar mapuche", icon: "◈" },
             ].map((item) => (
               <div key={item.label} className="flex flex-col items-center gap-2">
                 <span className="text-2xl">{item.icon}</span>

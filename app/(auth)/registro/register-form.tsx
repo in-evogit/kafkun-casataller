@@ -105,7 +105,7 @@ export function RegisterForm() {
         Crea tu cuenta
       </h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Únete a más de 200 alumnas que ya están tejiendo
+        Únete a las alumnas que ya están tejiendo con Katy
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col gap-4">

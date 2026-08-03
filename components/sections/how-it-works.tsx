@@ -2,17 +2,17 @@ const steps = [
   {
     number: "01",
     title: "Eliges tu curso",
-    description: "Ves el programa completo, el nivel y el preview gratis de la primera lección.",
+    description: "Ves el programa completo y el nivel antes de decidir.",
   },
   {
     number: "02",
     title: "Recibes acceso",
-    description: "Al confirmar el pago tienes acceso inmediato. Sin esperas, sin trámites.",
+    description: "Al confirmarse el pago se habilita tu acceso y te llega el correo con los datos.",
   },
   {
     number: "03",
     title: "Aprendes a tu ritmo",
-    description: "Videos en HD, pausas cuando quieras, vuelves a ver las veces que necesites.",
+    description: "Pausas cuando quieras y vuelves a ver las veces que necesites.",
   },
   {
     number: "04",

@@ -11,7 +11,7 @@ export const seedCourses = [
     lessons_count: 12,
     thumbnail_url: "https://placehold.co/600x450/9B2335/FFFFFF?text=Telar+mapuche+inicial",
     seo_description:
-      "Taller inicial de telar mapuche, técnica llano. Conoce el telar y sus piezas, la urdimbre y aprende a urdir desde cero. Acceso de por vida.",
+      "Taller inicial de telar mapuche, técnica llano. Conoce el telar y sus piezas, la urdimbre y aprende a urdir desde cero.",
   },
   {
     slug: "telar-mapuche",
@@ -93,32 +93,19 @@ export const seedProducts = [
   },
 ];
 
-export const testimonials = [
-  {
-    name: "Valentina Rojas",
-    city: "Santiago",
-    course: "Tu primer telar",
-    avatar: "https://placehold.co/80x80/9B2335/FFFFFF?text=VR",
-    quote:
-      "Nunca pensé que iba a poder tejer algo tan bonito en mis primeras semanas. Katy explica todo con mucha paciencia y claridad.",
-  },
-  {
-    name: "Francisca Morales",
-    city: "Valparaíso",
-    course: "Telar mapuche",
-    avatar: "https://placehold.co/80x80/7C1D2B/FFFFFF?text=FM",
-    quote:
-      "El curso de telar mapuche me cambió la perspectiva. Aprendí no solo técnica sino también historia y significado detrás de cada tejido.",
-  },
-  {
-    name: "Daniela Sepúlveda",
-    city: "Concepción",
-    course: "Tu primer telar",
-    avatar: "https://placehold.co/80x80/5C1520/FFFFFF?text=DS",
-    quote:
-      "Acceso de por vida es lo mejor. Vuelvo a ver las lecciones cada vez que necesito repasar algo. Vale cada peso.",
-  },
-];
+/**
+ * Testimonios: vacío a propósito.
+ * Los 3 anteriores (Valentina Rojas, Francisca Morales, Daniela Sepúlveda) eran inventados,
+ * con avatares de placehold.co, y afirmaban "acceso de por vida". Se eliminaron el 3-ago-2026.
+ * Solo se repuebla con testimonios reales de alumnas de Katy, con su autorización.
+ */
+export const testimonials: {
+  name: string;
+  city: string;
+  course: string;
+  avatar: string;
+  quote: string;
+}[] = [];
 
 export type SeedLesson = {
   slug: string;
@@ -238,29 +225,10 @@ export const seedModules: Record<string, SeedModule[]> = {
   ],
 };
 
-export const faqItems = [
-  {
-    q: "¿Necesito experiencia previa para empezar?",
-    a: "No, para nada. El curso Tu primer telar está diseñado exactamente para alguien que nunca ha tocado un telar. Te acompaño desde armar el bastidor.",
-  },
-  {
-    q: "¿Qué materiales necesito tener?",
-    a: "Un telar de peine o bastidor básico y lana. En la tienda encuentras kits de iniciación con todo lo necesario. También te indico alternativas económicas al inicio del curso.",
-  },
-  {
-    q: "¿Cuánto tiempo tengo para ver el curso?",
-    a: "Acceso de por vida. Lo ves a tu ritmo, puedes pausar, volver a ver y retomar cuando quieras. Sin fechas límite.",
-  },
-  {
-    q: "¿Y si el curso no es lo que esperaba?",
-    a: "Garantía de 7 días. Si en la primera semana sientes que no es para ti, te devuelvo el dinero sin preguntas.",
-  },
-  {
-    q: "¿Puedo hacer preguntas si me trabo?",
-    a: "Sí, todos los cursos incluyen soporte por WhatsApp por 30 días desde tu primera clase. Estoy ahí para ayudarte.",
-  },
-  {
-    q: "¿Cómo accedo al curso después de comprar?",
-    a: "Al completar el pago recibes un email con tus datos de acceso. En segundos ya puedes entrar a tu primera lección.",
-  },
-];
+/**
+ * FAQ: vacío a propósito.
+ * Las 6 respuestas anteriores afirmaban garantía de 7 días, acceso de por vida, soporte por
+ * WhatsApp durante 30 días y kits de iniciación en la tienda. Ninguna fue confirmada por Katy.
+ * Eliminadas el 3-ago-2026. Cada respuesta vuelve solo cuando ella defina la política real.
+ */
+export const faqItems: { q: string; a: string }[] = [];

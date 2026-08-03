@@ -8,7 +8,7 @@ export default function FinalCta() {
           ¿Lista para tejer tu primera pieza?
         </h2>
         <p className="mt-4 text-lg text-primary-foreground/80">
-          Acceso inmediato · Garantía 7 días · De por vida
+          Aprende telar mapuche a tu ritmo, con todos los tips y sin mezquindades.
         </p>
         <Link
           href="/cursos"
