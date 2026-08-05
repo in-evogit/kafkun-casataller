@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { useCart } from "@/lib/store/cart";
+import Figura from "@/components/figura";
+import { pendiente } from "@/lib/media";
 
 type Course = {
   slug: string;
@@ -56,15 +57,21 @@ export default function CourseCard({ course }: { course: Course }) {
       href={`/cursos/${course.slug}`}
       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background shadow-sm transition-shadow hover:shadow-md"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src={course.thumbnail_url}
-          alt={`Portada del curso ${course.title}`}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </div>
+      {/* Las portadas de curso van HORIZONTALES y hoy no existen: los thumbnail_url de seed
+          apuntaban a placehold.co, que responde 400, o sea la portada mostraba tres imágenes
+          rotas. Mientras no haya foto real se dibuja la ranura pendiente. */}
+      <Figura
+        media={
+          course.thumbnail_url && !course.thumbnail_url.includes("placehold.co")
+            ? {
+                src: course.thumbnail_url,
+                alt: `Portada del curso ${course.title}`,
+                proporcion: "horizontal",
+              }
+            : pendiente("horizontal", `Portada horizontal del curso "${course.title}"`)
+        }
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-center gap-2">
           <span
