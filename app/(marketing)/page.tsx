@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
 import CredibilityBar from "@/components/sections/credibility-bar";
-import ForWho from "@/components/sections/for-who";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import HowItWorks from "@/components/sections/how-it-works";
 import AboutMini from "@/components/sections/about-mini";
@@ -52,13 +51,15 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* Orden del embudo: quién soy → qué hago → cómo se encarga → qué enseño →
+          por qué confiar en mí → las dos puertas. Obras va antes que clases porque
+          es la vía que puede convertir hoy; las clases esperan datos de Katy. */}
       <Hero />
       <CredibilityBar />
-      <ForWho />
-      <FeaturedCourses />
-      <HowItWorks />
-      <AboutMini />
       <ObrasGallery />
+      <HowItWorks />
+      <FeaturedCourses />
+      <AboutMini />
       <Testimonials />
       <FaqSection />
       <section className="bg-secondary">

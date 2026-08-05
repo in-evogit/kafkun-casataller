@@ -16,10 +16,12 @@ type Course = {
   thumbnail_url: string;
 };
 
-const levelColors = {
-  principiante: "bg-primary text-primary-foreground",
-  intermedio: "bg-accent text-accent-foreground",
-  avanzado: "bg-[#5c1520] text-white",
+// El nivel se distingue por el color del filete, no por una pastilla de color:
+// una pastilla mas compite con el precio y con el boton por la misma atencion.
+const levelBorder = {
+  principiante: "border-border-strong",
+  intermedio: "border-border-strong",
+  avanzado: "border-primary",
 };
 
 function formatPrice(clp: number) {
@@ -55,7 +57,7 @@ export default function CourseCard({ course }: { course: Course }) {
   return (
     <Link
       href={`/cursos/${course.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background shadow-sm transition-shadow hover:shadow-md"
+      className={`group flex flex-col border-l-2 pl-5 transition-colors duration-[var(--dur-color)] hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background ${levelBorder[course.level]}`}
     >
       {/* Las portadas de curso van HORIZONTALES y hoy no existen: los thumbnail_url de seed
           apuntaban a placehold.co, que responde 400, o sea la portada mostraba tres imágenes
@@ -72,33 +74,30 @@ export default function CourseCard({ course }: { course: Course }) {
         }
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-2">
-          <span
-            className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${levelColors[course.level]}`}
-          >
-            {course.level}
-          </span>
-          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+      <div className="flex flex-1 flex-col pt-5">
+        <div className="flex items-center gap-3 text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+          <span>{course.level}</span>
+          <span aria-hidden>·</span>
+          <span className="flex items-center gap-1 normal-case tracking-normal">
             <Clock className="h-3 w-3" />
             {formatDuration(course.duration_minutes)}
           </span>
         </div>
-        <h3 className="mt-3 font-heading text-xl font-semibold text-foreground group-hover:text-primary">
+        <h3 className="mt-3 font-heading text-[1.3125rem] text-foreground">
           {course.title}
         </h3>
-        <p className="mt-1 flex-1 text-sm text-muted-foreground">
+        <p className="mt-1.5 flex-1 text-[0.9375rem] leading-relaxed text-muted-foreground">
           {course.subtitle}
         </p>
-        <div className="mt-4 flex items-center justify-between gap-2">
-          <span className="font-heading text-lg font-semibold text-foreground">
+        <div className="mt-5 flex items-center justify-between gap-2">
+          <span className="font-heading text-[1.0625rem] tabular-nums text-foreground">
             {formatPrice(course.price_clp)}
           </span>
           <button
             onClick={handleAdd}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-[2px] px-4 py-2 text-[0.8125rem] font-medium transition-colors duration-[var(--dur-color)] ${
               inCart
-                ? "bg-muted text-muted-foreground cursor-default"
+                ? "cursor-default bg-muted text-muted-foreground"
                 : "bg-primary text-primary-foreground hover:bg-accent"
             }`}
           >
