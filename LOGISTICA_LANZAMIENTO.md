@@ -74,8 +74,7 @@ personal, la persona no puede aparecer en el sexto scroll. Cuando exista el vide
 de saludo, va acá, con el retrato de póster y play manual.
 
 **3 · Obras a pedido.** Muestrario en grilla, **una fila por familia**: Chalecos,
-Piezas enteras, Fajas, Accesorios. Chalecos primero porque es lo que se vende
-hoy. Cada pieza: foto vertical 3:4, nombre, y al pasar el cursor aparece la
+Bufandas y Correas. Chalecos primero porque es lo que más se encarga hoy. Cada pieza: foto vertical 3:4, nombre, y al pasar el cursor aparece la
 segunda toma. Sin precio y sin carrito: cada una lleva a *"Quiero algo así"*, que
 abre `/contacto` con la pieza ya anotada en la URL (`?ref=chaleco-verde`), así
 Katy llega a la reunión sabiendo qué le gustó a esa persona.
@@ -153,8 +152,7 @@ Sobre el carrusel que se desliza solo: **no lo recomiendo como galería principa
 
 **Lo que sí recomiendo, ahora que van a haber hartas fotos de chalecos:**
 
-- **Grilla por familia.** Cada familia (Chalecos, Piezas enteras, Fajas,
-  Accesorios) es su propia fila. Escala bien: llegan 20 fotos de chalecos y la
+- **Grilla por familia.** Cada familia (Chalecos, Bufandas, Correas) es su propia fila. Escala bien: llegan 20 fotos de chalecos y la
   sección no se rompe, se hace más rica. La estructura ya existe en
   `lib/data/obras.ts` (`familiasEncargo`), solo hay que llenarla.
 - **Si quieren movimiento:** una tira horizontal de desplazamiento continuo
@@ -165,9 +163,10 @@ Sobre el carrusel que se desliza solo: **no lo recomiendo como galería principa
   específico y hay 4 tomas de esa misma pieza, ahí el carrusel deslizable con el
   dedo es lo correcto.
 
-> Ojo con la organización actual: hoy las fajas y los cordones están metidos
-> dentro de la familia "Piezas enteras" (`obras.ts:59`), lo cual no es. Al
-> cargar las fotos nuevas hay que separar familias de verdad.
+> **Corregido el 20-ago-2026.** Antes existía una familia inventada, "Fajas",
+> y las piezas estaban repartidas dentro de "Piezas enteras". Las familias
+> reales son **tres y solo tres: chalecos, bufandas y correas.** Ya quedaron
+> así en `lib/data/obras.ts`, con las obras vacías esperando las fotos buenas.
 
 ---
 
@@ -184,15 +183,20 @@ Reglas del negocio (definidas por Katy):
 
 **Recomendación de implementación — no construir un motor de agenda.**
 
-Opción recomendada: **Cal.com** (plan gratis) o *citas de Google Calendar*,
-con la disponibilidad configurada 18:00-21:00 L-V, embebido en `/contacto`.
-Ventajas: respeta el calendario real de Katy, no hay que mantener código de
-horarios, y se acabó el ida y vuelta por WhatsApp para cuadrar hora.
+**Canal que existe hoy:** el correo de Kafkún, `kafkuntelares@gmail.com`, que
+ya está publicado en el footer y en el cierre de la portada. Con eso solo, la
+v1 de `/contacto` puede salir: formulario que llega a ese correo.
+
+**Cuando se quiera automatizar la hora:** **Cal.com** (plan gratis) o *citas de
+Google Calendar*, con la disponibilidad configurada 18:00-21:00 L-V, embebido en
+`/contacto`. Respeta el calendario real de Katy, no hay que mantener código de
+horarios, y se acaba el ida y vuelta por WhatsApp para cuadrar hora. Es una
+mejora, no un requisito para lanzar.
 
 Antes del calendario, un formulario corto de calificación (4 campos, no más):
 
 1. Nombre + WhatsApp
-2. ¿Qué te gustaría que te teja? (chaleco / faja / otra pieza)
+2. ¿Qué te gustaría que te teja? (chaleco / bufanda / correa / otra pieza)
 3. ¿Para cuándo la necesitas?
 4. Referencias (subir fotos, opcional)
 
@@ -231,19 +235,23 @@ lección vista" en el reproductor, y la barra de progreso en `mis-cursos`.
 
 ## 5. Inventario de imágenes
 
-**Todas están locales, dentro del repo, en `public/images/`.**
-Ruta completa desde la raíz del proyecto: `<carpeta-del-repo>/public/images/`
+**Desde el 20-ago-2026 estas fotos ya NO están en el repo.** `public/images/`
+quedó vacío: eran de relleno, estaban mal categorizadas y se iban a mezclar con
+las definitivas. Ahora viven en el Drive de contenido, ordenadas por familia.
 
-20 archivos `.jpg`, 3,4 MB en total. Ninguna imagen rota: las 14 rutas que el
-código referencia existen todas en disco.
+Siguen en el historial de git, así que no se perdió nada: `git show
+99eeaee:public/images/<archivo>.jpg > <archivo>.jpg` recupera cualquiera.
 
-> **Importante para el Drive:** estas fotos están comprimidas y redimensionadas
-> a 960×1280 (~100-250 KB c/u). **No son los originales.** Al Drive hay que
-> subir los originales de Katy, no estos archivos.
+Eran 20 archivos `.jpg`, 3,4 MB en total, todos comprimidos a 960×1280
+(~100-250 KB c/u). **No son los originales.** Los originales de Katy van en
+`00-ORIGINALES/` del Drive.
 
-### 5.1 En uso hoy
+Esta tabla queda como registro de qué era cada archivo, para poder mapearlos
+cuando lleguen las versiones buenas.
 
-| Archivo | Medidas | Proporción | Dónde se usa | Qué muestra |
+### 5.1 Las que el sitio mostraba
+
+| Archivo | Medidas | Proporción | Dónde se usaba | Qué muestra |
 |---|---|---|---|---|
 | `katy-retrato.jpg` | 959×1280 | 3:4 vert | `/sobre-mi` | Retrato de Katy |
 | `telar-proceso.jpg` | 960×1280 | 3:4 vert | `/sobre-mi` | Proceso en el telar |
@@ -254,8 +262,8 @@ código referencia existen todas en disco.
 | `prod-bufanda-blanca-3.jpg` | 960×1280 | 3:4 vert | Obra "detalle" + tienda | Detalle del tejido |
 | `prod-bufanda-roja-1.jpg` | 960×1280 | 3:4 vert | Obra "Pieza roja" + tienda | Pieza roja con flecos |
 | `prod-bufanda-roja-2.jpg` | 960×1280 | 3:4 vert | Hover pieza roja + tienda | Pieza roja, caída completa |
-| `obra-correas-1.jpg` | 960×1280 | 3:4 vert | Obra "Fajas" | Fajas morado/amarillo/rosado |
-| `obra-correas-4.jpg` | 960×1280 | 3:4 vert | Obra "Faja en el telar" | Faja sobre la espada del telar |
+| `obra-correas-1.jpg` | 960×1280 | 3:4 vert | Obra "Fajas" (mal nombrada) | Correas morado/amarillo/rosado |
+| `obra-correas-4.jpg` | 960×1280 | 3:4 vert | Obra "Faja en el telar" (mal nombrada) | Correa sobre la espada del telar |
 | `lanas-1.jpg` | 960×1280 | 3:4 vert | Tienda (producto lanas) | Lanas e hilos |
 | `lanas-2.jpg` | 960×1280 | 3:4 vert | Tienda (producto lanas) | Lanas, segunda vista |
 | `obra-clientes.jpg` | 960×1280 | 3:4 vert | **Cargada pero NO visible** | Cordón porta-credencial |
@@ -264,19 +272,18 @@ código referencia existen todas en disco.
 `obras.ts:101`: está fotografiada sobre un escritorio de oficina con teclado y
 vaso de lápices en cuadro, y falta la autorización de la clienta.
 
-### 5.2 En el repo pero sin usar (6)
+### 5.2 Las que estaban cargadas y nadie mostraba (6)
 
-Estas están cargadas y nadie las muestra. **Revisar antes de pedir fotos nuevas
-— puede que alguna ya sirva:**
+**Revisar antes de pedir fotos nuevas — puede que alguna ya sirva:**
 
 | Archivo | Medidas | Proporción | Qué muestra |
 |---|---|---|---|
 | `katy-taller.jpg` | 734×1280 | 9:16 vert alta | Katy en el taller |
 | `katy-telar.jpg` | 740×1280 | 9:16 vert alta | Katy en el telar |
-| `obra-correas-2.jpg` | 960×1280 | 3:4 vert | Fajas, otra toma |
-| `obra-correas-3.jpg` | 960×1280 | 3:4 vert | Fajas, otra toma |
-| `obra-langer-1.jpg` | 960×1280 | 3:4 vert | Pieza langer |
-| `obra-langer-2.jpg` | 960×1280 | 3:4 vert | Pieza langer, otra toma |
+| `obra-correas-2.jpg` | 960×1280 | 3:4 vert | Correas, otra toma |
+| `obra-correas-3.jpg` | 960×1280 | 3:4 vert | Correas, otra toma |
+| `obra-langer-1.jpg` | 960×1280 | 3:4 vert | **Chaleco** de la familia Langer |
+| `obra-langer-2.jpg` | 960×1280 | 3:4 vert | Chaleco Langer, otra toma |
 
 ### 5.3 El hallazgo importante
 
@@ -311,7 +318,7 @@ Ordenadas por urgencia. Las 3 primeras son las que desbloquean la portada.
 
 **Importantes — es lo que se vende hoy**
 
-4. **Chalecos entregados.** Hoy hay UNO solo en el sitio. Si hay hartas fotos de
+4. **Chalecos entregados.** Contando el de la familia Langer hay dos. Si hay hartas fotos de
    chalecos de encargo, esta es la carga más valiosa del Drive. Por pieza:
    1 foto de la prenda completa + 1 detalle del tejido, **vertical 3:4**, fondo
    neutro, misma distancia y misma luz entre piezas (para que la grilla se lea
@@ -339,10 +346,9 @@ KAFKUN-CONTENIDO/
 │   ├── retrato-horizontal/   ← 3:2              [FALTA]
 │   └── ambiente-taller/      ← ya hay: katy-taller, katy-telar, katy-retrato
 ├── 03-OBRAS/
-│   ├── chalecos/             ← 3:4 · hoy solo 1, hacen falta más
-│   ├── piezas-enteras/       ← 3:4 · hay 5
-│   ├── fajas/                ← 3:4 · hay 4
-│   └── accesorios/           ← 3:4 · hay 1, hay que refotografiar
+│   ├── chalecos/             ← 3:4 · hay 4 (verde x2, Langer x2)
+│   ├── bufandas/             ← 3:4 · hay 5 (crema x3, roja x2)
+│   └── correas/              ← 3:4 · hay 5, una hay que refotografiar
 ├── 04-PROCESO/               ← 3:4 · hay 1 (telar-proceso)
 ├── 05-CURSO/
 │   └── portada/              ← 3:2              [FALTA]
@@ -363,7 +369,7 @@ respetan.
 |---|---|---|
 | 1 | Bajar la venta: sacar tienda, carrito y checkout | — |
 | 2 | Cursos a "próximamente" + lista de espera | — |
-| 3 | Crear `/contacto` con formulario + calendario | decidir Cal.com vs. Google |
+| 3 | Crear `/contacto` con formulario al correo de Kafkún | — |
 | 4 | Limpiar el menú y reordenar la portada | 1 y 2 |
 | 5 | Enchufar las fotos del hero y "quién teje" | fotos de Katy |
 | 6 | Cargar las obras nuevas por familia | fotos de Katy |
