@@ -31,90 +31,53 @@ export type FamiliaEncargo = {
   obras: Obra[];
 };
 
-const v = (src: string, alt: string, posicion?: string): Ranura => ({
-  src,
-  alt,
-  proporcion: "vertical",
-  posicion,
-});
-
+/**
+ * Familias del encargo. Son TRES y son estas: chalecos, bufandas y correas.
+ * No existen "fajas" — eso estaba mal categorizado y se corrigió el 20-ago-2026.
+ *
+ * Las `obras` van vacías a propósito: las fotos de relleno se sacaron del repo el
+ * 20-ago-2026 porque estaban mal seccionadas y se iban a mezclar con las definitivas.
+ * Las buenas llegan por el Drive de contenido, ya ordenadas por estas mismas familias.
+ * Mientras estén vacías, `ObrasGallery` se esconde sola: es preferible a publicar
+ * siete recuadros grises.
+ *
+ * Para cargar una obra:
+ *   media: { src: "/images/<archivo>.jpg", alt: "...", proporcion: "vertical" }
+ * Siempre VERTICAL 3:4 — es como se fotografía una prenda colgada.
+ * `mediaHover` es la segunda toma de la MISMA pieza, la que aparece al pasar el cursor.
+ */
 export const familiasEncargo: FamiliaEncargo[] = [
   {
     slug: "chalecos",
     nombre: "Chalecos",
     bajada: "Prendas hechas sobre tus medidas.",
     orden: 1,
-    obras: [
-      {
-        slug: "chaleco-verde",
-        nombre: "Chaleco verde",
-        media: v("/images/prod-chaleco-verde-1.jpg", "Chaleco verde tejido a mano"),
-        mediaHover: v("/images/prod-chaleco-verde-2.jpg", "Chaleco verde, vista lateral"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-    ],
+    // Va primero: es lo que más se encarga hoy.
+    // Pendiente del Drive: chaleco verde (2 tomas) y el chaleco de la familia Langer (2 tomas).
+    obras: [],
   },
   {
-    slug: "piezas-enteras",
-    nombre: "Piezas enteras",
-    bajada: "Piezas tejidas completas, salidas del telar.",
+    slug: "bufandas",
+    nombre: "Bufandas",
+    bajada: "Tejidas enteras, con la caída y el largo que tú elijas.",
     orden: 2,
-    obras: [
-      {
-        slug: "pieza-crema",
-        nombre: "Pieza crema con bandas",
-        media: v("/images/prod-bufanda-blanca-1.jpg", "Pieza tejida crema con bandas de color y flecos"),
-        mediaHover: v("/images/prod-bufanda-blanca-2.jpg", "Pieza crema, otra vista"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      {
-        slug: "pieza-roja",
-        nombre: "Pieza roja",
-        media: v("/images/prod-bufanda-roja-1.jpg", "Pieza tejida roja con flecos"),
-        mediaHover: v("/images/prod-bufanda-roja-2.jpg", "Pieza roja, caída completa", "45% 40%"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      {
-        slug: "pieza-crema-detalle",
-        nombre: "Pieza crema, detalle",
-        media: v("/images/prod-bufanda-blanca-3.jpg", "Detalle del tejido de la pieza crema"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      {
-        slug: "fajas",
-        nombre: "Fajas",
-        media: v("/images/obra-correas-1.jpg", "Fajas tejidas en morado, amarillo y rosado"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      {
-        slug: "faja-en-el-telar",
-        nombre: "Faja en el telar",
-        media: v("/images/obra-correas-4.jpg", "Faja tejida sobre la espada de madera del telar"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      // Encargo institucional real (cordones porta-credencial), pero fotografiados sobre un
-      // escritorio de oficina con teclado y vaso de lápices en cuadro. Hay que refotografiarlos.
-      // Además obra-clientes necesita autorización de la clienta.
-      {
-        slug: "porta-credenciales",
-        nombre: "Cordones porta-credencial",
-        media: v("/images/obra-clientes.jpg", "Cordón porta-credencial tejido"),
-        materialYTecnica: null,
-        publicable: false,
-        motivoNoPublicable:
-          "Fotografiado sobre un escritorio de oficina. Refotografiar y pedir autorización de la clienta.",
-      },
-    ],
+    // Pendiente del Drive: bufanda crema con bandas (2 tomas + 1 detalle) y bufanda roja (2 tomas).
+    obras: [],
+  },
+  {
+    slug: "correas",
+    nombre: "Correas",
+    bajada: "Correas y cordones tejidos, también por encargo.",
+    orden: 3,
+    // Pendiente del Drive: las correas de colores y la correa montada en el telar.
+    // Los cordones porta-credencial hay que REFOTOGRAFIARLOS (los actuales están sobre
+    // un escritorio de oficina) y pedirle autorización a la clienta antes de publicarlos.
+    obras: [],
   },
 ];
 
 /** Solo lo que se puede mostrar hoy, en orden de familia. */
 export const obrasPublicables: Obra[] = familiasEncargo
+  .slice()
   .sort((a, b) => a.orden - b.orden)
   .flatMap((f) => f.obras.filter((o) => o.publicable));

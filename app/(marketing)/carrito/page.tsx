@@ -130,14 +130,16 @@ export default function CarritoPage() {
               key={item.id}
               className="flex gap-4 rounded-xl border border-border bg-background p-4"
             >
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg">
-                <Image
-                  src={item.thumbnail_url}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                  sizes="80px"
-                />
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-secondary">
+                {item.thumbnail_url && (
+                  <Image
+                    src={item.thumbnail_url}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col justify-between">
                 <div className="flex items-start justify-between gap-2">

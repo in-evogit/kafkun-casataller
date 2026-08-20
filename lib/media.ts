@@ -1,9 +1,11 @@
 /**
  * Sistema de medios de Casa Taller Kafkún.
  *
- * Las fotos que hay hoy en public/images/ son DE RELLENO. Las definitivas las consigue
- * Katy después. Por eso ningún componente escribe una ruta de imagen adentro: recibe un
- * `Media` y lo dibuja. Cuando lleguen las fotos buenas se cambia el dato, no el componente.
+ * El 20-ago-2026 se vació public/images/: las fotos que había eran de relleno y estaban mal
+ * categorizadas, así que se sacaron para no mezclarlas con las definitivas. Las buenas
+ * llegan por el Drive de contenido. Por eso ningún componente escribe una ruta de imagen
+ * adentro: recibe un `Media` y lo dibuja. Cuando lleguen las fotos se cambia el dato, no
+ * el componente.
  *
  * Regla de proporción, decidida con Gabriel:
  *   VERTICAL   → obras, piezas, productos, trabajos de alumnas, detalle de proceso.

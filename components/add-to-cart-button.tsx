@@ -8,7 +8,7 @@ type Product = {
   slug: string;
   name: string;
   price_clp: number;
-  image_url: string;
+  image_url: string | null;
   stock: number;
 };
 

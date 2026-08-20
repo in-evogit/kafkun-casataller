@@ -44,18 +44,27 @@ export const seedCourses = [
 ];
 
 // NOTA: precios y stock son PLACEHOLDER — reemplazar con los reales de Katy.
-export const seedProducts = [
+//
+// `image_url` va en null y `images` vacío desde el 20-ago-2026: las fotos de relleno se
+// sacaron del repo. Además la venta online se cae en la v1 (todo es por encargo), así que
+// esta lista queda en pausa y no se le vuelven a enchufar fotos hasta que se decida si la
+// tienda revive con materiales.
+export const seedProducts: {
+  slug: string;
+  name: string;
+  price_clp: number;
+  stock: number;
+  image_url: string | null;
+  images: string[];
+  category: string;
+}[] = [
   {
     slug: "bufanda-crema",
     name: "Bufanda tejida a telar · crema",
     price_clp: 45000,
     stock: 3,
-    image_url: "/images/prod-bufanda-blanca-1.jpg",
-    images: [
-      "/images/prod-bufanda-blanca-1.jpg",
-      "/images/prod-bufanda-blanca-2.jpg",
-      "/images/prod-bufanda-blanca-3.jpg",
-    ],
+    image_url: null,
+    images: [],
     category: "bufandas",
   },
   {
@@ -63,11 +72,8 @@ export const seedProducts = [
     name: "Bufanda tejida a telar · roja",
     price_clp: 45000,
     stock: 2,
-    image_url: "/images/prod-bufanda-roja-1.jpg",
-    images: [
-      "/images/prod-bufanda-roja-1.jpg",
-      "/images/prod-bufanda-roja-2.jpg",
-    ],
+    image_url: null,
+    images: [],
     category: "bufandas",
   },
   {
@@ -75,11 +81,8 @@ export const seedProducts = [
     name: "Chaleco de lana · verde",
     price_clp: 38000,
     stock: 1,
-    image_url: "/images/prod-chaleco-verde-1.jpg",
-    images: [
-      "/images/prod-chaleco-verde-1.jpg",
-      "/images/prod-chaleco-verde-2.jpg",
-    ],
+    image_url: null,
+    images: [],
     category: "chalecos",
   },
   {
@@ -87,8 +90,8 @@ export const seedProducts = [
     name: "Lanas e hilos de colores",
     price_clp: 4500,
     stock: 20,
-    image_url: "/images/lanas-1.jpg",
-    images: ["/images/lanas-1.jpg", "/images/lanas-2.jpg"],
+    image_url: null,
+    images: [],
     category: "lanas",
   },
 ];

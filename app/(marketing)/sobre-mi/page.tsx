@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -30,15 +29,12 @@ export default function SobreMiPage() {
                 hablar al oído— y así fue como este oficio llegó a mi vida.
               </p>
             </div>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
-              <Image
-                src="/images/katy-retrato.jpg"
-                alt="Katy en su taller"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            {/* Retrato de Katy. Pendiente: la foto de relleno se sacó del repo el
+                20-ago-2026 y la definitiva llega por el Drive de contenido. */}
+            <div className="relative flex aspect-[4/5] items-end overflow-hidden rounded-2xl bg-secondary p-4 shadow-2xl ring-1 ring-white/20">
+              <span className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+                Foto en camino
+              </span>
             </div>
           </div>
         </div>
@@ -92,14 +88,11 @@ export default function SobreMiPage() {
       {/* Primera pieza */}
       <section className="bg-secondary">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:px-8">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-md">
-            <Image
-              src="/images/telar-proceso.jpg"
-              alt="Telar mapuche (witral) de Katy con un tejido en proceso"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          {/* Witral con un tejido en proceso. Pendiente, mismo motivo que el retrato. */}
+          <div className="relative flex aspect-[3/4] items-end overflow-hidden rounded-2xl bg-secondary p-4 shadow-md">
+            <span className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+              Foto en camino
+            </span>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary">

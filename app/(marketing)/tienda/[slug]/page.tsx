@@ -37,11 +37,18 @@ export default async function ProductoPage({ params }: Props) {
   const product = seedProducts.find((p) => p.slug === slug);
   if (!product) notFound();
 
+  // Las fotos de relleno se sacaron del repo el 20-ago-2026, así que esto puede venir vacío.
+  const fotos = product.images?.length
+    ? product.images
+    : product.image_url
+      ? [product.image_url]
+      : [];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    image: product.image_url,
+    ...(product.image_url ? { image: product.image_url } : {}),
     offers: {
       "@type": "Offer",
       price: product.price_clp,
@@ -65,7 +72,14 @@ export default async function ProductoPage({ params }: Props) {
           {/* Imagen(es) — carrusel deslizable */}
           <div>
             <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto rounded-2xl pb-2">
-              {(product.images ?? [product.image_url]).map((img, i) => (
+              {fotos.length === 0 && (
+                <div className="relative flex aspect-square w-full shrink-0 items-end overflow-hidden rounded-2xl bg-secondary p-4">
+                  <span className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    Foto en camino
+                  </span>
+                </div>
+              )}
+              {fotos.map((img, i) => (
                 <div
                   key={img}
                   className="relative aspect-square w-full shrink-0 snap-center overflow-hidden rounded-2xl"
@@ -81,7 +95,7 @@ export default async function ProductoPage({ params }: Props) {
                 </div>
               ))}
             </div>
-            {product.images && product.images.length > 1 && (
+            {fotos.length > 1 && (
               <p className="mt-2 text-center text-xs text-muted-foreground">
                 ← Desliza para ver más fotos →
               </p>

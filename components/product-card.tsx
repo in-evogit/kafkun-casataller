@@ -8,7 +8,8 @@ type Product = {
   slug: string;
   name: string;
   price_clp: number;
-  image_url: string;
+  /** null mientras no haya foto: las de relleno se sacaron del repo el 20-ago-2026. */
+  image_url: string | null;
   stock: number;
   category: string;
 };
@@ -45,13 +46,21 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="relative aspect-square overflow-hidden">
-        <Image
-          src={product.image_url}
-          alt={product.name}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-        />
+        {product.image_url ? (
+          <Image
+            src={product.image_url}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          />
+        ) : (
+          <div className="flex h-full w-full items-end bg-secondary p-3" aria-hidden>
+            <span className="text-[0.6875rem] uppercase tracking-[0.16em] text-muted-foreground">
+              Foto en camino
+            </span>
+          </div>
+        )}
         {outOfStock && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/70">
             <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">

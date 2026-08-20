@@ -6,7 +6,8 @@ export type CartItem = {
   type: "course" | "product";
   title: string;
   price_clp: number;
-  thumbnail_url: string;
+  /** null mientras la pieza no tenga foto. Quien lo pinte debe cubrir ese caso. */
+  thumbnail_url: string | null;
   quantity: number;
 };
 
