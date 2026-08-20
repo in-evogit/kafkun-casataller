@@ -8,35 +8,122 @@ primer curso. Entonces hoy tiene un solo trabajo: convertir la marca personal de
 Katy en (a) encargos agendados y (b) lista de espera del curso. Todo lo que no
 sirva a esos dos objetivos es peso muerto para la v1.
 
+### Decisiones tomadas (20-ago-2026)
+
+1. **No se vende nada online.** No hay pasarela de pago en la v1. El único
+   camino comercial es el encargo, y el encargo se cierra en una reunión.
+   → Se caen tienda, carrito y checkout.
+2. **Los cursos quedan en "próximamente".** No se configuran, no se venden, no
+   se listan con precio. Solo se anuncia que vienen y se capta la lista de
+   espera.
+3. Todo lo demás de este documento se ordena bajo esas dos decisiones.
+
 ---
 
 ## 1. Bloqueadores duros (sin esto no se lanza)
 
-| # | Problema | Dónde | Por qué bloquea |
+| # | Problema | Dónde | Estado |
 |---|---|---|---|
-| 1 | **`/contacto` no existe** | 7 links apuntan ahí | El CTA principal del encargo ("Empezar mi encargo", "Quiero algo así", navbar, footer, CTA final) cae en **404**. El embudo completo muere ahí. |
-| 2 | **Se pueden comprar 3 cursos que no existen** | `lib/data/seed.ts:1-44` | Los 3 cursos tienen precio (45.000 / 72.000 / 68.000) y flujo de compra. Las 46 lecciones tienen `mux_playback_id: null`, o sea **cero video**. Alguien puede pagar por nada. |
-| 3 | **La tienda contradice a las obras** | `/tienda` vs. portada | Las mismas fotos (`prod-chaleco-verde-1`, `prod-bufanda-*`) aparecen en la portada como *"obra entregada, no está en venta"* y en `/tienda` como *producto con precio y botón agregar al carrito*. Dos mensajes opuestos sobre la misma pieza. |
-| 4 | **La portada no tiene foto arriba** | `page.tsx:52` | El hero y la sección "quién teje" caen en el placeholder "Foto en camino". Lo primero que ve alguien que llega por marca personal es un recuadro gris. |
+| 1 | **`/contacto` no existe** | 7 links apuntan ahí | El CTA principal del encargo ("Empezar mi encargo", "Quiero algo así", navbar, footer, CTA final) cae en **404**. El embudo completo muere ahí. **Sigue abierto: es el #1.** |
+| 2 | **Se pueden comprar 3 cursos que no existen** | `lib/data/seed.ts:1-44` | Precio (45.000 / 72.000 / 68.000) y flujo de compra activos; las 46 lecciones tienen `mux_playback_id: null`, o sea cero video. → **Resuelto por decisión 2:** los cursos pasan a "próximamente" sin compra. |
+| 3 | **La tienda contradice a las obras** | `/tienda` vs. portada | La misma foto aparece como *"obra entregada, no está en venta"* en la portada y como *producto con precio y carrito* en `/tienda`. → **Resuelto por decisión 1:** la tienda se cae. |
+| 4 | **La portada no tiene foto arriba** | `page.tsx:52` | El hero y "quién teje" caen en el placeholder "Foto en camino". Depende de que Katy entregue las 2 fotos horizontales. |
 
 ---
 
-## 2. Estructura recomendada de la portada
+## 2. Cómo va a ser la interfaz
 
-Orden actual → orden propuesto para la v1:
+### 2.1 Navegación
+
+De 6 links a 4. Cada uno tiene que ganarse el lugar:
+
+```
+KAFKÚN     Obras · Quién es Katy · Cursos · Encargar una pieza
+```
+
+- **Obras** → ancla al muestrario de la portada.
+- **Quién es Katy** → `/sobre-mi`.
+- **Cursos** → `/cursos`, en modo "próximamente".
+- **Encargar una pieza** → `/contacto`. Es el botón sólido, el único destacado.
+
+Se caen del menú: *Tienda* (no existe más), *Diario* (el blog no aporta al
+lanzamiento; las 2 entradas quedan publicadas pero fuera del menú), *Login* y
+*Registro* (no hay nada que loguear hasta que exista el curso).
+
+### 2.2 La portada, sección por sección
 
 ```
 1. HERO             foto horizontal de Katy + promesa + 2 botones
-2. QUIÉN TEJE       retrato + descripción de ella y del oficio   ← sube
+2. QUIÉN TEJE       retrato + quién es ella y qué hace         ← sube
 3. OBRAS A PEDIDO   muestrario por familia (chalecos primero)
 4. EL PROCESO       los 5 pasos del encargo (ya está escrito)
 5. AGENDAR          bloque de reunión — el CTA del negocio de hoy
-6. EL CURSO         uno solo, "en preparación" + lista de espera
+6. EL CURSO         "en preparación" + lista de espera
 7. CIERRE           footer
 ```
 
-Se caen de la v1: testimonios (vacío a propósito, no hay reales), FAQ (vacío a
-propósito), newsletter genérica (se reemplaza por la lista de espera del curso).
+**1 · Hero.** Foto horizontal de Katy en el witral, texto encima. Un titular con
+la promesa real ("no tejo un chaleco típico, tejo el que tú quieres"), una bajada
+de dos líneas, y dos botones: *Encargar una pieza* (sólido) y *Ver las obras*
+(secundario, ancla a la sección 3). El componente ya está armado texto-primero,
+solo le falta la foto.
+
+**2 · Quién teje.** Retrato horizontal + el texto de Katy: quién es, desde cuándo
+teje, qué la hace distinta. Esto sube de posición: si el sitio vende marca
+personal, la persona no puede aparecer en el sexto scroll. Cuando exista el video
+de saludo, va acá, con el retrato de póster y play manual.
+
+**3 · Obras a pedido.** Muestrario en grilla, **una fila por familia**: Chalecos,
+Piezas enteras, Fajas, Accesorios. Chalecos primero porque es lo que se vende
+hoy. Cada pieza: foto vertical 3:4, nombre, y al pasar el cursor aparece la
+segunda toma. Sin precio y sin carrito: cada una lleva a *"Quiero algo así"*, que
+abre `/contacto` con la pieza ya anotada en la URL (`?ref=chaleco-verde`), así
+Katy llega a la reunión sabiendo qué le gustó a esa persona.
+
+**4 · El proceso.** Los 5 pasos ya escritos: nos juntamos y te tomo medidas →
+traes referencias → eliges material tocándolo → recién ahí hay precio y plazo →
+tejo y entrego. Esta sección es la que responde la pregunta que hoy Katy contesta
+una y otra vez por WhatsApp: *"¿cuánto sale?"*. La respuesta honesta —"depende, y
+por eso conversamos"— tiene que estar escrita antes de que la persona la
+pregunte.
+
+**5 · Agendar.** El bloque comercial. Explica las condiciones reales (reuniones
+de lunes a viernes después de las 18:00) y lleva al calendario.
+
+**6 · El curso.** Una sola tarjeta: nombre, promesa, temario visible, y en vez de
+precio y botón de compra, un **"avísame cuando abra"** con el correo. Mostrar el
+temario sin vender es a propósito: demuestra que el curso es real y en
+preparación, no una promesa vaga.
+
+**7 · Cierre.** Footer con Instagram, correo y el link a encargar.
+
+Se caen de la v1: **testimonios** (vacío a propósito, los anteriores eran
+inventados y se borraron), **FAQ** (vacío a propósito, las respuestas anteriores
+afirmaban políticas que Katy nunca confirmó) y la **newsletter genérica**, que se
+reemplaza por la lista de espera del curso.
+
+### 2.3 Las páginas
+
+| Ruta | Qué es | Estado |
+|---|---|---|
+| `/` | La portada de arriba | existe, hay que reordenar |
+| `/sobre-mi` | La historia larga de Katy | existe, tiene sus 2 fotos |
+| `/contacto` | Formulario + calendario del encargo | **hay que crearla** |
+| `/cursos` | El curso inicial en "próximamente" + lista de espera | existe, hay que sacarle la compra |
+| `/diario` | Las 2 entradas del blog | queda publicada, fuera del menú |
+| `/tienda` `/carrito` `/checkout` | Venta online | **se caen** |
+| `/login` `/registro` `/mi-cuenta` `/mis-cursos` `/aprende` | Área de alumnas | **quedan dormidas** hasta que exista el curso |
+
+Lo del área de alumnas: no se borra, se deja tal cual y sin links que lleven
+ahí. Cuando el curso exista se despierta. Borrarla sería tirar trabajo hecho.
+
+### 2.4 Lo que NO se toca ahora
+
+El progreso con checklist del curso (marcar lección vista, barra de avance en el
+perfil) **no existe** y no se construye todavía: no hay curso que seguir. Queda
+anotado como el primer trabajo del día después del lanzamiento. Son 3 piezas:
+tabla `lesson_progress`, botón de "marcar vista" en el reproductor, y la barra en
+`mis-cursos`.
 
 ### Hero: **foto, no video**
 
@@ -274,12 +361,13 @@ respetan.
 
 | Orden | Qué | Depende de |
 |---|---|---|
-| 1 | Crear `/contacto` con formulario + calendario | decidir Cal.com vs. Google |
-| 2 | Sacar los 2 cursos que no existen | — |
-| 3 | Resolver tienda: se cae o queda solo con materiales | decisión de Katy |
-| 4 | Enchufar las fotos del hero y "quién teje" | fotos de Katy |
-| 5 | Cargar las obras nuevas por familia | fotos de Katy |
-| 6 | Lista de espera del curso | — |
+| 1 | Bajar la venta: sacar tienda, carrito y checkout | — |
+| 2 | Cursos a "próximamente" + lista de espera | — |
+| 3 | Crear `/contacto` con formulario + calendario | decidir Cal.com vs. Google |
+| 4 | Limpiar el menú y reordenar la portada | 1 y 2 |
+| 5 | Enchufar las fotos del hero y "quién teje" | fotos de Katy |
+| 6 | Cargar las obras nuevas por familia | fotos de Katy |
 | 7 | *(post-lanzamiento)* progreso y checklist del curso | que exista el curso |
 
-Los pasos 1, 2, 3 y 6 no dependen de ninguna foto: se pueden hacer ya.
+Los pasos 1 a 4 no dependen de ninguna foto: se pueden hacer ya. Los pasos 5 y 6
+son los únicos bloqueados por Katy.
