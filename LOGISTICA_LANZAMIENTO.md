@@ -24,7 +24,7 @@ sirva a esos dos objetivos es peso muerto para la v1.
 
 | # | Problema | Dónde | Estado |
 |---|---|---|---|
-| 1 | **`/contacto` no existe** | 7 links apuntan ahí | El CTA principal del encargo ("Empezar mi encargo", "Quiero algo así", navbar, footer, CTA final) cae en **404**. El embudo completo muere ahí. **Sigue abierto: es el #1.** |
+| 1 | ~~**`/contacto` no existe**~~ | 7 links apuntaban ahí | El CTA del encargo, las obras, el navbar, el footer y el cierre caían en 404. → **Resuelto el 22-ago-2026** (`51ac26c`): la página existe, con formulario y hora por Cal.com. |
 | 2 | **Se pueden comprar 3 cursos que no existen** | `lib/data/seed.ts:1-44` | Precio (45.000 / 72.000 / 68.000) y flujo de compra activos; las 46 lecciones tienen `mux_playback_id: null`, o sea cero video. → **Resuelto por decisión 2:** los cursos pasan a "próximamente" sin compra. |
 | 3 | **La tienda contradice a las obras** | `/tienda` vs. portada | La misma foto aparece como *"obra entregada, no está en venta"* en la portada y como *producto con precio y carrito* en `/tienda`. → **Resuelto por decisión 1:** la tienda se cae. |
 | 4 | **La portada no tiene foto arriba** | `page.tsx:52` | El hero y "quién teje" caen en el placeholder "Foto en camino". Depende de que Katy entregue las 2 fotos horizontales. |
@@ -38,13 +38,13 @@ sirva a esos dos objetivos es peso muerto para la v1.
 De 6 links a 4. Cada uno tiene que ganarse el lugar:
 
 ```
-KAFKÚN     Obras · Quién es Katy · Cursos · Encargar una pieza
+KAFKÚN     Obras · Quién es Katy · Clases · Hacer mi pedido
 ```
 
 - **Obras** → ancla al muestrario de la portada.
 - **Quién es Katy** → `/sobre-mi`.
-- **Cursos** → `/cursos`, en modo "próximamente".
-- **Encargar una pieza** → `/contacto`. Es el botón sólido, el único destacado.
+- **Clases** → `/cursos`, en modo "próximamente".
+- **Hacer mi pedido** → `/contacto`. Es el botón sólido, el único destacado.
 
 Se caen del menú: *Tienda* (no existe más), *Diario* (el blog no aporta al
 lanzamiento; las 2 entradas quedan publicadas pero fuera del menú), *Login* y
@@ -64,7 +64,7 @@ lanzamiento; las 2 entradas quedan publicadas pero fuera del menú), *Login* y
 
 **1 · Hero.** Foto horizontal de Katy en el witral, texto encima. Un titular con
 la promesa real ("no tejo un chaleco típico, tejo el que tú quieres"), una bajada
-de dos líneas, y dos botones: *Encargar una pieza* (sólido) y *Ver las obras*
+de dos líneas, y dos botones: *Hacer mi pedido* (sólido) y *Ver las obras*
 (secundario, ancla a la sección 3). El componente ya está armado texto-primero,
 solo le falta la foto.
 
@@ -74,14 +74,15 @@ personal, la persona no puede aparecer en el sexto scroll. Cuando exista el vide
 de saludo, va acá, con el retrato de póster y play manual.
 
 **3 · Obras a pedido.** Muestrario en grilla, **una fila por familia**: Chalecos,
-Bufandas y Correas. Chalecos primero porque es lo que más se encarga hoy. Cada pieza: foto vertical 3:4, nombre, y al pasar el cursor aparece la
-segunda toma. Sin precio y sin carrito: cada una lleva a *"Quiero algo así"*, que
-abre `/contacto` con la pieza ya anotada en la URL (`?ref=chaleco-verde`), así
+y Bufandas — **Correas salió**. Chalecos primero porque es lo que más se encarga
+hoy. Cada obra: foto vertical 3:4, nombre, y al pasar el cursor aparece la
+segunda toma. Sin precio y sin carrito: cada una lleva a *"Quiero uno así"*, que
+abre `/contacto` con la obra ya anotada en la URL (`?ref=chaleco-verde`), así
 Katy llega a la reunión sabiendo qué le gustó a esa persona.
 
-**4 · El proceso.** Los 5 pasos ya escritos: nos juntamos y te tomo medidas →
-traes referencias → eliges material tocándolo → recién ahí hay precio y plazo →
-tejo y entrego. Esta sección es la que responde la pregunta que hoy Katy contesta
+**4 · El proceso.** Los 5 pasos: nos juntamos **por videollamada** y vemos
+medidas → me muestras referencias si tienes → definimos lana y materiales →
+recién ahí hay precio y plazo → lo tejo y te lo entrego. Esta sección es la que responde la pregunta que hoy Katy contesta
 una y otra vez por WhatsApp: *"¿cuánto sale?"*. La respuesta honesta —"depende, y
 por eso conversamos"— tiene que estar escrita antes de que la persona la
 pregunte.
@@ -107,7 +108,7 @@ reemplaza por la lista de espera del curso.
 |---|---|---|
 | `/` | La portada de arriba | existe, hay que reordenar |
 | `/sobre-mi` | La historia larga de Katy | existe, tiene sus 2 fotos |
-| `/contacto` | Formulario + calendario del encargo | **hay que crearla** |
+| `/contacto` | Formulario del pedido + hora por Cal.com | ✅ creada (`51ac26c`) |
 | `/cursos` | El curso inicial en "próximamente" + lista de espera | existe, hay que sacarle la compra |
 | `/diario` | Las 2 entradas del blog | queda publicada, fuera del menú |
 | `/tienda` `/carrito` `/checkout` | Venta online | **se caen** |
@@ -120,7 +121,7 @@ ahí. Cuando el curso exista se despierta. Borrarla sería tirar trabajo hecho.
 
 El progreso con checklist del curso (marcar lección vista, barra de avance en el
 perfil) **no existe** y no se construye todavía: no hay curso que seguir. Queda
-anotado como el primer trabajo del día después del lanzamiento. Son 3 piezas:
+anotado como el primer trabajo del día después del lanzamiento. Son 3 partes:
 tabla `lesson_progress`, botón de "marcar vista" en el reproductor, y la barra en
 `mis-cursos`.
 
@@ -147,26 +148,26 @@ Sobre el carrusel que se desliza solo: **no lo recomiendo como galería principa
 
 - Los carruseles automáticos tienen mala conversión: la gente no espera a que
   pase la foto que le interesaba, y en móvil pelean contra el scroll del dedo.
-- Se pierde el escaneo: con grilla el ojo compara 6 piezas de una; con carrusel
+- Se pierde el escaneo: con grilla el ojo compara 6 obras de una; con carrusel
   ve una a la vez.
 
 **Lo que sí recomiendo, ahora que van a haber hartas fotos de chalecos:**
 
-- **Grilla por familia.** Cada familia (Chalecos, Bufandas, Correas) es su propia fila. Escala bien: llegan 20 fotos de chalecos y la
+- **Grilla por familia.** Cada familia (Chalecos, Bufandas) es su propia fila. Escala bien: llegan 20 fotos de chalecos y la
   sección no se rompe, se hace más rica. La estructura ya existe en
   `lib/data/obras.ts` (`familiasEncargo`), solo hay que llenarla.
 - **Si quieren movimiento:** una tira horizontal de desplazamiento continuo
   (tipo muestrario que corre lento), que se detiene al pasar el cursor y que
   respeta `prefers-reduced-motion`. Eso sí funciona, porque no oculta nada: la
   foto siempre vuelve.
-- **Carrusel manual sí, pero adentro de una pieza:** cuando se abre un chaleco
-  específico y hay 4 tomas de esa misma pieza, ahí el carrusel deslizable con el
-  dedo es lo correcto.
+- **Carrusel manual sí, pero adentro de una obra:** cuando se abre un chaleco
+  específico y hay 4 tomas del mismo, ahí el carrusel deslizable con el dedo es
+  lo correcto.
 
 > **Corregido el 20-ago-2026.** Antes existía una familia inventada, "Fajas",
-> y las piezas estaban repartidas dentro de "Piezas enteras". Las familias
-> reales son **tres y solo tres: chalecos, bufandas y correas.** Ya quedaron
-> así en `lib/data/obras.ts`, con las obras vacías esperando las fotos buenas.
+> y todo estaba repartido dentro de "Piezas enteras". Las familias reales son
+> **dos: chalecos y bufandas** — correas se sacó el 21-ago-2026 por decisión de
+> Gabo. Ya quedaron así en `lib/data/obras.ts`, esperando las fotos buenas.
 
 ---
 
@@ -175,28 +176,33 @@ Sobre el carrusel que se desliza solo: **no lo recomiendo como galería principa
 Reglas del negocio (definidas por Katy):
 
 - **Disponibilidad:** lunes a viernes, **después de las 18:00**.
-- **No hay pasarela de pago.** El precio se define en la reunión porque la pieza
-  es 100% personalizada.
+- **No hay pasarela de pago.** El precio se define en la reunión porque el
+  tejido es 100% personalizado.
 - **Producto principal hoy:** chalecos a medida.
 - Después de la reunión: 50% de abono para entrar al telar, 50% a la entrega
   (ya está escrito en `how-it-works.tsx`, paso 04 y 05).
 
 **Recomendación de implementación — no construir un motor de agenda.**
 
-**Canal que existe hoy:** el correo de Kafkún, `kafkuntelares@gmail.com`, que
-ya está publicado en el footer y en el cierre de la portada. Con eso solo, la
-v1 de `/contacto` puede salir: formulario que llega a ese correo.
+**Decidido el 22-ago-2026: Cal.com.** Va embebido en `/contacto` como iframe, no
+con `@calcom/embed-react`: así no entra una dependencia más ni un script de
+terceros, y en la CSP basta con abrir `frame-src` en vez de `script-src`.
 
-**Cuando se quiera automatizar la hora:** **Cal.com** (plan gratis) o *citas de
-Google Calendar*, con la disponibilidad configurada 18:00-21:00 L-V, embebido en
-`/contacto`. Respeta el calendario real de Katy, no hay que mantener código de
-horarios, y se acaba el ida y vuelta por WhatsApp para cuadrar hora. Es una
-mejora, no un requisito para lanzar.
+El flujo va en dos tiempos a propósito: **primero los datos, después la hora.**
+Así el pedido le llega a Katy aunque la persona abandone antes de agendar, y el
+calendario aparece precargado con lo que acaba de escribir.
+
+Mientras `NEXT_PUBLIC_CAL_LINK` no exista, `/contacto` muestra el correo de
+Kafkún (`kafkuntelares@gmail.com`) en vez del calendario y funciona igual. Por
+eso se puede desplegar antes de que Katy cree la cuenta.
+
+**Las fotos de referencia no se suben:** se ven en la videollamada. Evita montar
+Supabase Storage y su superficie de ataque para la v1.
 
 Antes del calendario, un formulario corto de calificación (4 campos, no más):
 
 1. Nombre + WhatsApp
-2. ¿Qué te gustaría que te teja? (chaleco / bufanda / correa / otra pieza)
+2. ¿Qué te gustaría que te teja? (chaleco / bufanda / otro tejido)
 3. ¿Para cuándo la necesitas?
 4. Referencias (subir fotos, opcional)
 
@@ -348,7 +354,8 @@ KAFKUN-CONTENIDO/
 ├── 03-OBRAS/
 │   ├── chalecos/             ← 3:4 · hay 4 (verde x2, Langer x2)
 │   ├── bufandas/             ← 3:4 · hay 5 (crema x3, roja x2)
-│   └── correas/              ← 3:4 · hay 5, una hay que refotografiar
+│   └── correas/              ← 3:4 · hay 5. YA NO se publican: correas salió
+│                                del sitio el 21-ago. Las fotos se guardan igual.
 ├── 04-PROCESO/               ← 3:4 · hay 1 (telar-proceso)
 ├── 05-CURSO/
 │   └── portada/              ← 3:2              [FALTA]
@@ -365,15 +372,55 @@ respetan.
 
 ## 8. Orden de trabajo sugerido
 
-| Orden | Qué | Depende de |
+| Orden | Qué | Estado |
 |---|---|---|
-| 1 | Bajar la venta: sacar tienda, carrito y checkout | — |
-| 2 | Cursos a "próximamente" + lista de espera | — |
-| 3 | Crear `/contacto` con formulario al correo de Kafkún | — |
-| 4 | Limpiar el menú y reordenar la portada | 1 y 2 |
-| 5 | Enchufar las fotos del hero y "quién teje" | fotos de Katy |
-| 6 | Cargar las obras nuevas por familia | fotos de Katy |
+| 1 | **Crear `/contacto`** con el pedido y la hora | ✅ hecho (`51ac26c`) |
+| 2 | Bajar la venta: sacar tienda, carrito y checkout | pendiente |
+| 3 | Cursos a "próximamente" + lista de espera | pendiente |
+| 4 | Limpiar el menú y reordenar la portada | pendiente |
+| 5 | Enchufar las fotos del hero y "quién teje" | bloqueado por Katy |
+| 6 | Cargar las obras nuevas por familia | bloqueado por Katy |
 | 7 | *(post-lanzamiento)* progreso y checklist del curso | que exista el curso |
 
-Los pasos 1 a 4 no dependen de ninguna foto: se pueden hacer ya. Los pasos 5 y 6
-son los únicos bloqueados por Katy.
+Los pasos 2 a 4 no dependen de ninguna foto: se pueden hacer ya.
+
+---
+
+## 9. Pendientes que no son código
+
+Cosas que alguien tiene que ir a hacer afuera, y sin las cuales el sitio
+funciona pero a media máquina.
+
+### Bloquean el lanzamiento
+
+| # | Qué | Quién | Sin esto qué pasa |
+|---|---|---|---|
+| 1 | **Cuenta de Cal.com**: crearla, conectarla a Google Calendar y a Meet, y dejar la disponibilidad en L-V 18:00-21:00. Después setear `NEXT_PUBLIC_CAL_LINK` (ej. `kafkun/encargo`) | Katy + Gabo | `/contacto` muestra el correo en vez del calendario. Funciona, pero la hora se cuadra a mano por WhatsApp |
+| 2 | **Supabase**: terminar de armar el proyecto y cargar `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` | Gabo + Luca | **El sitio entero devuelve 500.** Ver el aviso de abajo |
+| 3 | **Las 3 fotos horizontales** de Katy: hero 16:9, retrato 3:2 y portada de curso 3:2 | Katy | La portada arriba muestra "Foto en camino" |
+
+> **Ojo con Supabase — esto no es un degradado, es una caída.**
+> `proxy.ts` construye el cliente de Supabase sin comprobar que existan las
+> variables, y el middleware corre **antes** que cualquier página. Si faltan, no
+> es que falle el login: revienta `/`, `/contacto`, todo, con un 500. Comprobado
+> el 22-ago-2026 levantando el servidor sin `.env.local`.
+> Conviene que `proxy.ts` deje pasar la petición cuando no hay configuración, en
+> vez de tumbar el sitio.
+
+### No bloquean, pero conviene
+
+| # | Qué | Quién |
+|---|---|---|
+| 4 | `RESEND_API_KEY` y `RESEND_FROM` en Vercel. Sin esto el pedido se recibe pero **no le llega el correo a Katy** | Gabo |
+| 5 | `PEDIDOS_EMAIL` en Vercel. Por defecto ya apunta a `kafkuntelares@gmail.com` | Gabo |
+| 6 | `UPSTASH_REDIS_REST_URL` y `_TOKEN`. Sin esto el límite de envíos del formulario **no se aplica**: cualquiera puede mandar mil pedidos | Gabo |
+| 7 | Confirmar que el proyecto de Vercel está conectado al repo (`npx vercel ls`) | Gabo |
+| 8 | Refotografiar los cordones porta-credencial y pedir autorización a la clienta | Katy |
+| 9 | Nombres de las obras, material y técnica de cada una | Katy |
+
+### Deuda de los skills del repo
+
+| # | Qué | Por qué |
+|---|---|---|
+| 10 | `.claude/nextjs-app-router/SKILL.md` dice **"Next.js 15"** y habla de `middleware.ts` | El repo corre 16.3.2 y usa `proxy.ts`. Se gatilla al trabajar acá y entrega contexto viejo |
+| 11 | No existe un skill del sistema visual | Cada sesión tiene que redescubrir la paleta, las proporciones de foto y las prohibiciones |
