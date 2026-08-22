@@ -18,7 +18,8 @@ const cspHeader = `
     https://*.mux.com
     https://www.google-analytics.com
     https://*.vercel-analytics.com;
-  frame-src 'self' https://www.mercadopago.com https://player.mux.com;
+  frame-src 'self' https://www.mercadopago.com https://player.mux.com
+    https://cal.com https://app.cal.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://www.mercadopago.com;
