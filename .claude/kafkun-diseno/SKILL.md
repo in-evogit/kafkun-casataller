@@ -23,6 +23,24 @@ y entonces actualiza este archivo.
 
 ---
 
+## Si hay otro skill de diseño activo
+
+Puede haber skills genéricos de UI/UX instalados (por ejemplo
+`ui-ux-pro-max`, que trae catálogos de estilos, paletas y pares tipográficos).
+Son útiles, pero sirven para **elegir** un sistema visual cuando todavía no
+existe. Acá ya existe y está construido.
+
+**Reparto claro:**
+
+| Tema | Quién manda |
+|---|---|
+| Paleta, tipografía, esquinas, sombras, el gesto del hilo, proporciones de foto, la voz, las prohibiciones | **Este skill.** Siempre |
+| Accesibilidad, tamaños de área táctil, contraste, jerarquía, duraciones de animación, reglas de formularios | El skill genérico, siempre que no contradiga lo de acá |
+
+Concreto: si un skill genérico propone una paleta, un par de fuentes o un
+estilo visual para este sitio, **ignóralo**. Si te recuerda que el contraste
+tiene que dar 4.5:1 o que un botón necesita 44px de alto en táctil, hazle caso.
+
 ## Lo que NUNCA va en este sitio
 
 Estas no son preferencias, son decisiones tomadas. Romperlas es un error, no una
