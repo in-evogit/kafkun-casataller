@@ -1,12 +1,34 @@
 ---
 name: nextjs-app-router
 description: >
-  Skill experto en patrones de Next.js 15 App Router. USAR SIEMPRE que el usuario mencione: Next.js, Next 15, App Router, Server Components, Client Components, "use client", "use server", server actions, Route Handlers, API routes, middleware.ts, loading.tsx, error.tsx, not-found.tsx, layout.tsx, page.tsx, generateMetadata, generateStaticParams, dynamic routes, parallel routes, intercepting routes, route groups, ISR, SSG, SSR, streaming, Suspense, revalidate, revalidateTag, revalidatePath, cookies(), headers(), redirect(), next/navigation, next/image, next/font, next/link, Server Actions con forms, useFormState, useFormStatus, optimistic UI, Tanstack Query, Zustand, Vercel deploy, edge runtime, nodejs runtime. También activar al estructurar carpetas, decidir entre client/server components, debuggear hydration errors, o optimizar performance.
+  Skill experto en patrones de Next.js 16 App Router. USAR SIEMPRE que el usuario mencione: Next.js, Next 16, App Router, Server Components, Client Components, "use client", "use server", server actions, Route Handlers, API routes, proxy.ts, middleware.ts, loading.tsx, error.tsx, not-found.tsx, layout.tsx, page.tsx, generateMetadata, generateStaticParams, dynamic routes, parallel routes, intercepting routes, route groups, ISR, SSG, SSR, streaming, Suspense, revalidate, revalidateTag, updateTag, refresh, revalidatePath, cookies(), headers(), redirect(), next/navigation, next/image, next/font, next/link, Server Actions con forms, useFormState, useFormStatus, optimistic UI, Tanstack Query, Zustand, Vercel deploy, Turbopack, nodejs runtime, edge runtime (deprecado). También activar al estructurar carpetas, decidir entre client/server components, debuggear hydration errors, o optimizar performance.
 ---
 
-# Next.js 15 App Router — Patterns Production-Grade
+# Next.js 16 App Router — Patterns Production-Grade
 
-Skill para construir bien en Next.js 15 App Router. App Router cambia mucho la forma de pensar: por default todo es Server Component, las API routes son Route Handlers, los forms usan Server Actions.
+> **Actualizado a Next.js 16 el 22-ago-2026.** Antes este skill decía "Next.js 15"
+> y enseñaba `middleware.ts`, que en 16 dejó de ser la convención. Si algo de acá
+> no calza con lo que ves en el código, la fuente de verdad son los docs que trae
+> el propio paquete en `node_modules/next/dist/docs/` — no la memoria del modelo.
+
+Skill para construir bien en Next.js 16 App Router. App Router cambia mucho la forma de pensar: por default todo es Server Component, las API routes son Route Handlers, los forms usan Server Actions.
+
+## Lo que cambió de 15 a 16
+
+Si vienes de Next 15, esto es lo que ya no funciona igual:
+
+| Cambio | Antes (15) | Ahora (16) |
+|---|---|---|
+| Middleware | `middleware.ts`, export `middleware` | **`proxy.ts`, export `proxy`**, runtime `nodejs` fijo |
+| `params` / `searchParams` | async, con compatibilidad síncrona temporal | **sólo async**, el acceso síncrono se eliminó |
+| `revalidateTag` | `revalidateTag('tag')` | **`revalidateTag('tag', 'max')`** — el perfil es obligatorio |
+| Empaquetador | webpack por defecto | **Turbopack por defecto** |
+| Runtime edge | opción normal | **deprecado**; no existe en `proxy` |
+| `experimental.useCache` / `dynamicIO` | en uso | deprecados |
+| tsconfig | `baseUrl`, `moduleResolution: "node"` | deprecados; usa `moduleResolution: "bundler"` |
+
+Next 16 también escribe solo un bloque en el `AGENTS.md` del proyecto cada vez que
+corre `next dev`. Sale como cambio sin commitear: commitéalo y deja de aparecer.
 
 ## Filosofía Central
 
@@ -124,7 +146,7 @@ app/
 │   │       ├── page.tsx      # /cursos/[slug]
 │   │       └── opengraph-image.tsx
 │   └── tienda/...
-├── (account)/                # Protegido (middleware)
+├── (account)/                # Protegido (proxy.ts)
 │   ├── layout.tsx
 │   ├── mi-cuenta/page.tsx
 │   └── aprende/[curso]/[leccion]/page.tsx
@@ -156,7 +178,7 @@ lib/
 │   ├── client.ts             # Cliente browser
 │   ├── server.ts             # Cliente server (RSC, server actions)
 │   ├── admin.ts              # Service role (server-only)
-│   └── middleware.ts
+│   └── proxy.ts              # antes middleware.ts
 ├── mercadopago.ts
 ├── mux.ts
 └── utils.ts
@@ -354,18 +376,46 @@ export async function POST(req: Request) {
 - Server Action: forms internos, mutaciones desde tu UI
 - Route Handler: webhooks externos, endpoints que llamarán terceros, integraciones móviles
 
-## Middleware
+## Proxy (antes middleware)
+
+**En Next.js 16 el archivo se llama `proxy.ts`, no `middleware.ts`.** El nombre
+cambió para dejar claro que es la frontera de red y el enrutado, no un lugar donde
+meter lógica de negocio. La función exportada también se renombra a `proxy`.
+
+```bash
+mv middleware.ts proxy.ts
+```
 
 ```typescript
-// middleware.ts (raíz, no en /app)
+// proxy.ts (raíz, no en /app)
+export async function proxy(req: NextRequest) { /* ... */ }
+```
+
+Las banderas de `next.config.ts` que llevaban el nombre viejo también cambiaron:
+`skipMiddlewareUrlNormalize` es ahora `skipProxyUrlNormalize`. El codemod de la
+versión 16 las actualiza solo.
+
+**`proxy` corre en runtime `nodejs` y NO se puede configurar.** El runtime `edge`
+no está soportado ahí. Si de verdad necesitas edge, tienes que quedarte con
+`middleware`, que sigue existiendo pero está deprecado.
+
+> **Trampa que cuesta caro:** el proxy corre ANTES que cualquier página. Si
+> construyes ahí un cliente (Supabase, por ejemplo) sin comprobar que existan sus
+> variables de entorno, un deploy sin configurar no te deja el login roto: te
+> devuelve **500 en todo el sitio**, incluida la portada. Comprueba y deja pasar la
+> petición cuando falte configuración.
+
+
+```typescript
+// proxy.ts (raíz, no en /app)
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const res = NextResponse.next();
 
-  // Crear cliente Supabase para middleware
+  // Crear cliente Supabase para el proxy
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -415,7 +465,9 @@ export const config = {
 };
 ```
 
-**Importante:** middleware corre en edge runtime. No puedes usar todas las APIs de Node. Para lógica pesada, hacerla en Server Components / Server Actions.
+**Importante:** el proxy corre en cada petición que calce con el `matcher`. Es la
+ruta caliente del sitio entero, así que nada de lógica pesada acá — eso va en
+Server Components o Server Actions.
 
 ## Cache y Revalidation
 
@@ -449,11 +501,39 @@ export async function updateCourse(id: string, data: any) {
 
 ### Tags para cache granular
 
+**`revalidateTag` ahora exige un segundo argumento** con el perfil de `cacheLife`.
+La forma de un solo argumento quedó deprecada y da error de TypeScript.
+
 ```typescript
 const courses = await fetch('https://api/courses', { next: { tags: ['courses'] } });
 
-// En otro lado:
-revalidateTag('courses'); // invalida todo lo tageado así
+// ❌ Next 15
+revalidateTag('courses');
+
+// ✅ Next 16
+revalidateTag('courses', 'max');
+```
+
+### Cuál de los tres usar
+
+Next 16 trae dos APIs nuevas al lado de `revalidateTag`, y la diferencia importa:
+
+| API | Qué hace | Cuándo |
+|---|---|---|
+| `revalidateTag(tag, perfil)` | Marca como viejo. La gente ve el dato añejo mientras se refresca por detrás | Blog, catálogo, docs: donde un retraso no molesta |
+| `updateTag(tag)` | Expira y refresca **en la misma petición**. Quien hizo el cambio lo ve al tiro | Formularios, ajustes de cuenta: donde la persona espera ver su cambio |
+| `refresh()` | Refresca el router del cliente desde una Server Action | Actualizar un contador o un badge del header |
+
+`updateTag` y `refresh` son **sólo para Server Actions**.
+
+```typescript
+'use server';
+import { updateTag } from 'next/cache';
+
+export async function updatePerfil(userId: string, perfil: Perfil) {
+  await db.users.update(userId, perfil);
+  updateTag(`user-${userId}`); // lo ve al instante, no un dato viejo
+}
 ```
 
 ## Dynamic Routes
@@ -596,7 +676,7 @@ Solución: marcar componente como `'use client'`.
 ## Checklist al Construir Nueva Feature
 
 - [ ] ¿Server Component por default? Solo `'use client'` donde necesite interactividad
-- [ ] ¿Usa `await params` (Next 15 los params son async)?
+- [ ] ¿Usa `await params` y `await searchParams`? En Next 16 el acceso síncrono se eliminó del todo
 - [ ] ¿Form usa Server Action o necesita API route?
 - [ ] ¿Tiene loading.tsx en su carpeta o usa Suspense?
 - [ ] ¿Tiene error.tsx para error boundary?
@@ -612,7 +692,9 @@ Solución: marcar componente como `'use client'`.
 - ❌ Acceso a DB desde Client Component (necesita API route innecesaria)
 - ❌ Fetch del lado cliente cuando podías hacerlo server-side
 - ❌ Pasar funciones como props de Server a Client (deben ser serializables)
-- ❌ Olvidar `await` en `params` y `searchParams` (Next 15 los hizo async)
-- ❌ Usar middleware para lógica pesada (limita performance edge)
+- ❌ Olvidar `await` en `params` y `searchParams`. En 15 daba aviso; en 16 ya no compila
+- ❌ Meter lógica pesada en `proxy.ts`: corre en cada petición del sitio
+- ❌ Escribir `middleware.ts` en un proyecto Next 16: la convención es `proxy.ts`
+- ❌ Llamar `revalidateTag('tag')` con un solo argumento: en 16 no compila
 - ❌ No invalidar cache tras mutación (ven datos viejos)
 - ❌ Usar `getServerSideProps`/`getStaticProps` (Pages Router, no App Router)

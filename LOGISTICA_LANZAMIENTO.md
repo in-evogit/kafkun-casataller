@@ -420,7 +420,7 @@ funciona pero a media máquina.
 
 ### Deuda de los skills del repo
 
-| # | Qué | Por qué |
+| # | Qué | Estado |
 |---|---|---|
-| 10 | `.claude/nextjs-app-router/SKILL.md` dice **"Next.js 15"** y habla de `middleware.ts` | El repo corre 16.3.2 y usa `proxy.ts`. Se gatilla al trabajar acá y entrega contexto viejo |
-| 11 | No existe un skill del sistema visual | Cada sesión tiene que redescubrir la paleta, las proporciones de foto y las prohibiciones |
+| 10 | `.claude/nextjs-app-router/SKILL.md` decía "Next.js 15" y enseñaba `middleware.ts` | ✅ actualizado a Next 16 el 22-ago: `proxy.ts`, `revalidateTag` con perfil, `updateTag`, `refresh`, Turbopack por defecto, edge deprecado |
+| 11 | No existía un skill del sistema visual | ✅ creado `.claude/kafkun-diseno/SKILL.md`: paleta, tipografía, el gesto del hilo, proporciones de foto, movimiento sin JavaScript, la voz y las prohibiciones |
