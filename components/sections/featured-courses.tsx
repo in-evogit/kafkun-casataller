@@ -4,10 +4,10 @@ import { seedCourses } from "@/lib/data/seed";
 
 /**
  * Clases de telar. Cards deliberadamente NO fotográficas frente a las obras: así el ojo
- * distingue una clase de una pieza sin tener que leer.
+ * distingue una clase de una obra sin tener que leer.
  *
- * El catálogo de 3 cursos es provisional. Se reemplaza por los 4 bloques (2 técnicas básicas
- * y 2 avanzadas) cuando Katy entregue nombre, promesa, temario y precio de cada uno.
+ * Al lanzamiento hay UN curso: el inicial. Los otros dos se sacaron el 22-ago-2026
+ * porque no existían. Se agregan cuando Katy los grabe.
  */
 export default function FeaturedCourses() {
   if (seedCourses.length === 0) return null;
@@ -23,8 +23,8 @@ export default function FeaturedCourses() {
             Aprende la técnica a tu ritmo, desde donde estés
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted-foreground">
-            Clases grabadas. Las ves cuando puedas y las repites las veces que
-            necesites. No hay fechas ni cupos: partes el día que decidas.
+            Katy está grabando el taller inicial. Acá está el temario completo para que
+            veas qué vas a aprender; cuando abra, la primera en enterarse es la lista.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function FeaturedCourses() {
             href="/cursos"
             className="hilo inline-block text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            Ver todas las clases
+            Ver el temario completo
           </Link>
         </div>
       </div>

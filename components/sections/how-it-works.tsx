@@ -1,9 +1,9 @@
 /**
  * El proceso del encargo, en la voz de Katy.
  *
- * Antes esta sección describía la compra de un curso ("eliges tu curso, recibes acceso") sobre
+ * Antes esta sección describía la compra de un curso sobre
  * un bloque rojo oscuro con textura. Ahora cuenta lo que realmente pasa cuando alguien encarga
- * una pieza, que es la duda que hoy Katy responde una y otra vez por WhatsApp.
+ * un encargo, que es la duda que hoy Katy responde una y otra vez por WhatsApp.
  *
  * Sin iconos y sin fotos: cinco pasos numerados y nada más. El número grande en Fraunces liviano
  * es el ritmo de la sección.
@@ -11,31 +11,31 @@
 const pasos = [
   {
     n: "01",
-    titulo: "Nos juntamos",
+    titulo: "Nos juntamos por videollamada",
     texto:
-      "Antes de tejer nada conversamos: para qué la quieres, cómo la usas, qué te queda bien. Ahí te tomo las medidas.",
+      "Conversamos para entender bien qué quieres, vemos las medidas y te asesoro completo. Sin salir de tu casa.",
   },
   {
     n: "02",
-    titulo: "Traes tus referencias",
+    titulo: "Me muestras referencias",
     texto:
-      "Fotos de lo que te gusta. Podemos tomar el cuello de una, el largo de otra y el diseño de una tercera. No tiene que existir en ninguna parte todavía.",
+      "Si tienes fotos de lo que te gusta, me las muestras. Podemos tomar el cuello de una y el largo de otra. No es obligatorio.",
   },
   {
     n: "03",
-    titulo: "Eliges el material tocándolo",
+    titulo: "Definimos lana y materiales",
     texto:
-      "Te muestro muestras de lanas y texturas. La pieza se define con el material en la mano, no mirando una pantalla.",
+      "En la misma reunión elegimos el tipo de lana, los materiales y los colores. Te muestro las opciones que tengo.",
   },
   {
     n: "04",
     titulo: "Recién ahí hay precio y plazo",
     texto:
-      "Con la pieza ya definida te digo cuánto vale y cuánto se demora. Si estamos de acuerdo, abonas el 50% y tu pieza entra al telar.",
+      "Con todo definido te digo cuánto vale y cuánto se demora. Si estamos de acuerdo, abonas el 50% y tu tejido entra al telar.",
   },
   {
     n: "05",
-    titulo: "Tejo tu pieza y te la entrego",
+    titulo: "Lo tejo y te lo entrego",
     texto: "El otro 50% se paga al final.",
   },
 ];
@@ -49,7 +49,7 @@ export default function HowItWorks() {
             El proceso
           </p>
           <h2 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3.25rem]">
-            De una conversación a una pieza
+            Cómo hacer tu pedido
           </h2>
         </div>
 
@@ -73,8 +73,7 @@ export default function HowItWorks() {
         </ol>
 
         <p className="mt-12 max-w-[52ch] text-[0.8125rem] text-muted-foreground">
-          Una pieza a pedido se teje a mano y toma su tiempo. En la reunión te
-          digo cuánto.
+          Un tejido a mano toma su tiempo. En la reunión te digo cuánto.
         </p>
       </div>
     </section>

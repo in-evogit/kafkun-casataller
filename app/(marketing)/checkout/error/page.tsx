@@ -22,10 +22,10 @@ export default function CheckoutErrorPage() {
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Link
-          href="/carrito"
+          href="/"
           className="rounded-md bg-primary px-8 py-3 font-semibold text-primary-foreground transition-colors hover:bg-accent"
         >
-          Volver al carrito
+          Volver al inicio
         </Link>
         <Link
           href="/contacto"

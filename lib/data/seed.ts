@@ -1,3 +1,7 @@
+// Un solo curso: el inicial. Los otros dos ("telar-mapuche" y "diseno-propio")
+// se sacaron el 22-ago-2026 porque no existían — tenían precio y flujo de compra
+// con las 46 lecciones en mux_playback_id: null, o sea cero video.
+// price_clp se conserva para cuando abra, pero NO se muestra en ninguna parte.
 export const seedCourses = [
   {
     slug: "tu-primer-telar",
@@ -12,34 +16,6 @@ export const seedCourses = [
     thumbnail_url: "https://placehold.co/600x450/9B2335/FFFFFF?text=Telar+mapuche+inicial",
     seo_description:
       "Taller inicial de telar mapuche, técnica llano. Conoce el telar y sus piezas, la urdimbre y aprende a urdir desde cero.",
-  },
-  {
-    slug: "telar-mapuche",
-    title: "Telar mapuche",
-    subtitle: "Witral, técnicas ancestrales",
-    description:
-      "Adéntrate en el telar mapuche tradicional. Técnicas de witral, ñimin, y el respeto del oficio.",
-    price_clp: 72000,
-    level: "intermedio" as const,
-    duration_minutes: 430,
-    lessons_count: 18,
-    thumbnail_url: "https://placehold.co/600x450/7C1D2B/FFFFFF?text=Telar+mapuche",
-    seo_description:
-      "Curso de telar mapuche tradicional. Witral, ñimin y técnicas ancestrales.",
-  },
-  {
-    slug: "diseno-propio",
-    title: "Diseño propio",
-    subtitle: "Color, composición y oficio",
-    description:
-      "Para alumnas que ya saben tejer y quieren desarrollar su propio lenguaje. Color, composición, identidad.",
-    price_clp: 68000,
-    level: "avanzado" as const,
-    duration_minutes: 400,
-    lessons_count: 16,
-    thumbnail_url: "https://placehold.co/600x450/5C1520/FFFFFF?text=Diseño+propio",
-    seo_description:
-      "Desarrolla tu propio lenguaje textil. Curso avanzado de diseño en telar.",
   },
 ];
 
@@ -154,75 +130,6 @@ export const seedModules: Record<string, SeedModule[]> = {
         { slug: "rematar", title: "Rematar y finalizar", duration_minutes: 20, mux_playback_id: null },
         { slug: "presentar", title: "Presentar tu obra", duration_minutes: 15, mux_playback_id: null },
         { slug: "siguientes-pasos", title: "¿Y ahora qué?", duration_minutes: 10, mux_playback_id: null },
-      ],
-    },
-  ],
-  "telar-mapuche": [
-    {
-      title: "Contexto e historia",
-      lessons: [
-        { slug: "introduccion", title: "El witral y su significado", duration_minutes: 20, mux_playback_id: null },
-        { slug: "materiales-tradicionales", title: "Materiales tradicionales", duration_minutes: 15, mux_playback_id: null },
-        { slug: "construir-witral", title: "Construir tu propio witral", duration_minutes: 35, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Técnica witral",
-      lessons: [
-        { slug: "urdimbre-vertical", title: "Urdimbre vertical", duration_minutes: 28, mux_playback_id: null },
-        { slug: "nimin-basico", title: "Ñimin básico", duration_minutes: 40, mux_playback_id: null },
-        { slug: "motivos-geometricos", title: "Motivos geométricos ancestrales", duration_minutes: 35, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Color y fibra",
-      lessons: [
-        { slug: "tintura-natural", title: "Tintura natural de lanas", duration_minutes: 45, mux_playback_id: null },
-        { slug: "paleta-tradicional", title: "Paleta de colores tradicional", duration_minutes: 22, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Proyecto completo",
-      lessons: [
-        { slug: "diseno-nimin", title: "Diseñar tu ñimin", duration_minutes: 38, mux_playback_id: null },
-        { slug: "tejiendo-proyecto", title: "Tejiendo el proyecto", duration_minutes: 55, mux_playback_id: null },
-        { slug: "terminaciones", title: "Terminaciones y presentación", duration_minutes: 30, mux_playback_id: null },
-        { slug: "reflexion-final", title: "Reflexión final", duration_minutes: 12, mux_playback_id: null },
-      ],
-    },
-  ],
-  "diseno-propio": [
-    {
-      title: "Fundamentos del diseño",
-      lessons: [
-        { slug: "introduccion-diseno", title: "¿Qué es diseño propio?", duration_minutes: 18, mux_playback_id: null },
-        { slug: "teoria-color", title: "Teoría del color textil", duration_minutes: 35, mux_playback_id: null },
-        { slug: "composicion", title: "Composición y ritmo", duration_minutes: 30, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Identidad visual",
-      lessons: [
-        { slug: "referencias", title: "Construir un moodboard textil", duration_minutes: 25, mux_playback_id: null },
-        { slug: "lenguaje-propio", title: "Desarrollar tu lenguaje propio", duration_minutes: 40, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Técnicas mixtas",
-      lessons: [
-        { slug: "mezcla-fibras", title: "Mezcla de fibras y texturas", duration_minutes: 35, mux_playback_id: null },
-        { slug: "relieve", title: "Tejido en relieve", duration_minutes: 42, mux_playback_id: null },
-        { slug: "estructura", title: "Variaciones de estructura", duration_minutes: 38, mux_playback_id: null },
-      ],
-    },
-    {
-      title: "Proyecto y portafolio",
-      lessons: [
-        { slug: "proceso-creativo", title: "Del boceto al tapiz", duration_minutes: 30, mux_playback_id: null },
-        { slug: "proyecto-final", title: "Proyecto final", duration_minutes: 50, mux_playback_id: null },
-        { slug: "fotografia", title: "Fotografiar tu obra", duration_minutes: 22, mux_playback_id: null },
-        { slug: "portafolio", title: "Armar tu portafolio", duration_minutes: 20, mux_playback_id: null },
-        { slug: "cierre", title: "Cierre y próximos pasos", duration_minutes: 15, mux_playback_id: null },
       ],
     },
   ],

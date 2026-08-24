@@ -1,23 +1,19 @@
 import Link from "next/link";
 
+// Sólo rutas que existen. Se cayeron los 4 links de /tienda, los 2 cursos que
+// nunca existieron y /preguntas-frecuentes, que era un 404 desde siempre.
 const links = {
-  Aprende: [
-    { href: "/cursos", label: "Todos los cursos" },
-    { href: "/cursos/tu-primer-telar", label: "Telar mapuche inicial" },
-    { href: "/cursos/telar-mapuche", label: "Telar mapuche" },
-    { href: "/cursos/diseno-propio", label: "Diseño propio" },
+  Encargos: [
+    // Sin "Obras a pedido": el ancla no existe mientras la galería esté vacía.
+    { href: "/contacto", label: "Hacer mi pedido" },
   ],
-  Tienda: [
-    { href: "/tienda", label: "Todos los productos" },
-    { href: "/tienda?cat=telares", label: "Telares" },
-    { href: "/tienda?cat=lanas", label: "Lanas" },
-    { href: "/tienda?cat=kits", label: "Kits" },
+  Aprende: [
+    { href: "/cursos", label: "Clases de telar" },
+    { href: "/cursos/tu-primer-telar", label: "Taller inicial" },
   ],
   Casa: [
-    { href: "/sobre-mi", label: "Sobre mí" },
+    { href: "/sobre-mi", label: "Quién es Katy" },
     { href: "/diario", label: "Diario" },
-    { href: "/contacto", label: "Contacto" },
-    { href: "/preguntas-frecuentes", label: "FAQ" },
   ],
 };
 
@@ -29,7 +25,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-heading text-xl font-semibold text-primary">
-              Casa Taller Kafkun
+              Casa Taller Kafkún
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Cursos de telar mapuche online, desde el sur de Chile. Aprender a
@@ -78,13 +74,11 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Casa Taller Kafkun · Chile
+            © {new Date().getFullYear()} Casa Taller Kafkún · Chile
           </p>
-          <div className="flex gap-4 text-xs text-muted-foreground">
-            <Link href="/terminos" className="hover:text-foreground">Términos</Link>
-            <Link href="/privacidad" className="hover:text-foreground">Privacidad</Link>
-            <Link href="/devoluciones" className="hover:text-foreground">Devoluciones</Link>
-          </div>
+          {/* Términos, Privacidad y Devoluciones eran 404: nunca se escribieron.
+              Vuelven cuando existan las páginas, no antes. Devoluciones además ya
+              no aplica: no hay venta online que devolver. */}
         </div>
       </div>
     </footer>

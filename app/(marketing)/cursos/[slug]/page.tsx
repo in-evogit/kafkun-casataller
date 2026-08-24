@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import NewsletterForm from "@/components/newsletter-form";
 import Image from "next/image";
-import Link from "next/link";
 import { Clock, BookOpen, CheckCircle2 } from "lucide-react";
 import { seedCourses, faqItems } from "@/lib/data/seed";
 import {
@@ -38,14 +38,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
     },
   };
-}
-
-function formatPrice(clp: number) {
-  return new Intl.NumberFormat("es-CL", {
-    style: "currency",
-    currency: "CLP",
-    maximumFractionDigits: 0,
-  }).format(clp);
 }
 
 function formatDuration(minutes: number) {
@@ -106,7 +98,6 @@ export default async function CourseDetailPage({ params }: Props) {
     },
     offers: {
       "@type": "Offer",
-      price: course.price_clp,
       priceCurrency: "CLP",
       availability: "https://schema.org/InStock",
     },
@@ -145,19 +136,16 @@ export default async function CourseDetailPage({ params }: Props) {
               </span>
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <span className="font-heading text-3xl font-semibold text-foreground">
-                {formatPrice(course.price_clp)}
+            {/* Donde iría el precio va el estado: el taller está en preparación.
+                Sin precio y sin compra hasta que Katy termine de grabarlo. */}
+            <div className="mt-8">
+              <span className="inline-flex items-center rounded-[2px] border border-primary px-3 py-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-primary">
+                En preparación
               </span>
-              <Link
-                href={`/checkout?curso=${course.slug}`}
-                className="rounded-md bg-primary px-8 py-3 text-center font-semibold text-primary-foreground transition-colors hover:bg-accent"
-              >
-                Inscribirme ahora
-              </Link>
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Pago único, sin suscripción
+            <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+              Katy lo está grabando. Déjame tu correo más abajo y te aviso el día
+              que abra: te escribo una sola vez, para eso.
             </p>
           </div>
 
@@ -239,18 +227,10 @@ export default async function CourseDetailPage({ params }: Props) {
             ¿Lista para empezar?
           </h2>
           <p className="mt-2 text-primary-foreground/80">
-            Pago único · Empiezas cuando quieras
+            Te escribo una sola vez, el día que abra.
           </p>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <span className="font-heading text-2xl font-semibold text-primary-foreground">
-              {formatPrice(course.price_clp)}
-            </span>
-            <Link
-              href={`/checkout?curso=${course.slug}`}
-              className="rounded-md bg-primary-foreground px-8 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
-            >
-              Inscribirme ahora →
-            </Link>
+          <div className="mt-6 flex justify-center">
+            <NewsletterForm />
           </div>
         </div>
       </section>

@@ -1,13 +1,28 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
-import CartIcon from "@/components/cart-icon";
 import MobileNav from "@/components/mobile-nav";
+import { obrasPublicables } from "@/lib/data/obras";
 
-export default async function Navbar() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+/**
+ * Navegación de 4 destinos. Cada uno se gana el lugar.
+ *
+ * Se cayeron: Tienda (no existe más — no hay venta online), Diario (el blog no
+ * aporta al lanzamiento; sus entradas siguen publicadas pero fuera del menú), y
+ * Login/Registro (no hay nada que loguear hasta que exista el curso: el área de
+ * alumnas quedó dormida, sin links que lleven a ella).
+ *
+ * Dejó de ser async al salir el carrito y la sesión: ya no consulta Supabase, y
+ * eso saca una llamada de red del layout de todas las páginas.
+ */
+
+export default function Navbar() {
+  // "Obras" ancla a una sección que se esconde sola cuando no hay obras
+  // publicables. Un link que no lleva a ninguna parte es peor que no tenerlo,
+  // así que aparece solo cuando hay algo que mostrar: vuelve solo con las fotos.
+  const links = [
+    ...(obrasPublicables.length > 0 ? [{ href: "/#a-pedido", label: "Obras" }] : []),
+    { href: "/sobre-mi", label: "Quién es Katy" },
+    { href: "/cursos", label: "Clases" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
@@ -16,71 +31,29 @@ export default async function Navbar() {
           href="/"
           className="font-heading text-xl font-semibold text-primary"
         >
-          Casa Taller Kafkun
+          Casa Taller Kafkún
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
-          <Link
-            href="/cursos"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Cursos
-          </Link>
-          <Link
-            href="/tienda"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Tienda
-          </Link>
-          <Link
-            href="/diario"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Diario
-          </Link>
-          <Link
-            href="/sobre-mi"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Sobre mí
-          </Link>
+        <nav className="hidden items-center gap-8 lg:flex">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="hilo text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {l.label}
+            </Link>
+          ))}
+          {/* El único botón sólido del encabezado: es el destino del negocio. */}
           <Link
             href="/contacto"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="hilo hilo-boton relative inline-flex h-10 items-center justify-center rounded-[2px] bg-primary px-5 text-[0.875rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            Contacto
+            Hacer mi pedido
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          <CartIcon />
-          <div className="hidden items-center gap-4 lg:flex">
-            {user ? (
-              <Link
-                href="/mis-cursos"
-                className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-              >
-                Mi cuenta
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  Ingresar
-                </Link>
-                <Link
-                  href="/registro"
-                  className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-                >
-                  Empezar
-                </Link>
-              </>
-            )}
-          </div>
-          <MobileNav isLoggedIn={!!user} />
-        </div>
+        <MobileNav links={links} />
       </div>
     </header>
   );

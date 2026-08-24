@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Figura from "@/components/figura";
 import { pendiente, type Ranura } from "@/lib/media";
+import { obrasPublicables } from "@/lib/data/obras";
 
 /**
  * Hero de la portada.
@@ -9,7 +10,7 @@ import { pendiente, type Ranura } from "@/lib/media";
  * por defecto entra la ranura pendiente y el bloque se ve igual de terminado. Cuando Katy
  * entregue la foto, se pasa por `media` y este archivo no se toca.
  *
- * El degradado carmesí anterior se fue: competía de frente con el rojo de las propias piezas
+ * El degradado carmesí anterior se fue: competía de frente con el rojo de los propios tejidos
  * de Katy, que es el color que tiene que ganar en la página.
  */
 type Props = {
@@ -34,28 +35,33 @@ export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
               El titular grande es lo que llena el ancho: el aire a la derecha queda como
               margen editorial, no como un hueco donde falta algo. */}
           <h1 className="mt-5 text-balance font-heading text-[2.875rem] font-light leading-[0.95] tracking-[-0.025em] text-foreground md:text-[4.25rem] xl:text-[5rem]">
-            Una pieza tejida{" "}
+            Tejido a mano{" "}
             <em className="font-normal italic text-primary">para ti</em>, no para
             una talla.
           </h1>
           <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-muted-foreground">
-            Soy Katy, tejedora de telar mapuche. Hago piezas a pedido conversadas
-            contigo, y enseño la técnica en clases que ves a tu ritmo.
+            Soy Katy, tejedora de telar mapuche. Tejo por encargo, conversado contigo
+            en una videollamada, y enseño la técnica en clases que ves a tu ritmo.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
-              href="/tienda"
+              href="/contacto"
               className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              Ver las obras
+              Hacer mi pedido
             </Link>
-            <Link
-              href="/cursos"
-              className="hilo inline-flex h-12 items-center justify-center px-2 text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Ver las clases
-            </Link>
+            {/* El segundo botón ancla al muestrario, y el muestrario se esconde
+                solo cuando no hay obras publicables. Mientras tanto el hero queda
+                con una sola llamada, que tampoco está mal. Vuelve con las fotos. */}
+            {obrasPublicables.length > 0 && (
+              <Link
+                href="/#a-pedido"
+                className="hilo inline-flex h-12 items-center justify-center px-2 text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Ver las obras
+              </Link>
+            )}
           </div>
         </div>
       </div>

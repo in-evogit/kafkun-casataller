@@ -6,7 +6,7 @@ import { obrasPublicables } from "@/lib/data/obras";
  * Obras a pedido.
  *
  * Antes esto era una grilla muda: ocho fotos recortadas a cuadrado —sobre originales 3:4, o
- * sea perdiendo un cuarto de cada pieza— sin un solo elemento clickeable. Era el desperdicio
+ * sea perdiendo un cuarto de cada obra— sin un solo elemento clickeable. Era el desperdicio
  * más grande del sitio.
  *
  * La frase de que no están en venta va ANTES de las fotos, no después: es lo que evita que
@@ -26,10 +26,10 @@ export default function ObrasGallery() {
             No tejo un chaleco típico. Tejo el que tú quieres.
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted-foreground">
-            Tus medidas, la forma y el diseño conversados, y la lana elegida
-            después de tocarla. Las piezas que ves acá ya fueron tejidas para
-            alguien: están para mostrarte hasta dónde llega el trabajo, no para
-            comprarlas tal cual.
+            Tus medidas, la forma y el diseño conversados por videollamada, y la lana
+            definida contigo. Lo que ves acá ya fue tejido para alguien:
+            está para mostrarte hasta dónde llega el trabajo, no para comprarlo
+            tal cual.
           </p>
         </div>
 

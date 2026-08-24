@@ -4,15 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-const links = [
-  { href: "/cursos", label: "Cursos" },
-  { href: "/tienda", label: "Tienda" },
-  { href: "/diario", label: "Diario" },
-  { href: "/sobre-mi", label: "Sobre mí" },
-  { href: "/contacto", label: "Contacto" },
-];
+// Los links los decide el navbar, para que escritorio y móvil no puedan
+// desincronizarse. Sin Tienda, sin Diario y sin sesión: el área de alumnas
+// quedó dormida hasta que exista el curso.
+type Link = { href: string; label: string };
 
-export default function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
+export default function MobileNav({ links }: { links: Link[] }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
@@ -51,34 +48,13 @@ export default function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
                   {l.label}
                 </Link>
               ))}
-              <div className="mt-3 flex flex-col gap-2">
-                {isLoggedIn ? (
-                  <Link
-                    href="/mis-cursos"
-                    onClick={close}
-                    className="rounded-md bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-                  >
-                    Mi cuenta
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      onClick={close}
-                      className="rounded-md border border-border px-4 py-2.5 text-center text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-                    >
-                      Ingresar
-                    </Link>
-                    <Link
-                      href="/registro"
-                      onClick={close}
-                      className="rounded-md bg-primary px-4 py-2.5 text-center text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
-                    >
-                      Empezar
-                    </Link>
-                  </>
-                )}
-              </div>
+              <Link
+                href="/contacto"
+                onClick={close}
+                className="mt-4 flex h-13 items-center justify-center rounded-[2px] bg-primary px-4 text-base font-medium text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent"
+              >
+                Hacer mi pedido
+              </Link>
             </nav>
           </div>
         </>

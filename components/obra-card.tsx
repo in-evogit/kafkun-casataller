@@ -8,7 +8,7 @@ import { type Obra } from "@/lib/data/obras";
  * La foto ES la tarjeta: sin borde, sin sombra, sin radio. Ese trío es la firma exacta de
  * plantilla, y acá el protagonista es el tejido.
  *
- * No lleva "agregar al carrito" ni precio a propósito: la pieza se define conversando, así que
+ * No lleva "agregar al carrito" ni precio a propósito: el encargo se define conversando, así que
  * el único destino posible es empezar un encargo. El `?ref` deja anotado de qué obra viene.
  */
 export default function ObraCard({ obra }: { obra: Obra }) {
@@ -41,7 +41,7 @@ export default function ObraCard({ obra }: { obra: Obra }) {
           href={`/contacto?ref=${obra.slug}`}
           className="hilo mt-0.5 shrink-0 text-[0.8125rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          Quiero algo así
+          Quiero uno así
         </Link>
       </div>
     </article>
