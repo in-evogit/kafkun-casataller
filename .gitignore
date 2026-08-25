@@ -43,3 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# material fuente de Katy (fotos y video originales, no van al repo)
+/Kafkun contenido/
