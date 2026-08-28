@@ -1,3 +1,7 @@
+// Candado real, no un comentario: si alguien importa esto desde un componente
+// de navegador, la compilacion FALLA en vez de empaquetar el secreto y mandarlo.
+import "server-only";
+
 import { createClient } from "@supabase/supabase-js";
 
 // Solo usar en server components / API routes / server actions
