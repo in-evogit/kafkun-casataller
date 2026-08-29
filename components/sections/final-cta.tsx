@@ -27,7 +27,7 @@ export default function FinalCta() {
               después de eso hay precio.
             </p>
             <Link
-              href="/contacto"
+              href="/a-pedido/empezar"
               className="hilo hilo-boton relative mt-6 inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Empezar mi encargo

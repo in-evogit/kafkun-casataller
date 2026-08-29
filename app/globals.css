@@ -243,3 +243,24 @@
     }
   }
 }
+/* ─── Movimiento del formulario de encargo ────────────────────────────────
+   Dos entradas, nada mas. Son animaciones que una persona ve tres o cuatro
+   veces en su vida (encarga una pieza, no entra a diario), asi que aca si
+   cabe un gesto; en algo que se usa cien veces al dia estorbaria.
+
+   Ninguna nace en scale(0): nada en el mundo real aparece de la nada.
+   El bloque de prefers-reduced-motion de mas arriba las neutraliza solo. */
+
+@keyframes caer {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes paso-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
