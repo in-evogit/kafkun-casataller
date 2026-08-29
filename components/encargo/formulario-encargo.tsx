@@ -44,16 +44,42 @@ export default function FormularioEncargo({ dias }: { dias: DiaDisponible[] }) {
     prefiereMensaje: false,
   });
 
-  const puedeAvanzar =
-    paso === 0 ? pieza.tipo !== "" && pieza.descripcion.trim().length > 10 : true;
-
-  const puedeEnviar =
-    contacto.nombre.trim() !== "" &&
-    contacto.email.trim() !== "" &&
-    (contacto.prefiereMensaje || contacto.horaIso !== "" || dias.length === 0);
+  /**
+   * Que falta para avanzar, dicho con palabras.
+   *
+   * Antes esto devolvia un booleano y el boton se apagaba en silencio: la persona
+   * quedaba mirando un boton muerto sin saber por que. Un boton deshabilitado sin
+   * explicacion es una via muerta. Ahora el boton SIEMPRE se puede apretar, y si
+   * falta algo lo dice y lleva el foco al campo que falta.
+   */
+  function queFalta(): { mensaje: string; campo?: string } | null {
+    if (paso === 0) {
+      if (!pieza.tipo) return { mensaje: "Elige qué te gustaría que teja." };
+      if (pieza.descripcion.trim() === "")
+        return {
+          mensaje: "Cuéntame aunque sea en una línea cómo la imaginas.",
+          campo: "descripcion",
+        };
+      return null;
+    }
+    if (paso === 2) {
+      if (contacto.nombre.trim() === "")
+        return { mensaje: "Falta tu nombre.", campo: "nombre" };
+      if (contacto.email.trim() === "")
+        return { mensaje: "Falta tu correo, para poder responderte.", campo: "email" };
+      if (!contacto.prefiereMensaje && contacto.horaIso === "" && dias.length > 0)
+        return {
+          mensaje:
+            "Elige una hora, o marca abajo que prefieres coordinar por mensaje.",
+        };
+      return null;
+    }
+    return null;
+  }
 
   function ir(siguiente: number) {
     setPaso(siguiente);
+    setMensajeError("");
     // Sin esto, quien navega con teclado o lector de pantalla se queda al final del
     // paso anterior y no se entera de que cambio la pantalla.
     requestAnimationFrame(() => encabezadoRef.current?.focus());
@@ -188,8 +214,10 @@ export default function FormularioEncargo({ dias }: { dias: DiaDisponible[] }) {
         )}
       </div>
 
+      {/* aria-live: quien usa lector de pantalla se entera de lo que falta sin
+          tener que recorrer el formulario otra vez buscando el campo vacio. */}
       <p aria-live="polite" className="mt-8 min-h-[1.25rem] text-[0.875rem] text-primary">
-        {estado === "error" ? mensajeError : ""}
+        {mensajeError}
       </p>
 
       <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-4">
@@ -205,10 +233,17 @@ export default function FormularioEncargo({ dias }: { dias: DiaDisponible[] }) {
 
         <button
           type="button"
-          disabled={
-            estado === "enviando" || (esUltimo ? !puedeEnviar : !puedeAvanzar)
-          }
-          onClick={() => (esUltimo ? enviar() : ir(paso + 1))}
+          disabled={estado === "enviando"}
+          onClick={() => {
+            const falta = queFalta();
+            if (falta) {
+              setMensajeError(falta.mensaje);
+              if (falta.campo) document.getElementById(falta.campo)?.focus();
+              return;
+            }
+            setMensajeError("");
+            esUltimo ? enviar() : ir(paso + 1);
+          }}
           className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-[background-color,transform,opacity] duration-[var(--dur-color)] hover:bg-accent active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {estado === "enviando"
