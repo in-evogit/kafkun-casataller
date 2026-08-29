@@ -49,7 +49,19 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    // robots.txt solo lo respetan los buscadores que quieren. Esta cabecera es
+    // la orden dura de "no me indexes", y va en todo lo que no sea produccion:
+    // previews publicos que Katy puede abrir por enlace, sin que se cuelen a Google.
+    const fueraDeProduccion = process.env.VERCEL_ENV !== "production";
+
+    return [
+      {
+        source: "/(.*)",
+        headers: fueraDeProduccion
+          ? [...securityHeaders, { key: "X-Robots-Tag", value: "noindex, nofollow" }]
+          : securityHeaders,
+      },
+    ];
   },
 
   images: {

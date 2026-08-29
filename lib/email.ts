@@ -1,3 +1,7 @@
+// Candado real, no un comentario: si alguien importa esto desde un componente
+// de navegador, la compilacion FALLA en vez de empaquetar el secreto y mandarlo.
+import "server-only";
+
 import { Resend } from "resend";
 
 const resend = process.env.RESEND_API_KEY
