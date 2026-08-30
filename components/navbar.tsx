@@ -27,10 +27,10 @@ export default async function Navbar() {
             Cursos
           </Link>
           <Link
-            href="/tienda"
+            href="/a-pedido"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            Tienda
+            A pedido
           </Link>
           <Link
             href="/diario"

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft, ChevronRight, CheckCircle2, Clock, X } from "lucide-react";
-import { seedCourses, seedModules } from "@/lib/data/seed";
+import { seedCourses, seedModules } from "@/lib/data/clases";
 import VideoPlayer from "@/components/video-player";
 
 type Props = { params: Promise<{ curso: string; leccion: string }> };

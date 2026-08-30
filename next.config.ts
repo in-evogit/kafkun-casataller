@@ -48,6 +48,16 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
 
+  // /tienda prometia una tienda donde no se puede comprar nada. Muere y manda a
+  // /a-pedido, que es lo que de verdad hay. Permanente (308) para que los buscadores
+  // trasladen el posicionamiento en vez de repartirlo entre dos URLs.
+  async redirects() {
+    return [
+      { source: "/tienda", destination: "/a-pedido", permanent: true },
+      { source: "/tienda/:slug", destination: "/a-pedido", permanent: true },
+    ];
+  },
+
   async headers() {
     // robots.txt solo lo respetan los buscadores que quieren. Esta cabecera es
     // la orden dura de "no me indexes", y va en todo lo que no sea produccion:

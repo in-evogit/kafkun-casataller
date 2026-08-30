@@ -109,7 +109,7 @@ export default async function MisComprasPage() {
               Ver cursos
             </Link>
             <Link
-              href="/tienda"
+              href="/a-pedido"
               className="rounded-md border border-border px-5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
             >
               Ver tienda

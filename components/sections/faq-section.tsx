@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqItems } from "@/lib/data/seed";
+import { faqItems } from "@/lib/data/clases";
 
 export default function FaqSection() {
   // Sin respuestas confirmadas por Katy, la sección no se renderiza.

@@ -1,5 +1,5 @@
 import { redirect, notFound } from "next/navigation";
-import { seedModules } from "@/lib/data/seed";
+import { seedModules } from "@/lib/data/clases";
 
 type Props = { params: Promise<{ curso: string }> };
 

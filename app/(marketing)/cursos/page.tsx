@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CourseCard from "@/components/course-card";
-import { seedCourses } from "@/lib/data/seed";
+import { seedCourses } from "@/lib/data/clases";
 
 export const metadata: Metadata = {
   title: "Todos los cursos · Casa Taller Kafkun",

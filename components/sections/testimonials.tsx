@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { testimonials } from "@/lib/data/seed";
+import { testimonials } from "@/lib/data/testimonios";
 
 export default function Testimonials() {
   // Sin testimonios reales confirmados, la sección no se renderiza.
