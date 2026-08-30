@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import CartIcon from "@/components/cart-icon";
 import MobileNav from "@/components/mobile-nav";
+import Marca from "@/components/marca";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -12,12 +13,7 @@ export default async function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="font-heading text-xl font-semibold text-primary"
-        >
-          Casa Taller Kafkun
-        </Link>
+        <Marca />
 
         <nav className="hidden items-center gap-6 lg:flex">
           <Link

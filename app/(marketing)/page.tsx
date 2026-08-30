@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
 import CredibilityBar from "@/components/sections/credibility-bar";
 import FeaturedCourses from "@/components/sections/featured-courses";
-import HowItWorks from "@/components/sections/how-it-works";
 import AboutMini from "@/components/sections/about-mini";
 import ObrasGallery from "@/components/sections/obras-gallery";
-import Testimonials from "@/components/sections/testimonials";
+import Resenas from "@/components/sections/resenas";
+import DosPuertas from "@/components/sections/dos-puertas";
 import FaqSection from "@/components/sections/faq-section";
 import FinalCta from "@/components/sections/final-cta";
 import NewsletterForm from "@/components/newsletter-form";
@@ -51,16 +51,25 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Orden del embudo: quién soy → qué hago → cómo se encarga → qué enseño →
-          por qué confiar en mí → las dos puertas. Obras va antes que clases porque
-          es la vía que puede convertir hoy; las clases esperan datos de Katy. */}
+      {/* Orden del embudo.
+          Un sitio de marca personal no se ordena como una tienda: acá lo que se compra
+          es el criterio de QUIEN teje, no un catálogo. Por eso "Quién teje" subió de la
+          posición 6 a la 3 — la confianza en la persona va antes que el interés en el
+          producto, y la historia de Katy es el activo más fuerte que tiene el sitio.
+
+          Después la prueba de trabajo, y recién entonces la bifurcación explícita: hasta
+          ahora las dos vías convivían sin que nada dijera "elige tu camino", y quien no
+          se reconocía en la primera sección seguía bajando sin saber si esto era para ella.
+
+          El proceso de cinco pasos salió de acá: vive completo en /a-pedido, que es donde
+          hace falta. Repetirlo en la portada la alargaba haciendo el trabajo de la subpágina. */}
       <Hero />
       <CredibilityBar />
-      <ObrasGallery />
-      <HowItWorks />
-      <FeaturedCourses />
       <AboutMini />
-      <Testimonials />
+      <ObrasGallery />
+      <DosPuertas />
+      <FeaturedCourses />
+      <Resenas />
       <FaqSection />
       <section className="bg-secondary">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">

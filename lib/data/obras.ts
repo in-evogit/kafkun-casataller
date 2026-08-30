@@ -98,18 +98,6 @@ export const familiasEncargo: FamiliaEncargo[] = [
         materialYTecnica: null,
         publicable: true,
       },
-      // Encargo institucional real (cordones porta-credencial), pero fotografiados sobre un
-      // escritorio de oficina con teclado y vaso de lápices en cuadro. Hay que refotografiarlos.
-      // Además obra-clientes necesita autorización de la clienta.
-      {
-        slug: "porta-credenciales",
-        nombre: "Cordones porta-credencial",
-        media: v("/images/obra-clientes.jpg", "Cordón porta-credencial tejido"),
-        materialYTecnica: null,
-        publicable: false,
-        motivoNoPublicable:
-          "Fotografiado sobre un escritorio de oficina. Refotografiar y pedir autorización de la clienta.",
-      },
     ],
   },
 ];

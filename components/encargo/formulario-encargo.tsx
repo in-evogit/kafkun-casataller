@@ -242,7 +242,8 @@ export default function FormularioEncargo({ dias }: { dias: DiaDisponible[] }) {
               return;
             }
             setMensajeError("");
-            esUltimo ? enviar() : ir(paso + 1);
+            if (esUltimo) enviar();
+            else ir(paso + 1);
           }}
           className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-[background-color,transform,opacity] duration-[var(--dur-color)] hover:bg-accent active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
