@@ -264,3 +264,16 @@
     transform: translateY(8px);
   }
 }
+
+/* El hilo del carrusel de resenas se tensa con el tiempo que queda antes de
+   cambiar. No es decoracion: quita la ansiedad de "¿me va a cambiar antes de
+   que termine de leer?", que es lo que hace odiosos a casi todos los carruseles.
+   Lineal a proposito: representa tiempo, y el tiempo no acelera. */
+@keyframes tensar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
