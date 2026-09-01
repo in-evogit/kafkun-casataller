@@ -33,6 +33,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-tinta: var(--tinta);
+  --color-tinta-foreground: var(--tinta-foreground);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -86,6 +87,11 @@
      sin al menos una sección de peso, nueve secciones crema se leen como un solo
      campo plano. Medido: papel sobre esta tinta da 15.86:1. */
   --tinta: oklch(0.235 0.048 38);
+  /* El texto sobre tinta NO puede ser var(--background): en modo oscuro el fondo es
+     casi negro y quedaba texto negro sobre marrón oscuro — 1.20:1, ilegible. La tinta
+     es un panel oscuro POR DISEÑO en los dos modos, así que su texto es siempre claro.
+     Medido: 15.86:1 sobre la tinta. */
+  --tinta-foreground: oklch(0.978 0.014 76);
   --accent-foreground: oklch(1 0 0);
 
   /* ─── Movimiento. Nada dura más de 450ms salvo lo ligado al scroll. ─── */

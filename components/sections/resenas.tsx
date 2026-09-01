@@ -53,19 +53,19 @@ export default function Resenas() {
   };
 
   const flecha =
-    "grid h-10 w-10 shrink-0 place-items-center rounded-full border border-background/25 text-background transition-[color,border-color,background-color,transform,opacity] duration-[var(--dur-color)] hover:border-background hover:bg-background hover:text-tinta active:scale-[0.94] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background focus-visible:ring-offset-2 focus-visible:ring-offset-tinta";
+    "grid h-10 w-10 shrink-0 place-items-center rounded-full border border-tinta-foreground/25 text-tinta-foreground transition-[color,border-color,background-color,transform,opacity] duration-[var(--dur-color)] hover:border-tinta-foreground hover:bg-tinta-foreground hover:text-tinta active:scale-[0.94] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-tinta-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tinta-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-tinta";
 
   return (
     <section aria-labelledby="resenas-titulo" className="bg-tinta">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-background/50">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-tinta-foreground/50">
               Lo que dicen
             </p>
             <h2
               id="resenas-titulo"
-              className="mt-3 font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-background md:text-[2.25rem]"
+              className="mt-3 font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-tinta-foreground md:text-[2.25rem]"
             >
               Sus alumnas, en sus palabras
             </h2>
@@ -93,7 +93,7 @@ export default function Resenas() {
         <ul
           ref={pista}
           tabIndex={0}
-          className="mt-10 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background/60 focus-visible:ring-offset-4 focus-visible:ring-offset-tinta"
+          className="mt-10 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tinta-foreground/60 focus-visible:ring-offset-4 focus-visible:ring-offset-tinta"
         >
           {resenas.map((r, n) => (
             <li
@@ -101,7 +101,7 @@ export default function Resenas() {
               // Ancho fijo y menor que la pantalla: asi la siguiente SIEMPRE se asoma.
               className="w-[17.5rem] shrink-0 snap-start sm:w-[20rem]"
             >
-              <figure className="flex h-full flex-col rounded-[2px] bg-background/[0.06] p-6 ring-1 ring-background/10">
+              <figure className="flex h-full flex-col rounded-[2px] bg-tinta-foreground/[0.06] p-6 ring-1 ring-tinta-foreground/10">
                 <div aria-label="5 de 5" className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, s) => (
                     <svg key={s} viewBox="0 0 20 20" aria-hidden className="h-3 w-3 fill-primary">
@@ -111,16 +111,16 @@ export default function Resenas() {
                 </div>
 
                 <blockquote className="mt-4 flex-1">
-                  <p className="text-[0.9375rem] leading-relaxed text-background/85">
+                  <p className="text-[0.9375rem] leading-relaxed text-tinta-foreground/85">
                     {r.texto}
                   </p>
                 </blockquote>
 
-                <figcaption className="mt-6 border-t border-background/15 pt-4">
-                  <span className="block text-[0.875rem] font-medium text-background">
+                <figcaption className="mt-6 border-t border-tinta-foreground/15 pt-4">
+                  <span className="block text-[0.875rem] font-medium text-tinta-foreground">
                     {r.nombre}
                   </span>
-                  <span className="mt-0.5 block text-[0.75rem] text-background/50">
+                  <span className="mt-0.5 block text-[0.75rem] text-tinta-foreground/50">
                     {r.taller}
                   </span>
                 </figcaption>
