@@ -26,10 +26,9 @@
  * de una sola fila): partir una resena en dos es inflar la prueba social. Se dejo la
  * mas fuerte.
  *
- * OJO para Gabriel: "Consu S." y "Consu S.E." son dos respuestas distintas, de dos
- * talleres distintos (crochet y Retiro Tejeril). Puede ser la misma persona que volvio
- * —que seria una senal excelente— pero con dos nombres casi iguales se lee como relleno.
- * Decide tu: unificarlas en una, o dejar solo una.
+ * "Consu S." y "Consu S.E." eran la misma persona en dos respuestas (crochet y Retiro
+ * Tejeril). Gabriel lo confirmo el 31-ago y se unificaron en una sola entrada que nombra
+ * los dos talleres.
  */
 
 export type Resena = {
@@ -49,15 +48,13 @@ export const resenas: Resena[] = [
   },
   {
     nombre: "Consu S.",
-    taller: "Taller de crochet",
+    // Hizo los dos, en fechas distintas. Se nombran ambos porque que una alumna VUELVA
+    // es de las senales mas fuertes que hay, y asi ademas se ve que Katy no ensena
+    // solo telar. La cita es textual de una sola de las dos respuestas: juntar dos
+    // respuestas en una frase seria fabricar algo que ella nunca escribio asi.
+    taller: "Taller de crochet · Retiro Tejeril",
     texto:
       "Me encantó, aprendí a hacer un chaleco top down a la medida, con explicaciones claras y precisas, y la profe tenía mucha paciencia y amabilidad con todas.",
-  },
-  {
-    nombre: "Consu S.E.",
-    taller: "Retiro Tejeril",
-    texto:
-      "Me encantó el retiro, aprendí mucho y compartí con nuevas amigas, todas ayudándonos y apoyándonos en nuestros proyectos. Se arma una comunidad hermosa en torno al tejido.",
   },
   {
     nombre: "Javier Vargas",
