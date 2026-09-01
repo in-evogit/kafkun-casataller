@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
-import CredibilityBar from "@/components/sections/credibility-bar";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import AboutMini from "@/components/sections/about-mini";
 import ObrasGallery from "@/components/sections/obras-gallery";
@@ -64,7 +63,6 @@ export default function HomePage() {
           El proceso de cinco pasos salió de acá: vive completo en /a-pedido, que es donde
           hace falta. Repetirlo en la portada la alargaba haciendo el trabajo de la subpágina. */}
       <Hero />
-      <CredibilityBar />
       <AboutMini />
       <ObrasGallery />
       <DosPuertas />

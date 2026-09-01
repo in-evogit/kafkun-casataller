@@ -32,6 +32,7 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-tinta: var(--tinta);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -57,12 +58,12 @@
    se recortaba a #950023 (rojo sangre) en vez del #9B2335 de la marca. Corregidos. */
 :root {
   /* Base */
-  --background: oklch(0.982 0.006 83);      /* #FBF9F5 papel — nunca blanco puro */
-  --foreground: oklch(0.235 0.021 55);      /* #261C15 tinta cálida */
+  --background: oklch(0.978 0.014 76);      /* #FDF7EE papel — más crema, no gris */
+  --foreground: oklch(0.240 0.034 48);      /* #2C1A11 tinta cálida, más profunda */
 
   /* Cards / Popover */
-  --card: oklch(0.982 0.006 83);
-  --card-foreground: oklch(0.235 0.021 55);
+  --card: oklch(0.978 0.014 76);
+  --card-foreground: oklch(0.240 0.034 48);
   --popover: oklch(0.982 0.006 83);
   --popover-foreground: oklch(0.235 0.021 55);
 
@@ -71,15 +72,20 @@
   --primary-foreground: oklch(1 0 0);
 
   /* Secondary — lienzo #F4EFE7 */
-  --secondary: oklch(0.955 0.012 80);
-  --secondary-foreground: oklch(0.235 0.021 55);
+  --secondary: oklch(0.908 0.034 72);   /* #EFDEC9 arena */
+  --secondary-foreground: oklch(0.240 0.034 48);
 
   /* Muted — greige #E9E3D9 */
-  --muted: oklch(0.918 0.015 78);
-  --muted-foreground: oklch(0.475 0.020 60);
+  --muted: oklch(0.862 0.040 70);       /* #E3CDB5 arena tostada */
+  --muted-foreground: oklch(0.470 0.030 55);
 
   /* Accent — carmesí oscuro #7C1D2B exacto (hover) */
   --accent: oklch(0.393 0.129 17.5);
+
+  /* Tinta profunda y CALIDA, no negra. Es el bloque que le da ritmo a la página:
+     sin al menos una sección de peso, nueve secciones crema se leen como un solo
+     campo plano. Medido: papel sobre esta tinta da 15.86:1. */
+  --tinta: oklch(0.235 0.048 38);
   --accent-foreground: oklch(1 0 0);
 
   /* ─── Movimiento. Nada dura más de 450ms salvo lo ligado al scroll. ─── */
@@ -262,18 +268,5 @@
   from {
     opacity: 0;
     transform: translateY(8px);
-  }
-}
-
-/* El hilo del carrusel de resenas se tensa con el tiempo que queda antes de
-   cambiar. No es decoracion: quita la ansiedad de "¿me va a cambiar antes de
-   que termine de leer?", que es lo que hace odiosos a casi todos los carruseles.
-   Lineal a proposito: representa tiempo, y el tiempo no acelera. */
-@keyframes tensar {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
   }
 }

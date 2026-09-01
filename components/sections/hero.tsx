@@ -43,6 +43,24 @@ export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
             contigo, y enseño la técnica en clases que ves a tu ritmo.
           </p>
 
+          {/* Las cifras que antes ocupaban una franja entera de tinta.
+              Son datos confirmados por Katy (commit 03db920) y no se tocan; lo que
+              cambia es el peso: aca sostienen la promesa del titular en el momento
+              en que se lee, en vez de robarse un bloque completo de la portada. */}
+          <dl className="mt-8 flex flex-wrap items-baseline gap-x-7 gap-y-2">
+            {[
+              { valor: "+50", etiqueta: "alumnas presenciales" },
+              { valor: "2015", etiqueta: "enseñando desde" },
+            ].map((d) => (
+              <div key={d.etiqueta} className="flex items-baseline gap-2">
+                <dt className="font-heading text-[1.375rem] font-light leading-none text-primary">
+                  {d.valor}
+                </dt>
+                <dd className="text-[0.8125rem] text-muted-foreground">{d.etiqueta}</dd>
+              </div>
+            ))}
+          </dl>
+
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
               href="/a-pedido"
