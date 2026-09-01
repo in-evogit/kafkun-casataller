@@ -85,30 +85,18 @@ export const familiasEncargo: FamiliaEncargo[] = [
         publicable: true,
       },
       {
-        slug: "fajas",
-        nombre: "Fajas",
-        media: v("/images/obra-correas-1.jpg", "Fajas tejidas en morado, amarillo y rosado"),
+        slug: "cintas",
+        nombre: "Cintas tejidas",
+        media: v("/images/obra-correas-1.jpg", "Cintas tejidas en morado, amarillo y rosado"),
         materialYTecnica: null,
         publicable: true,
       },
       {
-        slug: "faja-en-el-telar",
-        nombre: "Faja en el telar",
-        media: v("/images/obra-correas-4.jpg", "Faja tejida sobre la espada de madera del telar"),
+        slug: "cinta-en-el-telar",
+        nombre: "Cinta en el telar",
+        media: v("/images/obra-correas-4.jpg", "Cinta tejida sobre la espada de madera del telar"),
         materialYTecnica: null,
         publicable: true,
-      },
-      // Encargo institucional real (cordones porta-credencial), pero fotografiados sobre un
-      // escritorio de oficina con teclado y vaso de lápices en cuadro. Hay que refotografiarlos.
-      // Además obra-clientes necesita autorización de la clienta.
-      {
-        slug: "porta-credenciales",
-        nombre: "Cordones porta-credencial",
-        media: v("/images/obra-clientes.jpg", "Cordón porta-credencial tejido"),
-        materialYTecnica: null,
-        publicable: false,
-        motivoNoPublicable:
-          "Fotografiado sobre un escritorio de oficina. Refotografiar y pedir autorización de la clienta.",
       },
     ],
   },

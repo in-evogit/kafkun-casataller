@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, BookOpen, CheckCircle2 } from "lucide-react";
-import { seedCourses, faqItems } from "@/lib/data/seed";
+import { seedCourses, faqItems } from "@/lib/data/clases";
 import {
   Accordion,
   AccordionContent,

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CourseCard from "@/components/course-card";
-import { seedCourses } from "@/lib/data/seed";
+import { seedCourses } from "@/lib/data/clases";
 
 /**
  * Clases de telar. Cards deliberadamente NO fotográficas frente a las obras: así el ojo

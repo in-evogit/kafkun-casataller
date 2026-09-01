@@ -45,7 +45,7 @@ export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
-              href="/tienda"
+              href="/a-pedido"
               className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Ver las obras

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
-import { seedCourses } from "@/lib/data/seed";
+import { seedCourses } from "@/lib/data/clases";
 import CheckoutButton from "@/components/checkout-button";
 import CheckoutCarrito from "@/components/checkout-carrito";
 

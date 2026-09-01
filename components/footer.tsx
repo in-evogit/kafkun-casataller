@@ -8,10 +8,10 @@ const links = {
     { href: "/cursos/diseno-propio", label: "Diseño propio" },
   ],
   Tienda: [
-    { href: "/tienda", label: "Todos los productos" },
-    { href: "/tienda?cat=telares", label: "Telares" },
-    { href: "/tienda?cat=lanas", label: "Lanas" },
-    { href: "/tienda?cat=kits", label: "Kits" },
+    // Katy no vende telares, lanas ni kits: teje piezas por encargo. Esas cuatro
+    // entradas describian una tienda que no existe.
+    { href: "/a-pedido", label: "Piezas a pedido" },
+    { href: "/a-pedido/empezar", label: "Empezar mi encargo" },
   ],
   Casa: [
     { href: "/sobre-mi", label: "Sobre mí" },

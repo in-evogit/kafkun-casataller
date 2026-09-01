@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { seedCourses, seedModules } from "@/lib/data/seed";
+import { seedCourses, seedModules } from "@/lib/data/clases";
 import { PlayCircle } from "lucide-react";
 
 export const metadata: Metadata = {

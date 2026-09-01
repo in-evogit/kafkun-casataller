@@ -1,3 +1,4 @@
+import { pasosEncargo as pasos } from "@/lib/data/proceso";
 /**
  * El proceso del encargo, en la voz de Katy.
  *
@@ -8,37 +9,7 @@
  * Sin iconos y sin fotos: cinco pasos numerados y nada más. El número grande en Fraunces liviano
  * es el ritmo de la sección.
  */
-const pasos = [
-  {
-    n: "01",
-    titulo: "Nos juntamos",
-    texto:
-      "Antes de tejer nada conversamos: para qué la quieres, cómo la usas, qué te queda bien. Ahí te tomo las medidas.",
-  },
-  {
-    n: "02",
-    titulo: "Traes tus referencias",
-    texto:
-      "Fotos de lo que te gusta. Podemos tomar el cuello de una, el largo de otra y el diseño de una tercera. No tiene que existir en ninguna parte todavía.",
-  },
-  {
-    n: "03",
-    titulo: "Eliges el material tocándolo",
-    texto:
-      "Te muestro muestras de lanas y texturas. La pieza se define con el material en la mano, no mirando una pantalla.",
-  },
-  {
-    n: "04",
-    titulo: "Recién ahí hay precio y plazo",
-    texto:
-      "Con la pieza ya definida te digo cuánto vale y cuánto se demora. Si estamos de acuerdo, abonas el 50% y tu pieza entra al telar.",
-  },
-  {
-    n: "05",
-    titulo: "Tejo tu pieza y te la entrego",
-    texto: "El otro 50% se paga al final.",
-  },
-];
+
 
 export default function HowItWorks() {
   return (
