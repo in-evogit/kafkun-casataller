@@ -34,6 +34,7 @@
   --color-accent: var(--accent);
   --color-tinta: var(--tinta);
   --color-tinta-foreground: var(--tinta-foreground);
+  --color-estrella: var(--estrella);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -92,6 +93,12 @@
      es un panel oscuro POR DISEÑO en los dos modos, así que su texto es siempre claro.
      Medido: 15.86:1 sobre la tinta. */
   --tinta-foreground: oklch(0.978 0.014 76);
+
+  /* Ámbar de las estrellas. Google usa un amarillo (#FBBC04) que sobre crema
+     desaparece: da 1.9:1. Este es más tostado y llega a 2.49:1, y además pega con
+     la paleta cálida en vez de meter un amarillo de semáforo. La calificación va
+     igual en aria-label, así que quien no distingue el color no se pierde el dato. */
+  --estrella: oklch(0.71 0.15 70);
   --accent-foreground: oklch(1 0 0);
 
   /* ─── Movimiento. Nada dura más de 450ms salvo lo ligado al scroll. ─── */
