@@ -168,28 +168,36 @@ export const familiasEncargo: FamiliaEncargo[] = [
         nombre: "Muestrario de diseños",
         media: v("/images/obra-cintas-muestrario.jpg", "Varias cintas tejidas con distintos diseños tradicionales"),
         materialYTecnica: null,
-        publicable: true,
+        publicable: false,
+        motivoNoPublicable:
+          "Gabriel, 6-sep-2026: las cintas y correas se dejan aparte por ahora. La familia entera desaparece de /a-pedido mientras todas estén así; para devolverlas, cambiar estos cuatro a true.",
       },
       {
         slug: "cinta-amarilla",
         nombre: "Cinta crema, roja y amarilla",
         media: v("/images/obra-cinta-amarilla.jpg", "Cinta tejida en crema con franjas rojas y amarillas"),
         materialYTecnica: null,
-        publicable: true,
+        publicable: false,
+        motivoNoPublicable:
+          "Gabriel, 6-sep-2026: las cintas y correas se dejan aparte por ahora. La familia entera desaparece de /a-pedido mientras todas estén así; para devolverlas, cambiar estos cuatro a true.",
       },
       {
         slug: "cintas-colores",
         nombre: "Cintas tejidas",
         media: v("/images/obra-correas-1.jpg", "Cintas tejidas en morado, amarillo y rosado"),
         materialYTecnica: null,
-        publicable: true,
+        publicable: false,
+        motivoNoPublicable:
+          "Gabriel, 6-sep-2026: las cintas y correas se dejan aparte por ahora. La familia entera desaparece de /a-pedido mientras todas estén así; para devolverlas, cambiar estos cuatro a true.",
       },
       {
         slug: "cinta-en-el-telar",
         nombre: "Cinta en el telar",
         media: v("/images/obra-correas-4.jpg", "Cinta tejida sobre la espada de madera del telar"),
         materialYTecnica: null,
-        publicable: true,
+        publicable: false,
+        motivoNoPublicable:
+          "Gabriel, 6-sep-2026: las cintas y correas se dejan aparte por ahora. La familia entera desaparece de /a-pedido mientras todas estén así; para devolverlas, cambiar estos cuatro a true.",
       },
     ],
   },
