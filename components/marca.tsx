@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * La marca en la barra superior.
@@ -23,15 +24,21 @@ export default function Marca({ src, className }: Props) {
       aria-label="Casa Taller Kafkún — ir a la portada"
       className={
         className ??
-        "font-heading text-xl font-semibold tracking-[-0.01em] text-primary transition-colors duration-[var(--dur-color)] hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        "inline-flex items-center gap-2.5 font-heading text-xl font-semibold tracking-[-0.01em] text-primary transition-colors duration-[var(--dur-color)] hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       }
     >
-      {src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt="Casa Taller Kafkún" className="h-8 w-auto" />
-      ) : (
-        "Casa Taller Kafkún"
-      )}
+      {/* La greca del logo de Katy, recortada de su archivo original. Va como marca
+          mas el nombre escrito al lado: el logo completo es vertical y a la altura
+          de la barra (32px) el "KAFKÜN" quedaria ilegible. */}
+      <Image
+        src={src ?? "/images/marca-kafkun.png"}
+        alt=""
+        width={256}
+        height={256}
+        className="h-7 w-7 shrink-0"
+        priority
+      />
+      <span>Casa Taller Kafkún</span>
     </Link>
   );
 }

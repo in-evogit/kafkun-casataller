@@ -70,7 +70,12 @@
   --popover-foreground: oklch(0.235 0.021 55);
 
   /* Primary — carmesí #9B2335 exacto */
-  --primary: oklch(0.458 0.155 18);
+  /* EL rojo de Katy, medido del archivo del logo (#CC0001). El vino que habia
+     antes (#9B2335) se lo invento una sesion anterior: no era su color. Se baja
+     un pelo la luminosidad (0.531 -> 0.52) para que pase AA tambien sobre la
+     arena, donde el original quedaba en 4.47:1. Verificado: papel 5.77:1,
+     arena 4.67:1, y blanco encima 6.15:1 para los botones. */
+  --primary: oklch(0.52 0.21 29.1);
   --primary-foreground: oklch(1 0 0);
 
   /* Secondary — lienzo #F4EFE7 */
@@ -82,7 +87,7 @@
   --muted-foreground: oklch(0.470 0.030 55);
 
   /* Accent — carmesí oscuro #7C1D2B exacto (hover) */
-  --accent: oklch(0.393 0.129 17.5);
+  --accent: oklch(0.46 0.19 29.1);   /* el mismo rojo, mas oscuro, para hover */
 
   /* Tinta profunda y CALIDA, no negra. Es el bloque que le da ritmo a la página:
      sin al menos una sección de peso, nueve secciones crema se leen como un solo
