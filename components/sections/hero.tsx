@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Figura from "@/components/figura";
-import { pendiente, type Ranura } from "@/lib/media";
+import { type Ranura } from "@/lib/media";
 
 /**
  * Hero de la portada.
@@ -16,10 +16,19 @@ type Props = {
   media?: Ranura;
 };
 
-const MEDIA_POR_DEFECTO = pendiente(
-  "panoramica",
-  "Hero: foto horizontal de Katy en el taller o del witral en uso. Pendiente de Katy."
-);
+const MEDIA_POR_DEFECTO: Ranura = {
+  src: "/images/proceso-telar.jpg",
+  alt: "Pieza en blanco, negro y naranja montada en el telar de Katy",
+  proporcion: "panoramica",
+  posicion: "50% 45%",
+};
+
+/**
+ * PENDIENTE, y es la mejora mas grande que le queda a la portada: la foto de Katy en el
+ * camino con el chal abierto contra el volcan. Es la mejor imagen del material que hay,
+ * pero solo existe el recorte de Instagram a 758px, que a ancho completo se ve pixelado.
+ * Hay que pedirle a Katy el original del telefono.
+ */
 
 export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
   return (
