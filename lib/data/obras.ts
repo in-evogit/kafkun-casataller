@@ -106,7 +106,9 @@ export const familiasEncargo: FamiliaEncargo[] = [
         nombre: "Lista para entregar",
         media: v("/images/obra-manta-roja-caja.jpg", "La manta roja doblada en su caja, con la etiqueta de Kafkün"),
         materialYTecnica: null,
-        publicable: true,
+        publicable: false,
+        motivoNoPublicable:
+          "Gabriel, 7-sep-2026: es la misma manta roja de la obra anterior, en su caja. La foto vale (se ve el empaque con la etiqueta), pero en el carrusel la pieza salía dos veces. Devolverla con publicable: true si se quiere una sección de empaque aparte.",
       },
       {
         slug: "manta-hojas",
@@ -140,18 +142,10 @@ export const familiasEncargo: FamiliaEncargo[] = [
           "Se ve el rostro de la clienta. Falta su autorización por escrito.",
       },
       {
-        slug: "pieza-crema",
-        nombre: "Pieza crema con bandas",
-        media: v("/images/prod-bufanda-blanca-1.jpg", "Pieza tejida crema con bandas"),
-        mediaHover: v("/images/prod-bufanda-blanca-2.jpg", "La pieza crema, caída completa"),
-        materialYTecnica: null,
-        publicable: true,
-      },
-      {
-        slug: "pieza-roja",
-        nombre: "Pieza roja",
-        media: v("/images/prod-bufanda-roja-1.jpg", "Pieza tejida roja con flecos"),
-        mediaHover: v("/images/prod-bufanda-roja-2.jpg", "La pieza roja, caída completa", "45% 40%"),
+        slug: "chal-frambuesa",
+        nombre: "Chal crema y frambuesa",
+        media: v("/images/prod-bufanda-roja-1.jpg", "Chal crema con franjas frambuesa, sobre maniquí en el jardín"),
+        mediaHover: v("/images/prod-bufanda-roja-2.jpg", "El mismo chal, caída completa", "45% 40%"),
         materialYTecnica: null,
         publicable: true,
       },
