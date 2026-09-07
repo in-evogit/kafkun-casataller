@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ObraCard from "@/components/obra-card";
+import ObrasCarrusel from "@/components/sections/obras-carrusel";
 import { familiasEncargo } from "@/lib/data/obras";
 import { pasosEncargo } from "@/lib/data/proceso";
 
@@ -59,37 +59,19 @@ export default function APedidoPage() {
         </div>
       </section>
 
-      {familias.map((familia, i) => (
-        <section
+      {/* Una familia, un carrusel. La reja mostraba todas las piezas del mismo
+          tamano y a la misma distancia, que es como se lee un catalogo; aca se
+          mira UNA a la vez. Para un encargo eso es lo correcto: nadie compra
+          "una de estas ocho", cada persona esta imaginando la suya. */}
+      {familias.map((familia) => (
+        <ObrasCarrusel
           key={familia.slug}
-          id={familia.slug}
-          className={i % 2 === 1 ? "bg-secondary" : "bg-background"}
-        >
-          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-            <div className="max-w-2xl border-l border-border pl-6">
-              <h2 className="font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-foreground md:text-[2.125rem]">
-                {familia.nombre}
-              </h2>
-              <p className="mt-2 max-w-[46ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-                {familia.bajada}
-              </p>
-            </div>
-
-            <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 lg:gap-x-8">
-              {familia.obras.map((obra, j) => (
-                <div
-                  key={obra.slug}
-                  // Desfase alterno solo en escritorio: rompe la cuadricula y hace que
-                  // se lea como muestrario y no como catalogo. En movil desordena.
-                  className={j % 3 === 1 ? "md:mt-12" : undefined}
-                >
-                  <ObraCard obra={obra} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+          obras={familia.obras}
+          titulo={familia.nombre}
+          bajada={familia.bajada}
+        />
       ))}
+
 
       {/* El proceso va DESPUES de la prueba de trabajo: primero se genera el deseo
           viendo lo que Katy hace, y recien entonces se explica como se consigue. */}
