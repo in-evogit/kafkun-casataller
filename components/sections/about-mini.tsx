@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Figura from "@/components/figura";
-import { pendiente, type Ranura } from "@/lib/media";
+import { type Ranura } from "@/lib/media";
 
 /**
  * Quién teje. Sostiene el precio de un encargo a medida: lo que se compra es el criterio
@@ -12,10 +12,14 @@ import { pendiente, type Ranura } from "@/lib/media";
  * selfie de interior con un perro tapándole media cara: servía para una bio chica, no para ser
  * la imagen más grande de la portada. Queda pendiente hasta tener un retrato real.
  */
-const RETRATO_POR_DEFECTO = pendiente(
-  "horizontal",
-  "Retrato horizontal de Katy en el taller, mirando a cámara. Sirve también de póster del video de saludo."
-);
+const RETRATO_POR_DEFECTO: Ranura = {
+  src: "/images/katy-chal-gris.jpg",
+  alt: "Katy en su taller, con un chal gris tejido por ella",
+  // Vertical y no horizontal: en esta reja de dos columnas la foto vertical llena la
+  // mitad de la pantalla, mientras que una horizontal deja aire muerto arriba y abajo.
+  proporcion: "vertical",
+  posicion: "50% 30%",
+};
 
 export default function AboutMini({ media = RETRATO_POR_DEFECTO }: { media?: Ranura }) {
   return (

@@ -1,177 +1,169 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { resenas } from "@/lib/data/testimonios";
 
-const INTERVALO_MS = 7000;
-
 /**
- * Carrusel de resenas.
+ * Resenas, en tarjetas del estilo que la gente ya sabe leer (las de Google).
  *
- * Los indicadores no son puntos: son HILOS. Es el gesto firma del sitio (la linea de
- * 1.5px de .hilo), y ademas el hilo activo se va tensando con el tiempo que queda, asi
- * que se ve venir el cambio en vez de que la frase desaparezca a media lectura. Esa
- * ansiedad —"¿me va a cambiar antes de terminar?"— es lo que hace odiosos a la mayoria
- * de los carruseles.
+ * Los dos intentos anteriores fallaron por lo mismo: eran bonitos pero no se leian
+ * como resenas. Una cita gigante rotando parece una frase de marca; unas tarjetas
+ * oscuras parecen una seccion de producto. La forma importa mas que la elegancia
+ * cuando el objetivo es que alguien reconozca "esto es lo que opina la gente" en
+ * medio segundo, sin leer el titulo.
  *
- * Un carrusel que avanza solo y no se puede detener es de lo mas hostil que puede tener
- * una pagina. Este:
- *   - se detiene al pasar el mouse y al recibir el foco de teclado,
- *   - trae flechas de verdad, que son el equivalente accesible por teclado,
- *   - no avanza con la pestana oculta (si no, al volver salta varias de golpe),
- *   - y con "reducir movimiento" no avanza solo: se lee con las flechas.
+ * Por eso: avatar circular con la inicial, nombre, estrellas ambar, texto, y todo
+ * sobre tarjeta clara con borde y sombra suave. Nada de eso es original — esa es
+ * exactamente la gracia.
  *
- * Todas las tarjetas se apilan en la MISMA celda de grilla. Asi el bloque mide lo que la
- * resena mas larga y no da un salto de alto al cambiar entre una de dos lineas y una de
- * cinco.
+ * La barra de abajo es un indicador REAL de desplazamiento: antes el scrollbar
+ * nativo estaba oculto por CSS y no quedaba ninguna pista de que la fila se movia.
  */
 export default function Resenas() {
-  const [i, setI] = useState(0);
-  const [detenido, setDetenido] = useState(false);
-  const [menosMovimiento, setMenosMovimiento] = useState(false);
+  const pista = useRef<HTMLUListElement>(null);
+  const [prog, setProg] = useState({ ancho: 1, izq: 0 });
+  const [alInicio, setAlInicio] = useState(true);
+  const [alFinal, setAlFinal] = useState(false);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const leer = () => setMenosMovimiento(mq.matches);
-    leer();
-    mq.addEventListener("change", leer);
-    return () => mq.removeEventListener("change", leer);
+  const medir = useCallback(() => {
+    const el = pista.current;
+    if (!el) return;
+    const total = el.scrollWidth;
+    const visible = el.clientWidth;
+    setProg({
+      ancho: Math.min(1, visible / total),
+      izq: total > visible ? el.scrollLeft / total : 0,
+    });
+    setAlInicio(el.scrollLeft < 8);
+    setAlFinal(el.scrollLeft + visible >= total - 8);
   }, []);
 
   useEffect(() => {
-    if (detenido || menosMovimiento || resenas.length <= 1) return;
-    const t = setInterval(() => {
-      if (!document.hidden) setI((n) => (n + 1) % resenas.length);
-    }, INTERVALO_MS);
-    return () => clearInterval(t);
-  }, [detenido, menosMovimiento]);
+    const el = pista.current;
+    if (!el) return;
+    medir();
+    el.addEventListener("scroll", medir, { passive: true });
+    window.addEventListener("resize", medir);
+    return () => {
+      el.removeEventListener("scroll", medir);
+      window.removeEventListener("resize", medir);
+    };
+  }, [medir]);
 
   if (resenas.length === 0) return null;
 
-  const mover = (d: number) => setI((n) => (n + d + resenas.length) % resenas.length);
-  const corre = !detenido && !menosMovimiento && resenas.length > 1;
+  const correr = (dir: number) => {
+    const el = pista.current;
+    if (!el) return;
+    // Medido del DOM: no hay numeros magicos que se desincronicen al cambiar el ancho.
+    const paso = el.querySelector("li")?.clientWidth ?? 320;
+    el.scrollBy({ left: dir * (paso + 16), behavior: "smooth" });
+  };
+
+  const flecha =
+    "grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background text-foreground shadow-sm transition-[color,border-color,transform,opacity] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.94] disabled:opacity-35 disabled:hover:border-border disabled:hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
 
   return (
-    <section
-      aria-roledescription="carrusel"
-      aria-label="Lo que dicen quienes ya tejieron con Katy"
-      className="border-t border-border bg-secondary"
-      onMouseEnter={() => setDetenido(true)}
-      onMouseLeave={() => setDetenido(false)}
-      onFocusCapture={() => setDetenido(true)}
-      onBlurCapture={() => setDetenido(false)}
-    >
-      <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-          Lo que dicen sus alumnas
-        </p>
+    <section aria-labelledby="resenas-titulo" className="bg-secondary">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+          <div>
+            <h2
+              id="resenas-titulo"
+              className="font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-foreground md:text-[2.25rem]"
+            >
+              Lo que dicen sus alumnas
+            </h2>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="flex gap-0.5" aria-hidden>
+                {Array.from({ length: 5 }).map((_, s) => (
+                  <Estrella key={s} className="h-4 w-4" />
+                ))}
+              </span>
+              <span className="text-[0.875rem] text-muted-foreground">
+                5,0 · {resenas.length} reseñas
+              </span>
+            </div>
+          </div>
 
-        {/* aria-live off: el cambio automatico no debe interrumpir a un lector de
-            pantalla cada siete segundos. Las flechas si mueven el foco al contenido. */}
-        <div className="mt-10 grid" aria-live="off">
-          {resenas.map((r, n) => {
-            const activa = n === i;
-            return (
-              <figure
-                key={r.nombre + n}
-                aria-hidden={!activa}
-                // Todas en la misma celda: el bloque mide lo que la mas larga.
-                style={{ gridArea: "1 / 1" }}
-                className={[
-                  "transition-opacity duration-[var(--dur-foto)] ease-[var(--ease-std)]",
-                  activa ? "opacity-100" : "pointer-events-none opacity-0",
-                ].join(" ")}
-              >
-                <div aria-label="5 de 5" className="flex gap-1">
+          {resenas.length > 1 && (
+            <div className="flex items-center gap-2">
+              <button type="button" onClick={() => correr(-1)} disabled={alInicio} aria-label="Ver reseñas anteriores" className={flecha}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <button type="button" onClick={() => correr(1)} disabled={alFinal} aria-label="Ver más reseñas" className={flecha}>
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
+          )}
+        </div>
+
+        <ul
+          ref={pista}
+          tabIndex={0}
+          className="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-secondary"
+        >
+          {resenas.map((r, n) => (
+            <li key={r.nombre + n} className="w-[18rem] shrink-0 snap-start sm:w-[21rem]">
+              <figure className="flex h-full flex-col rounded-xl border border-border bg-background p-5 shadow-[0_1px_2px_rgba(44,26,17,0.04),0_4px_12px_-4px_rgba(44,26,17,0.08)]">
+                <figcaption className="flex items-center gap-3">
+                  {/* Avatar con la inicial: nadie mando foto, y un circulo gris vacio
+                      se ve peor que la inicial. Papel sobre carmesi da 7.34:1. */}
+                  <span
+                    aria-hidden
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary font-heading text-[1.0625rem] text-primary-foreground"
+                  >
+                    {r.nombre.trim()[0]}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[0.9375rem] font-medium text-foreground">
+                      {r.nombre}
+                    </span>
+                    <span className="block truncate text-[0.75rem] text-muted-foreground">
+                      {r.taller}
+                    </span>
+                  </span>
+                </figcaption>
+
+                <div className="mt-3.5 flex gap-0.5" aria-label="5 de 5 estrellas">
                   {Array.from({ length: 5 }).map((_, s) => (
-                    <svg
-                      key={s}
-                      viewBox="0 0 20 20"
-                      aria-hidden
-                      className="h-3.5 w-3.5 fill-primary"
-                    >
-                      <path d="M10 1.5l2.47 5.26 5.53.78-4 4.03.95 5.68L10 14.6l-4.95 2.65.95-5.68-4-4.03 5.53-.78z" />
-                    </svg>
+                    <Estrella key={s} className="h-[0.9375rem] w-[0.9375rem]" />
                   ))}
                 </div>
 
-                <blockquote className="mt-6">
-                  <p className="max-w-[36ch] text-balance font-heading text-[1.5rem] font-light leading-[1.25] tracking-[-0.01em] text-foreground md:max-w-[42ch] md:text-[2.125rem]">
+                <blockquote className="mt-3 flex-1">
+                  <p className="text-[0.9375rem] leading-relaxed text-muted-foreground">
                     {r.texto}
                   </p>
                 </blockquote>
-
-                <figcaption className="mt-8 flex items-baseline gap-3">
-                  {/* Un hilo corto antes del nombre: el mismo gesto, quieto. */}
-                  <span aria-hidden className="h-px w-8 shrink-0 bg-primary" />
-                  <span className="text-[0.9375rem] font-medium text-foreground">
-                    {r.nombre}
-                  </span>
-                  <span className="text-[0.8125rem] text-muted-foreground">
-                    {r.taller}
-                  </span>
-                </figcaption>
               </figure>
-            );
-          })}
-        </div>
+            </li>
+          ))}
+        </ul>
 
+        {/* Indicador de desplazamiento REAL. El scrollbar nativo esta oculto para que
+            no rompa el diseno, asi que hay que devolver la pista de otra forma: esta
+            barra dice cuanto de la fila se ve y en que parte va. */}
         {resenas.length > 1 && (
-          <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-5">
-            {/* Los hilos. El activo se tensa con el tiempo que queda. */}
-            <ol className="flex flex-1 items-center gap-2">
-              {resenas.map((r, n) => (
-                <li key={r.nombre + n} className="flex-1">
-                  <button
-                    type="button"
-                    onClick={() => setI(n)}
-                    aria-label={`Reseña ${n + 1} de ${resenas.length}`}
-                    aria-current={n === i}
-                    className="group relative block h-4 w-full focus-visible:outline-none"
-                  >
-                    <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-border transition-colors duration-[var(--dur-color)] group-hover:bg-muted-foreground group-focus-visible:bg-muted-foreground" />
-                    <span
-                      key={`${n}-${i}-${corre}`}
-                      style={
-                        n === i && corre
-                          ? { animation: `tensar ${INTERVALO_MS}ms linear forwards` }
-                          : undefined
-                      }
-                      className={[
-                        "absolute inset-x-0 top-1/2 h-[1.5px] origin-left -translate-y-1/2 bg-primary",
-                        n === i ? (corre ? "" : "scale-x-100") : "scale-x-0",
-                      ].join(" ")}
-                    />
-                  </button>
-                </li>
-              ))}
-            </ol>
-
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => mover(-1)}
-                aria-label="Reseña anterior"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground transition-[color,border-color,transform] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => mover(1)}
-                aria-label="Reseña siguiente"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground transition-[color,border-color,transform] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
+          <div aria-hidden className="mt-6 h-1 w-full overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-primary/70 transition-[width] duration-100"
+              style={{
+                width: `${prog.ancho * 100}%`,
+                marginLeft: `${prog.izq * 100}%`,
+              }}
+            />
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+function Estrella({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden className={`fill-estrella ${className ?? ""}`}>
+      <path d="M10 1.5l2.47 5.26 5.53.78-4 4.03.95 5.68L10 14.6l-4.95 2.65.95-5.68-4-4.03 5.53-.78z" />
+    </svg>
   );
 }

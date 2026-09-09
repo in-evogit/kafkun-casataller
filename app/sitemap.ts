@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/cursos`, lastModified: new Date(), priority: 0.9, changeFrequency: "weekly" },
     { url: `${base}/diario`, lastModified: new Date(), priority: 0.7, changeFrequency: "weekly" },
     { url: `${base}/sobre-mi`, lastModified: new Date(), priority: 0.6, changeFrequency: "monthly" },
+    { url: `${base}/contacto`, lastModified: new Date(), priority: 0.5, changeFrequency: "monthly" },
   ];
 
   const cursos: MetadataRoute.Sitemap = seedCourses.map((c) => ({

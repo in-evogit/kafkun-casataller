@@ -3,7 +3,8 @@ import Hero from "@/components/sections/hero";
 import CredibilityBar from "@/components/sections/credibility-bar";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import AboutMini from "@/components/sections/about-mini";
-import ObrasGallery from "@/components/sections/obras-gallery";
+import ObrasCarrusel from "@/components/sections/obras-carrusel";
+import { obrasPublicables } from "@/lib/data/obras";
 import Resenas from "@/components/sections/resenas";
 import DosPuertas from "@/components/sections/dos-puertas";
 import FaqSection from "@/components/sections/faq-section";
@@ -66,7 +67,12 @@ export default function HomePage() {
       <Hero />
       <CredibilityBar />
       <AboutMini />
-      <ObrasGallery />
+      <ObrasCarrusel
+        obras={obrasPublicables}
+        titulo="No tejo un chaleco típico. Tejo el que tú quieres."
+        bajada="Tus medidas, la forma y el diseño conversados, y la lana elegida después de tocarla."
+        cta={{ texto: "Empezar mi encargo", href: "/a-pedido/empezar" }}
+      />
       <DosPuertas />
       <FeaturedCourses />
       <Resenas />
