@@ -1,39 +1,22 @@
 import Link from "next/link";
-import Figura from "@/components/figura";
-import { type Ranura } from "@/lib/media";
 
 /**
  * Hero de la portada.
  *
- * La imagen va HORIZONTAL y llega por propiedad: hoy no existe la foto definitiva, así que
- * por defecto entra la ranura pendiente y el bloque se ve igual de terminado. Cuando Katy
- * entregue la foto, se pasa por `media` y este archivo no se toca.
+ * SIN FOTO, por decisión de Gabriel (7-sep-2026): la del telar que iba a sangre abajo
+ * sobraba. El hero es puro texto — el titular, la promesa, las cifras y las dos puertas.
+ *
+ * Eso obliga a que el titular se sostenga solo, que es una prueba honesta: si el hero
+ * necesita una foto para no verse vacío, es que el texto no estaba diciendo lo suficiente.
  *
  * El degradado carmesí anterior se fue: competía de frente con el rojo de las propias piezas
  * de Katy, que es el color que tiene que ganar en la página.
  */
-type Props = {
-  media?: Ranura;
-};
 
-const MEDIA_POR_DEFECTO: Ranura = {
-  src: "/images/proceso-telar.jpg",
-  alt: "Pieza en blanco, negro y naranja montada en el telar de Katy",
-  proporcion: "panoramica",
-  posicion: "50% 45%",
-};
-
-/**
- * PENDIENTE, y es la mejora mas grande que le queda a la portada: la foto de Katy en el
- * camino con el chal abierto contra el volcan. Es la mejor imagen del material que hay,
- * pero solo existe el recorte de Instagram a 758px, que a ancho completo se ve pixelado.
- * Hay que pedirle a Katy el original del telefono.
- */
-
-export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
+export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-secondary">
-      <div className="relative mx-auto max-w-7xl px-4 pt-16 sm:px-6 sm:pt-24 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8">
         {/* Texto primero, siempre: en móvil la foto sola sin texto no dice nada. */}
         <div className="max-w-3xl">
           <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
@@ -87,17 +70,6 @@ export default function Hero({ media = MEDIA_POR_DEFECTO }: Props) {
         </div>
       </div>
 
-      {/* La foto a sangre abajo: horizontal, ancho completo, sin radio ni sombra.
-          Con el tope de alto, en pantallas anchas la foto se recorta en vez de empujar
-          todo lo demás fuera de la pantalla. */}
-      <div className="relative mt-14 sm:mt-20">
-        <Figura
-          media={media}
-          priority
-          sizes="100vw"
-          className="max-h-[62vh] sm:max-h-[58vh]"
-        />
-      </div>
     </section>
   );
 }

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Mail, Scissors } from "lucide-react";
+import IconoInstagram from "@/components/ui/icono-instagram";
+import MenuCircular from "@/components/ui/menu-circular";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -71,6 +74,23 @@ export default function ContactoPage() {
             </div>
           ))}
         </dl>
+
+        {/* Los mismos canales, en botones que se abren al pasar el cursor. Un boton
+            circular con icono es exactamente para esto: acciones cortas y conocidas,
+            donde el icono ya dice de que se trata antes de leer el nombre. */}
+        <MenuCircular
+          className="mt-14"
+          items={[
+            { titulo: "Escríbeme", icono: Mail, href: "mailto:kafkuntelares@gmail.com" },
+            {
+              titulo: "Instagram",
+              icono: IconoInstagram,
+              href: "https://instagram.com/casataller_kafkun",
+              externo: true,
+            },
+            { titulo: "Encargar una pieza", icono: Scissors, href: "/a-pedido/empezar" },
+          ]}
+        />
 
         {/* Quien llega aca con intencion de encargar no deberia tener que escribir un
             correo para empezar: se le ofrece el camino corto. */}
