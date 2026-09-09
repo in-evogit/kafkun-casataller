@@ -92,7 +92,11 @@
   /* Tinta profunda y CALIDA, no negra. Es el bloque que le da ritmo a la página:
      sin al menos una sección de peso, nueve secciones crema se leen como un solo
      campo plano. Medido: papel sobre esta tinta da 15.86:1. */
-  --tinta: oklch(0.235 0.048 38);
+  /* VINO PROFUNDO. Gabriel: "los colores estan perfect, hay que volver a agregar
+     esa paleta como de vino en algunos sectores nuevamente". El vino viejo (#7C1D2B)
+     era de la paleta anterior al logo; este es de la misma familia pero emparentado
+     con el rojo real de Katy (mismo matiz 29). Papel encima da 14.32:1. */
+  --tinta: oklch(0.28 0.11 29);
   /* El texto sobre tinta NO puede ser var(--background): en modo oscuro el fondo es
      casi negro y quedaba texto negro sobre marrón oscuro — 1.20:1, ilegible. La tinta
      es un panel oscuro POR DISEÑO en los dos modos, así que su texto es siempre claro.

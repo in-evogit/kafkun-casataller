@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ObrasCarrusel from "@/components/sections/obras-carrusel";
 import { familiasEncargo } from "@/lib/data/obras";
-import { pasosEncargo } from "@/lib/data/proceso";
+import LineaEncargo from "@/components/linea-encargo";
 
 export const metadata: Metadata = {
   title: "A pedido",
@@ -86,24 +86,7 @@ export default function APedidoPage() {
             </h2>
           </div>
 
-          <ol className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {pasosEncargo.map((p) => (
-              <li
-                key={p.n}
-                className="border-l border-border pl-6 transition-colors duration-[var(--dur-color)] hover:border-primary"
-              >
-                <span className="block font-heading text-[2.125rem] font-light leading-none text-muted-foreground/60">
-                  {p.n}
-                </span>
-                <h3 className="mt-3 font-heading text-[1.3125rem] text-foreground">
-                  {p.titulo}
-                </h3>
-                <p className="mt-2 max-w-[42ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-                  {p.texto}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <LineaEncargo />
 
           <div className="mt-14">
             <Link
