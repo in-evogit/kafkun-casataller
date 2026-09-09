@@ -4,8 +4,6 @@ const links = {
   Aprende: [
     { href: "/cursos", label: "Todos los cursos" },
     { href: "/cursos/tu-primer-telar", label: "Telar mapuche inicial" },
-    { href: "/cursos/telar-mapuche", label: "Telar mapuche" },
-    { href: "/cursos/diseno-propio", label: "Diseño propio" },
   ],
   Tienda: [
     // Katy no vende telares, lanas ni kits: teje piezas por encargo. Esas cuatro

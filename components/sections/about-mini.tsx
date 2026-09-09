@@ -49,9 +49,25 @@ export default function AboutMini({ media = RETRATO_POR_DEFECTO }: { media?: Ran
                 mezquindades.
               </p>
             </blockquote>
+            {/* Las cifras viven aca y no en el hero: son datos confirmados por Katy
+                (commit 03db920) y donde de verdad convencen es junto a su historia,
+                no flotando bajo el titular. Chicas y en una linea: un numero grande
+                no las hace mas ciertas, solo mas ruidosas. */}
+            <dl className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-1 border-t border-border pt-6">
+              {[
+                { valor: "+50", etiqueta: "alumnas presenciales" },
+                { valor: "2015", etiqueta: "enseñando desde" },
+              ].map((d) => (
+                <div key={d.etiqueta} className="flex items-baseline gap-1.5">
+                  <dt className="text-[0.9375rem] font-medium text-primary">{d.valor}</dt>
+                  <dd className="text-[0.8125rem] text-muted-foreground">{d.etiqueta}</dd>
+                </div>
+              ))}
+            </dl>
+
             <Link
               href="/sobre-mi"
-              className="hilo mt-8 inline-block text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="hilo mt-6 inline-block text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Leer mi historia completa
             </Link>

@@ -48,7 +48,14 @@ export default function DosPuertas() {
           {puertas.map((p) => (
             <div
               key={p.titulo}
-              className="border-l border-border pl-6 transition-colors duration-[var(--dur-color)] hover:border-primary md:pl-8"
+              className={[
+                "flex flex-col rounded-[2px] border border-border bg-background p-7 md:p-9",
+                // Cada puerta como caja propia, no una linea suelta: Gabriel decia que
+                // las secciones se veian planas. La caja marca donde empieza y termina
+                // cada camino, y al pasar el cursor se levanta un poco.
+                "transition-[border-color,box-shadow,transform] duration-[var(--dur-color)]",
+                "hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_2px_8px_rgba(44,26,17,0.06),0_16px_36px_-16px_rgba(44,26,17,0.16)]",
+              ].join(" ")}
             >
               <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
                 {p.eyebrow}
@@ -64,9 +71,13 @@ export default function DosPuertas() {
                 <Link
                   href={p.href}
                   className={
+                    // Los dos son botones y los dos llevan contorno. La diferencia
+                    // esta en el relleno, no en si parecen boton: el primario va
+                    // solido, el secundario en contorno. Antes el secundario era
+                    // texto subrayado y ni se leia como algo apretable.
                     p.principal
-                      ? "hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                      : "hilo inline-flex h-12 items-center justify-center border-b border-transparent px-1 text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      ? "hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] border border-primary bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:border-accent hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      : "inline-flex h-12 items-center justify-center rounded-[2px] border border-border bg-transparent px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-foreground transition-colors duration-[var(--dur-color)] hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   }
                 >
                   {p.cta}
@@ -74,7 +85,7 @@ export default function DosPuertas() {
                 {p.secundario && (
                   <Link
                     href={p.secundario.href}
-                    className="hilo text-[0.9375rem] text-muted-foreground transition-colors duration-[var(--dur-color)] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+                    className="inline-flex h-12 items-center justify-center rounded-[2px] border border-border bg-transparent px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-foreground transition-colors duration-[var(--dur-color)] hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {p.secundario.texto}
                   </Link>

@@ -17,39 +17,21 @@ export const seedCourses = [
     level: "principiante" as const,
     duration_minutes: 260,
     lessons_count: 12,
-    thumbnail_url: "https://placehold.co/600x450/9B2335/FFFFFF?text=Telar+mapuche+inicial",
+    thumbnail_url: "/images/taller-alumnas.jpg",
     seo_description:
       "Taller inicial de telar mapuche, técnica llano. Conoce el telar y sus piezas, la urdimbre y aprende a urdir desde cero.",
   },
-  {
-    slug: "telar-mapuche",
-    title: "Telar mapuche",
-    subtitle: "Witral, técnicas ancestrales",
-    description:
-      "Adéntrate en el telar mapuche tradicional. Técnicas de witral, ñimin, y el respeto del oficio.",
-    price_clp: 72000,
-    level: "intermedio" as const,
-    duration_minutes: 430,
-    lessons_count: 18,
-    thumbnail_url: "https://placehold.co/600x450/7C1D2B/FFFFFF?text=Telar+mapuche",
-    seo_description:
-      "Curso de telar mapuche tradicional. Witral, ñimin y técnicas ancestrales.",
-  },
-  {
-    slug: "diseno-propio",
-    title: "Diseño propio",
-    subtitle: "Color, composición y oficio",
-    description:
-      "Para alumnas que ya saben tejer y quieren desarrollar su propio lenguaje. Color, composición, identidad.",
-    price_clp: 68000,
-    level: "avanzado" as const,
-    duration_minutes: 400,
-    lessons_count: 16,
-    thumbnail_url: "https://placehold.co/600x450/5C1520/FFFFFF?text=Diseño+propio",
-    seo_description:
-      "Desarrolla tu propio lenguaje textil. Curso avanzado de diseño en telar.",
-  },
 ];
+
+/**
+ * POR AHORA SOLO EL INICIAL, por decisión de Gabriel (8-sep-2026). Los otros dos
+ * cursos que había ("Telar mapuche" intermedio y "Diseño propio" avanzado) no
+ * estaban grabados: mostrarlos era prometer algo que no se puede entregar.
+ *
+ * Vuelven cuando Katy los tenga listos, con su propia foto de portada.
+ *
+ * OJO: el precio de 45.000 sigue siendo PLACEHOLDER. Lo pone Katy.
+ */
 
 export type SeedLesson = {
   slug: string;

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
-import CredibilityBar from "@/components/sections/credibility-bar";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import AboutMini from "@/components/sections/about-mini";
 import ObrasCarrusel from "@/components/sections/obras-carrusel";
@@ -8,7 +7,6 @@ import { obrasPublicables } from "@/lib/data/obras";
 import Resenas from "@/components/sections/resenas";
 import DosPuertas from "@/components/sections/dos-puertas";
 import FaqSection from "@/components/sections/faq-section";
-import FinalCta from "@/components/sections/final-cta";
 import NewsletterForm from "@/components/newsletter-form";
 
 export const metadata: Metadata = {
@@ -52,45 +50,50 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Orden del embudo.
-          Un sitio de marca personal no se ordena como una tienda: acá lo que se compra
-          es el criterio de QUIEN teje, no un catálogo. Por eso "Quién teje" subió de la
-          posición 6 a la 3 — la confianza en la persona va antes que el interés en el
-          producto, y la historia de Katy es el activo más fuerte que tiene el sitio.
+      {/* Orden del embudo, reordenado el 8-sep-2026 con Gabriel.
+          Su frase: "tiene que ser como un embudo de nutricion de info mientras
+          scrolleo, para que cuando llegue al momento de pedir ya no tenga dudas".
 
-          Después la prueba de trabajo, y recién entonces la bifurcación explícita: hasta
-          ahora las dos vías convivían sin que nada dijera "elige tu camino", y quien no
-          se reconocía en la primera sección seguía bajando sin saber si esto era para ella.
+          Eso cambia DONDE va la bifurcacion. Antes "las dos puertas" estaba en la
+          posicion 4, a media pagina: se le pedia elegir camino a alguien que todavia
+          no sabia quien es Katy, que hace ni si funciona. Ahora baja al final, con
+          toda la informacion ya entregada. La pregunta se hace cuando ya no hay dudas.
 
-          El proceso de cinco pasos salió de acá: vive completo en /a-pedido, que es donde
-          hace falta. Repetirlo en la portada la alargaba haciendo el trabajo de la subpágina. */}
+          El orden queda: quien es -> que hace -> que ensena -> quien lo dice ->
+          que dudas quedan -> ELIGE. Y recien despues el correo, que es lo que se
+          pide a quien todavia no esta listo para decidir. */}
       <Hero />
-      <CredibilityBar />
       <AboutMini />
       <ObrasCarrusel
         obras={obrasPublicables}
         titulo="No tejo un chaleco típico. Tejo el que tú quieres."
         bajada="Tus medidas, la forma y el diseño conversados, y la lana elegida después de tocarla."
-        cta={{ texto: "Empezar mi encargo", href: "/a-pedido/empezar" }}
       />
-      <DosPuertas />
       <FeaturedCourses />
       <Resenas />
       <FaqSection />
-      <section className="bg-secondary">
+      {/* Aca iba tambien FinalCta ("Dos maneras de empezar"), que decia EXACTAMENTE
+          lo mismo que DosPuertas: encargar vs aprender, dos botones, con veinte lineas
+          de distancia. Lo cazo Gabriel. Se elimina el duplicado; DosPuertas se queda
+          porque tiene las cajas marcadas y los dos botones con contorno. */}
+      <DosPuertas />
+
+      {/* El correo va al FINAL del todo, despues del cierre: es el premio de consuelo
+          para quien bajo entera la pagina y aun asi no se decidio. Ponerlo antes le
+          ofrece una salida barata a alguien que estaba a punto de encargar. */}
+      <section className="border-t border-border bg-background">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
-            Novedades y descuentos exclusivos
+          <h2 className="font-heading text-[1.5rem] font-light text-foreground sm:text-[1.75rem]">
+            ¿Todavía lo estás pensando?
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            Suscríbete y sé la primera en enterarte de nuevos cursos, materiales y ofertas.
+          <p className="mt-3 text-[0.9375rem] text-muted-foreground">
+            Déjame tu correo y te aviso cuando abra cupos o publique algo nuevo.
           </p>
           <div className="mt-6">
             <NewsletterForm />
           </div>
         </div>
       </section>
-      <FinalCta />
     </>
   );
 }

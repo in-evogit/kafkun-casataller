@@ -61,10 +61,10 @@ export default function Resenas() {
   };
 
   const flecha =
-    "grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background text-foreground shadow-sm transition-[color,border-color,transform,opacity] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.94] disabled:opacity-35 disabled:hover:border-border disabled:hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary";
+    "grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border bg-background text-foreground shadow-sm transition-[color,border-color,transform,opacity] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.94] disabled:opacity-35 disabled:hover:border-border disabled:hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
   return (
-    <section aria-labelledby="resenas-titulo" className="bg-secondary">
+    <section aria-labelledby="resenas-titulo" className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
           <div>
@@ -101,7 +101,7 @@ export default function Resenas() {
         <ul
           ref={pista}
           tabIndex={0}
-          className="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-secondary"
+          className="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         >
           {resenas.map((r, n) => (
             <li key={r.nombre + n} className="w-[18rem] shrink-0 snap-start sm:w-[21rem]">
