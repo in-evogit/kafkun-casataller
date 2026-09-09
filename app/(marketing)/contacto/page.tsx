@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Mail, Scissors } from "lucide-react";
 import IconoInstagram from "@/components/ui/icono-instagram";
 import MenuCircular from "@/components/ui/menu-circular";
+import FormularioContacto from "@/components/formulario-contacto";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -91,6 +92,18 @@ export default function ContactoPage() {
             { titulo: "Encargar una pieza", icono: Scissors, href: "/a-pedido/empezar" },
           ]}
         />
+
+        {/* El formulario, en su recuadro. Va DESPUES de los canales directos a
+            proposito: quien tiene apuro prefiere el correo o el Instagram, y quien
+            quiere contar algo largo baja hasta aca. */}
+        <div className="mt-16">
+          <h2 className="font-heading text-[1.5rem] font-light text-foreground">
+            O escríbeme desde aquí
+          </h2>
+          <div className="mt-6">
+            <FormularioContacto />
+          </div>
+        </div>
 
         {/* Quien llega aca con intencion de encargar no deberia tener que escribir un
             correo para empezar: se le ofrece el camino corto. */}

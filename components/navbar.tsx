@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import CartIcon from "@/components/cart-icon";
 import MobileNav from "@/components/mobile-nav";
 import Marca from "@/components/marca";
+import NavEnlace from "@/components/nav-enlace";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -16,36 +17,11 @@ export default async function Navbar() {
         <Marca />
 
         <nav className="hidden items-center gap-6 lg:flex">
-          <Link
-            href="/cursos"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Cursos
-          </Link>
-          <Link
-            href="/a-pedido"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            A pedido
-          </Link>
-          <Link
-            href="/diario"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Diario
-          </Link>
-          <Link
-            href="/sobre-mi"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Sobre mí
-          </Link>
-          <Link
-            href="/contacto"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Contacto
-          </Link>
+          <NavEnlace href="/cursos">Cursos</NavEnlace>
+          <NavEnlace href="/a-pedido">A pedido</NavEnlace>
+          <NavEnlace href="/diario">Diario</NavEnlace>
+          <NavEnlace href="/sobre-mi">Sobre mí</NavEnlace>
+          <NavEnlace href="/contacto">Contacto</NavEnlace>
         </nav>
 
         <div className="flex items-center gap-3 sm:gap-4">
