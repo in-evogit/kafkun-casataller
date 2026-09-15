@@ -6,7 +6,7 @@ import LineaTiempo from "@/components/linea-tiempo";
 export const metadata: Metadata = {
   title: "Sobre mí · Casa Taller Kafkun",
   description:
-    "Katy, tejedora autodidacta de telar mapuche. Kafkún significa susurro en mapudungun. Su historia, su oficio y por qué enseña sin guardarse nada.",
+    "Katty, tejedora autodidacta de telar mapuche. Kafkún significa susurro en mapudungun. Su historia, su oficio y por qué enseña sin guardarse nada.",
 };
 
 export default function SobreMiPage() {
@@ -28,7 +28,7 @@ export default function SobreMiPage() {
                 <em className="font-normal italic text-primary">encontró a mí</em>.
               </h1>
               <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-muted-foreground">
-                Soy Katy, tejedora autodidacta de telar mapuche, crochet y palillo.{" "}
+                Soy Katty, tejedora autodidacta de telar mapuche, crochet y palillo.{" "}
                 <em>Kafkün</em> significa susurro en mapudungun.
               </p>
             </div>
@@ -36,7 +36,7 @@ export default function SobreMiPage() {
             <div className="relative aspect-[3/4] overflow-hidden rounded-[2px]">
               <Image
                 src="/images/katy-chal-gris.jpg"
-                alt="Katy en su taller, con un chal gris tejido por ella"
+                alt="Katty en su taller, con un chal gris tejido por ella"
                 fill
                 priority
                 className="object-cover"
@@ -108,7 +108,7 @@ export default function SobreMiPage() {
               práctica, lo enseño — con todos los tips, sin mezquindades.
             </p>
             <footer className="mt-8 text-[0.875rem] text-tinta-foreground/60">
-              Katy · Casa Taller Kafkün
+              Katty · Casa Taller Kafkün
             </footer>
           </blockquote>
         </div>
@@ -120,7 +120,7 @@ export default function SobreMiPage() {
             <div className="relative aspect-[3/4] overflow-hidden rounded-[2px]">
               <Image
                 src="/images/telar-proceso.jpg"
-                alt="Telar mapuche de Katy con un tejido en proceso"
+                alt="Telar mapuche de Katty con un tejido en proceso"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

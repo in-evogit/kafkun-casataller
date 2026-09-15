@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  *
  *   - Iconos de lucide-react, no react-icons. El proyecto YA tiene lucide; sumar otra
  *     libreria de iconos son 2 dependencias haciendo el mismo trabajo.
- *   - Un solo carmesi (#c50906, el del logo de Katy) en vez de degradados neon
+ *   - Un solo carmesi (#c50906, el del logo de Katty) en vez de degradados neon
  *     morado/rosa/azul/verde. Kafkun tiene UN color; cinco degradados distintos en
  *     una pagina de telar mapuche se leen como plantilla descargada.
  *   - Sin blur glow. Nada en el sitio brilla.

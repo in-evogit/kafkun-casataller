@@ -23,7 +23,7 @@ export default function CheckoutButton({ items, devMode, couponCode }: Props) {
       <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
         <p className="font-semibold">Modo desarrollo</p>
         <p className="mt-1">
-          El pago con Mercado Pago se activa cuando Katy configure las
+          El pago con Mercado Pago se activa cuando Katty configure las
           credenciales oficiales. La estructura está lista.
         </p>
       </div>

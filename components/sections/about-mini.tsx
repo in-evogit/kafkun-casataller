@@ -6,7 +6,7 @@ import { type Ranura } from "@/lib/media";
  * Quién teje. Sostiene el precio de un encargo a medida: lo que se compra es el criterio
  * de quien teje, no una prenda de catálogo.
  *
- * El texto es de Katy, verificado, y no se toca. Es de lo mejor que tiene el sitio.
+ * El texto es de Katty, verificado, y no se toca. Es de lo mejor que tiene el sitio.
  *
  * La foto va HORIZONTAL (retrato de ella en ambiente). La que había, katy-retrato.jpg, es una
  * selfie de interior con un perro tapándole media cara: servía para una bio chica, no para ser
@@ -14,7 +14,7 @@ import { type Ranura } from "@/lib/media";
  */
 const RETRATO_POR_DEFECTO: Ranura = {
   src: "/images/katy-chal-gris.jpg",
-  alt: "Katy en su taller, con un chal gris tejido por ella",
+  alt: "Katty en su taller, con un chal gris tejido por ella",
   // Vertical y no horizontal: en esta reja de dos columnas la foto vertical llena la
   // mitad de la pantalla, mientras que una horizontal deja aire muerto arriba y abajo.
   proporcion: "vertical",
@@ -36,7 +36,7 @@ export default function AboutMini({ media = RETRATO_POR_DEFECTO }: { media?: Ran
               El telar me encontró a mí
             </h2>
             <p className="mt-6 max-w-[52ch] leading-relaxed text-muted-foreground">
-              Soy Katy, tejedora autodidacta de telar mapuche, crochet y
+              Soy Katty, tejedora autodidacta de telar mapuche, crochet y
               palillo. <em>Kafkún</em> significa susurro en mapudungun, y creo
               que el telar me encontró a mí. Aprendí sola, porque no encontré a
               nadie que me enseñara: me equivoqué harto y cometí muchos errores,
@@ -49,7 +49,7 @@ export default function AboutMini({ media = RETRATO_POR_DEFECTO }: { media?: Ran
                 mezquindades.
               </p>
             </blockquote>
-            {/* Las cifras viven aca y no en el hero: son datos confirmados por Katy
+            {/* Las cifras viven aca y no en el hero: son datos confirmados por Katty
                 (commit 03db920) y donde de verdad convencen es junto a su historia,
                 no flotando bajo el titular. Chicas y en una linea: un numero grande
                 no las hace mas ciertas, solo mas ruidosas. */}
@@ -65,9 +65,12 @@ export default function AboutMini({ media = RETRATO_POR_DEFECTO }: { media?: Ran
               ))}
             </dl>
 
+            {/* En recuadro, no como texto subrayado: Gabriel lo pidio asi, y tiene
+                razon — es el unico camino de salida de esta seccion y como enlace
+                suelto no se leia como algo apretable. */}
             <Link
               href="/sobre-mi"
-              className="hilo mt-6 inline-block text-[0.9375rem] font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="mt-7 inline-flex h-12 items-center justify-center rounded-[2px] border border-border px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-foreground transition-[border-color,color,transform] duration-[var(--dur-color)] hover:border-primary hover:text-primary active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Leer mi historia completa
             </Link>

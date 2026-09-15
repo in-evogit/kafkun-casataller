@@ -1,10 +1,10 @@
 import { pasosEncargo as pasos } from "@/lib/data/proceso";
 /**
- * El proceso del encargo, en la voz de Katy.
+ * El proceso del encargo, en la voz de Katty.
  *
  * Antes esta sección describía la compra de un curso ("eliges tu curso, recibes acceso") sobre
  * un bloque rojo oscuro con textura. Ahora cuenta lo que realmente pasa cuando alguien encarga
- * una pieza, que es la duda que hoy Katy responde una y otra vez por WhatsApp.
+ * una pieza, que es la duda que hoy Katty responde una y otra vez por WhatsApp.
  *
  * Sin iconos y sin fotos: cinco pasos numerados y nada más. El número grande en Fraunces liviano
  * es el ritmo de la sección.

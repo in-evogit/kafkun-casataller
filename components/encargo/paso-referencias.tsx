@@ -20,7 +20,7 @@ const TIPOS_OK = ["image/jpeg", "image/png", "image/webp", "image/heic", "image/
  * Paso 02 — las referencias.
  *
  * Es el paso 02 del proceso que la portada ya promete ("Traes tus referencias"), hecho
- * realidad. El texto repite la idea de Katy a proposito: que la pieza no tiene que
+ * realidad. El texto repite la idea de Katty a proposito: que la pieza no tiene que
  * existir todavia en ninguna parte.
  *
  * La zona vacia usa la MISMA urdimbre que el estado "foto en camino" de figura.tsx. No es

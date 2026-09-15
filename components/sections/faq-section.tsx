@@ -7,7 +7,7 @@ import {
 import { faqItems } from "@/lib/data/clases";
 
 export default function FaqSection() {
-  // Sin respuestas confirmadas por Katy, la sección no se renderiza.
+  // Sin respuestas confirmadas por Katty, la sección no se renderiza.
   if (faqItems.length === 0) return null;
 
   return (

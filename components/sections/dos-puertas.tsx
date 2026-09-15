@@ -26,7 +26,7 @@ const puertas = [
     eyebrow: "Quiero aprender",
     titulo: "Aprender",
     texto:
-      "Clases grabadas que ves a tu ritmo, sin fechas ni cupos. Todo lo que Katy aprendió desde la práctica, sin mezquindades.",
+      "Clases grabadas que ves a tu ritmo, sin fechas ni cupos. Todo lo que Katty aprendió desde la práctica, sin mezquindades.",
     cta: "Ver las clases",
     href: "/cursos",
     secundario: null,

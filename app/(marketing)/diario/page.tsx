@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Urdimbre from "@/components/urdimbre";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Diario de telar · Casa Taller Kafkun",
   description:
-    "Consejos, técnicas y materiales para tejer. Aprende con Katy, instructora de telar en Chile.",
+    "Consejos, técnicas y materiales para tejer. Aprende con Katty, instructora de telar en Chile.",
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/diario`,
   },
@@ -20,8 +21,17 @@ export default function DiarioPage() {
       {/* Cabecera sin bloque de color. Gabriel: los encabezados de las subsecciones
           "son muy voluminosos y no aportan mucho". Este ocupaba una franja entera para
           decir dos frases. */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 pt-20 pb-10 sm:px-6 sm:pt-28 lg:px-8">
+      {/* Hero con la urdimbre. Gabriel queria "algo mas representativo de la marca,
+          con referencia a lanas". Son los hilos del telar tensandose al entrar,
+          dibujados con CSS — sin framer-motion, que costaria 50-70 KB. */}
+      <section className="relative isolate overflow-hidden border-b border-border bg-background">
+        <Urdimbre className="absolute inset-0 -z-10" />
+        {/* El papel se abre hacia abajo para que el texto no compita con los hilos. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,color-mix(in_oklch,var(--background)_55%,transparent)_0%,var(--background)_78%)]"
+        />
+        <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 sm:pt-32 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
               Diario

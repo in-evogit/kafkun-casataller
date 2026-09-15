@@ -7,7 +7,7 @@ import { seedCourses } from "@/lib/data/clases";
  * distingue una clase de una pieza sin tener que leer.
  *
  * El catálogo de 3 cursos es provisional. Se reemplaza por los 4 bloques (2 técnicas básicas
- * y 2 avanzadas) cuando Katy entregue nombre, promesa, temario y precio de cada uno.
+ * y 2 avanzadas) cuando Katty entregue nombre, promesa, temario y precio de cada uno.
  */
 export default function FeaturedCourses() {
   if (seedCourses.length === 0) return null;

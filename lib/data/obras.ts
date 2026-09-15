@@ -1,12 +1,12 @@
 import { type Ranura } from "@/lib/media";
 
 /**
- * Obras entregadas. NO son productos: son prueba de lo que Katy es capaz de hacer.
+ * Obras entregadas. NO son productos: son prueba de lo que Katty es capaz de hacer.
  * El encargo se define conversando, así que acá no hay precio, ni talla, ni "agregar al carrito".
  *
  * ACTUALIZADO 6-sep-2026: las fotos de relleno se reemplazaron por el material real que
  * entregó Gabriel. De seis piezas se pasa a catorce, y eso cambia lo que el sitio dice de
- * Katy: seis se lee como "hizo unas cosas", catorce se lee como oficio.
+ * Katty: seis se lee como "hizo unas cosas", catorce se lee como oficio.
  *
  * Las piezas en maniquí son las más valiosas del set porque se ve CÓMO CAE la prenda puesta,
  * que es justo lo que alguien necesita para imaginarse la suya.
@@ -18,12 +18,12 @@ import { type Ranura } from "@/lib/media";
 
 export type Obra = {
   slug: string;
-  /** DATO PENDIENTE: los nombres propios los pone Katy. */
+  /** DATO PENDIENTE: los nombres propios los pone Katty. */
   nombre: string;
   media: Ranura;
   /** Segunda toma, para el cambio al pasar el cursor. */
   mediaHover?: Ranura;
-  /** Solo si Katy la nombra. Nunca inventar la técnica ni el material. */
+  /** Solo si Katty la nombra. Nunca inventar la técnica ni el material. */
   materialYTecnica: string | null;
   publicable: boolean;
   /** Las fotos con clientas necesitan su autorización antes de publicarse. */

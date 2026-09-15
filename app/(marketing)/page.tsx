@@ -12,7 +12,7 @@ import NewsletterForm from "@/components/newsletter-form";
 export const metadata: Metadata = {
   title: "Casa Taller Kafkun · Cursos de telar online en Chile",
   description:
-    "Aprende telar mapuche desde cero y a tu ritmo, con Katy: tejedora autodidacta que enseña desde 2015, con todos los tips y sin mezquindades.",
+    "Aprende telar mapuche desde cero y a tu ritmo, con Katty: tejedora autodidacta que enseña desde 2015, con todos los tips y sin mezquindades.",
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL,
   },
@@ -56,7 +56,7 @@ export default function HomePage() {
 
           Eso cambia DONDE va la bifurcacion. Antes "las dos puertas" estaba en la
           posicion 4, a media pagina: se le pedia elegir camino a alguien que todavia
-          no sabia quien es Katy, que hace ni si funciona. Ahora baja al final, con
+          no sabia quien es Katty, que hace ni si funciona. Ahora baja al final, con
           toda la informacion ya entregada. La pregunta se hace cuando ya no hay dudas.
 
           El orden queda: quien es -> que hace -> que ensena -> quien lo dice ->

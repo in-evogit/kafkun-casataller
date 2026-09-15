@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
         <h2>¡Hola!</h2>
         <p>Gracias por suscribirte. Te avisaremos cuando publiquemos nuevos cursos, artículos y descuentos exclusivos.</p>
         <p>Mientras tanto, explora nuestros <a href="${process.env.NEXT_PUBLIC_SITE_URL}/cursos">cursos disponibles</a>.</p>
-        <p>Katy · Casa Taller Kafkun 🧶</p>
+        <p>Katty · Casa Taller Kafkun 🧶</p>
       `,
     }).catch(() => {});
   }

@@ -11,7 +11,7 @@ const campo =
  * Formulario de contacto.
  *
  * OJO, Y ES IMPORTANTE: mientras Resend no este configurado, este formulario GUARDA
- * el mensaje pero NADIE le avisa a Katy. Por eso la confirmacion no dice "te
+ * el mensaje pero NADIE le avisa a Katty. Por eso la confirmacion no dice "te
  * responderemos pronto" —seria mentir— sino que muestra tambien el correo directo,
  * para que quien tenga apuro no se quede esperando una respuesta que no va a llegar.
  *

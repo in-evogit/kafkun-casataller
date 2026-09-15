@@ -13,8 +13,8 @@
  *   - Vivian Aedo: califico 4 y ademas pidio que no apareciera su nombre.
  *
  * EDICION: solo ortografia evidente, nunca el tono ni el contenido.
- *   "chaleto" -> "chaleco", "Casa Talker" -> "Casa Taller", "Katti"/"Kathy" -> "Katy"
- *   (el sitio la nombra Katy en todas partes; dejar tres grafias distintas confunde),
+ *   "chaleto" -> "chaleco", "Casa Talker" -> "Casa Taller", "Katti"/"Kathy" -> "Katty"
+ *   (el sitio la nombra Katty en todas partes; dejar tres grafias distintas confunde),
  *   y tildes que faltaban. Todo lo demas es textual.
  *
  * El texto de cada una sale de la pregunta que de verdad recogio la experiencia. OJO:
@@ -33,7 +33,7 @@
 
 export type Resena = {
   nombre: string;
-  /** El taller que hizo. Da contexto y demuestra que Katy ensena mas que telar. */
+  /** El taller que hizo. Da contexto y demuestra que Katty ensena mas que telar. */
   taller: string;
   /** Sus palabras. */
   texto: string;
@@ -49,7 +49,7 @@ export const resenas: Resena[] = [
   {
     nombre: "Consu S.",
     // Hizo los dos, en fechas distintas. Se nombran ambos porque que una alumna VUELVA
-    // es de las senales mas fuertes que hay, y asi ademas se ve que Katy no ensena
+    // es de las senales mas fuertes que hay, y asi ademas se ve que Katty no ensena
     // solo telar. La cita es textual de una sola de las dos respuestas: juntar dos
     // respuestas en una frase seria fabricar algo que ella nunca escribio asi.
     taller: "Taller de crochet · Retiro Tejeril",
@@ -75,6 +75,6 @@ export const resenas: Resena[] = [
   {
     nombre: "Verónica Salgado",
     taller: "Taller de telar, técnicas básicas",
-    texto: "Katy es muy profesional y clara para enseñar.",
+    texto: "Katty es muy profesional y clara para enseñar.",
   },
 ];

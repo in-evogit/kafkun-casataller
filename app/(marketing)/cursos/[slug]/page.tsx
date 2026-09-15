@@ -123,21 +123,21 @@ export default async function CourseDetailPage({ params }: Props) {
       />
 
       {/* Hero */}
-      <section className="border-t border-border bg-background">
+      <section className="bg-tinta">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
           <div className="flex flex-col justify-center">
-            <span className="inline-block rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
+            <span className="inline-block rounded-full border border-tinta-foreground/40 px-3 py-1 text-xs font-medium text-tinta-foreground/80">
               {levelLabel[course.level]}
             </span>
-            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3rem]">
+            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-tinta-foreground md:text-[3rem]">
               {course.title}
             </h1>
-            <p className="mt-2 font-heading text-xl text-muted-foreground">
+            <p className="mt-2 font-heading text-xl text-tinta-foreground/70">
               {course.subtitle}
             </p>
-            <p className="mt-4 text-muted-foreground">{course.description}</p>
+            <p className="mt-4 text-tinta-foreground/70">{course.description}</p>
 
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted-foreground">
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-tinta-foreground/70">
               <span className="flex items-center gap-1.5">
                 <Clock className="h-4 w-4" />
                 {formatDuration(course.duration_minutes)}
@@ -149,43 +149,36 @@ export default async function CourseDetailPage({ params }: Props) {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <span className="font-heading text-3xl font-semibold text-foreground">
+              <span className="font-heading text-3xl font-semibold text-tinta-foreground">
                 {formatPrice(course.price_clp)}
               </span>
               <Link
                 href={`/checkout?curso=${course.slug}`}
-                className="rounded-md bg-primary px-8 py-3 text-center font-semibold text-primary-foreground transition-colors hover:bg-accent"
+                className="inline-flex h-12 items-center justify-center rounded-[2px] border border-tinta-foreground bg-tinta-foreground px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-tinta transition-[background-color,border-color,transform] duration-[var(--dur-color)] hover:bg-tinta-foreground/88 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tinta-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-tinta"
               >
-                Inscribirme ahora
+                Quiero este taller
               </Link>
             </div>
             {/* Respuesta de Gabriel (9-sep-2026): se paga una vez y queda tuyo para
                 siempre. No es suscripcion ni acceso por tiempo limitado, y decirlo
                 completo quita la duda que frena una inscripcion. */}
-            <p className="mt-3 max-w-[46ch] text-[0.8125rem] leading-relaxed text-muted-foreground">
+            <p className="mt-3 max-w-[46ch] text-[0.8125rem] leading-relaxed text-tinta-foreground/70">
               Pago único: lo compras una vez y queda tuyo para siempre. Online y
               grabado, lo ves cuando puedas.
             </p>
           </div>
 
           {/* Un curso GRABADO se vende mostrando el video, no una foto fija: lo
-              primero que alguien quiere saber es como ensena Katy. Hoy no hay video
+              primero que alguien quiere saber es como ensena Katty. Hoy no hay video
               ni Mux configurado, asi que va la ranura del tamano exacto. */}
-          <div className="flex flex-col justify-center gap-4">
+          {/* SOLO EL VIDEO. La foto de portada se fue: en la lista de cursos ya se
+              vio, y repetirla aca no agrega nada. Lo que alguien quiere al entrar a
+              un curso grabado es ver COMO ensena Katty, y eso solo lo dice el video. */}
+          <div className="flex flex-col justify-center">
             <RanuraVideo
               titulo={course.title}
-              nota="Un adelanto de la primera clase, para que veas cómo enseña Katy antes de decidir."
+              nota="Un adelanto de la primera clase, para que veas cómo enseña Katty antes de decidir."
             />
-            <div className="relative aspect-[3/2] overflow-hidden rounded-[2px]">
-              <Image
-                src={course.thumbnail_url}
-                alt={`Alumnas en un taller de Casa Taller Kafkún`}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -212,8 +205,8 @@ export default async function CourseDetailPage({ params }: Props) {
           contiene, sino lo que la persona va a poder hacer despues.
 
           Las cuatro ranuras estan vacias A PROPOSITO y no se llenan con fotos de las
-          obras de Katy: eso seria trampa. Lo que va aqui son trabajos DE ALUMNAS,
-          hechos en este taller. Katy los tiene que juntar, y ademas necesita la
+          obras de Katty: eso seria trampa. Lo que va aqui son trabajos DE ALUMNAS,
+          hechos en este taller. Katty los tiene que juntar, y ademas necesita la
           autorizacion de cada una antes de publicarlos.
 
           Mientras tanto se ve el lienzo con la urdimbre, del tamano exacto: la seccion
@@ -228,7 +221,7 @@ export default async function CourseDetailPage({ params }: Props) {
               Lo que vas a poder tejer al terminar
             </h2>
             <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-              Piezas hechas por alumnas de este mismo taller, no por Katy.
+              Piezas hechas por alumnas de este mismo taller, no por Katty.
             </p>
           </div>
 

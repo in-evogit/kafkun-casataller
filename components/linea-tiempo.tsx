@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
  * Linea de tiempo que se va llenando al bajar.
  *
  * UNA sola implementacion para los dos usos que pidio Gabriel: el proceso del encargo
- * y la historia de Katy. Duplicar la logica del observador en dos archivos garantiza
+ * y la historia de Katty. Duplicar la logica del observador en dos archivos garantiza
  * que un dia se comporten distinto y nadie sepa por que.
  *
  * La linea no es adorno: es lo que convierte una lista de cajas sueltas en un

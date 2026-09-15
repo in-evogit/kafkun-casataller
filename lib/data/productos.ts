@@ -2,14 +2,14 @@
  * Piezas a pedido. Lo lleva Gabriel.
  *
  * OJO: hoy no se vende nada directo. Estas piezas son REFERENCIA de lo que
- * Katy ya tejio para otras personas, no inventario disponible.
+ * Katty ya tejio para otras personas, no inventario disponible.
  *
  * Antes esto vivia todo junto en lib/data/seed.ts. Se partio el 30-ago-2026 porque
  * Luca trabaja las clases y Gabriel los productos a pedido: con un archivo unico,
  * cada merge de los dos chocaba en el mismo lugar.
  */
 
-// NOTA: precios y stock son PLACEHOLDER — reemplazar con los reales de Katy.
+// NOTA: precios y stock son PLACEHOLDER — reemplazar con los reales de Katty.
 export const seedProducts = [
   {
     slug: "bufanda-crema",
@@ -63,5 +63,5 @@ export const seedProducts = [
  * Testimonios: vacío a propósito.
  * Los 3 anteriores (Valentina Rojas, Francisca Morales, Daniela Sepúlveda) eran inventados,
  * con avatares de placehold.co, y afirmaban "acceso de por vida". Se eliminaron el 3-ago-2026.
- * Solo se repuebla con testimonios reales de alumnas de Katy, con su autorización.
+ * Solo se repuebla con testimonios reales de alumnas de Katty, con su autorización.
  */

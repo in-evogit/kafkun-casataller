@@ -28,9 +28,9 @@ export const seedCourses = [
  * cursos que había ("Telar mapuche" intermedio y "Diseño propio" avanzado) no
  * estaban grabados: mostrarlos era prometer algo que no se puede entregar.
  *
- * Vuelven cuando Katy los tenga listos, con su propia foto de portada.
+ * Vuelven cuando Katty los tenga listos, con su propia foto de portada.
  *
- * OJO: el precio de 45.000 sigue siendo PLACEHOLDER. Lo pone Katy.
+ * OJO: el precio de 45.000 sigue siendo PLACEHOLDER. Lo pone Katty.
  */
 
 export type SeedLesson = {
@@ -154,7 +154,7 @@ export const seedModules: Record<string, SeedModule[]> = {
 /**
  * FAQ: vacío a propósito.
  * Las 6 respuestas anteriores afirmaban garantía de 7 días, acceso de por vida, soporte por
- * WhatsApp durante 30 días y kits de iniciación en la tienda. Ninguna fue confirmada por Katy.
+ * WhatsApp durante 30 días y kits de iniciación en la tienda. Ninguna fue confirmada por Katty.
  * Eliminadas el 3-ago-2026. Cada respuesta vuelve solo cuando ella defina la política real.
  */
 export const faqItems: { q: string; a: string }[] = [];

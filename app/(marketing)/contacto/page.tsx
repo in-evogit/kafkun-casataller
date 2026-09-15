@@ -8,7 +8,7 @@ import FormularioContacto from "@/components/formulario-contacto";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Escríbele a Katy de Casa Taller Kafkün. Dudas sobre clases, encargos o un pedido en curso.",
+    "Escríbele a Katty de Casa Taller Kafkün. Dudas sobre clases, encargos o un pedido en curso.",
   alternates: { canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/contacto` },
 };
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
  * Contacto.
  *
  * SIN FORMULARIO a proposito, y no por falta de ganas. Un formulario necesita avisarle a
- * Katy cuando alguien escribe; sin Resend configurado, el mensaje se guardaria en la base
+ * Katty cuando alguien escribe; sin Resend configurado, el mensaje se guardaria en la base
  * y nadie lo leeria nunca. Eso es peor que no tener formulario: la persona cree que
  * escribio y se queda esperando. Cuando Resend este, se agrega.
  *
@@ -30,7 +30,7 @@ const canales = [
     etiqueta: "Correo",
     valor: "kafkuntelares@gmail.com",
     href: "mailto:kafkuntelares@gmail.com",
-    nota: "Lo lee Katy. Suele responder en el día.",
+    nota: "Lo lee Katty. Suele responder en el día.",
   },
   {
     etiqueta: "Instagram",

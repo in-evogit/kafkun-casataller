@@ -2,7 +2,7 @@
  * Disponibilidad y datos del encargo.
  *
  * Esto NO habla con Google Calendar ni con ninguna empresa externa, y no hace falta:
- * la disponibilidad vive acá, no en la agenda personal de Katy. Ella declara sus
+ * la disponibilidad vive acá, no en la agenda personal de Katty. Ella declara sus
  * ventanas y bloquea lo que no puede. A cambio, el sistema nunca va a "adivinar" que
  * tiene dentista el martes: si no lo bloquea, la hora se puede reservar.
  *
@@ -19,7 +19,7 @@ export const VENTANA_DIAS = 21;
 
 /**
  * Cuántas horas de anticipación mínima. Sin esto, alguien puede reservar para dentro
- * de diez minutos y Katy se entera cuando ya pasó.
+ * de diez minutos y Katty se entera cuando ya pasó.
  */
 export const ANTICIPACION_HORAS = 24;
 
@@ -42,7 +42,7 @@ export const VENTANAS_PROVISIONALES: VentanaSemanal[] = [
   { dia: 6, desde: "10:00", hasta: "12:30" }, // sábado
 ];
 
-/** Fechas puntuales que Katy bloquea. Formato "YYYY-MM-DD". También saldrá de la base. */
+/** Fechas puntuales que Katty bloquea. Formato "YYYY-MM-DD". También saldrá de la base. */
 export const BLOQUEOS_PROVISIONALES: string[] = [];
 
 export type Hora = {

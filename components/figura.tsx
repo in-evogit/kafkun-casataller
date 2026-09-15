@@ -20,7 +20,7 @@ type Props = {
  *
  * El estado sin foto NO es un cuadro gris de error: es una superficie de lienzo con la
  * urdimbre marcada, del tamaño exacto que va a ocupar la foto definitiva. Así el sitio se
- * ve terminado mientras Katy consigue el material, y además no hay salto de layout el día
+ * ve terminado mientras Katty consigue el material, y además no hay salto de layout el día
  * que la foto entre, porque el espacio ya estaba reservado.
  *
  * Server component a propósito: cero JavaScript en el cliente.

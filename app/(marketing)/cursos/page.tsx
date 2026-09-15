@@ -46,17 +46,17 @@ export default function CursosPage() {
             LAS RESPUESTAS SON DE GABRIEL (9-sep-2026), no inventadas:
             - "Pago unico" = pagas el curso y lo tienes para siempre. No es suscripcion
               ni acceso por tiempo limitado.
-            - El curso es ONLINE Y GRABADO. Katy tambien hace talleres presenciales,
+            - El curso es ONLINE Y GRABADO. Katty tambien hace talleres presenciales,
               pero este no lo es, y hay que decirlo aca antes de que alguien pague
               creyendo que va a ir a su taller.
 
             Las preguntas las escribi yo como primera version; Gabriel las va a revisar
-            con Katy. Ninguna promete algo que no este confirmado. */}
+            con Katty. Ninguna promete algo que no este confirmado. */}
         <dl className="mt-16 divide-y divide-border border-y border-border">
           {[
             {
               q: "¿Es online o presencial?",
-              a: "Este curso es online y grabado: lo ves cuando puedas, las veces que quieras. Katy también hace talleres presenciales, pero se avisan aparte.",
+              a: "Este curso es online y grabado: lo ves cuando puedas, las veces que quieras. Katty también hace talleres presenciales, pero se avisan aparte.",
             },
             {
               q: "¿Por cuánto tiempo lo tengo?",
@@ -68,7 +68,7 @@ export default function CursosPage() {
             },
             {
               q: "¿Necesito comprar un telar antes?",
-              a: "Escríbele a Katy antes de comprar nada. Ella te dice qué necesitas de verdad según lo que quieras tejer.",
+              a: "Escríbele a Katty antes de comprar nada. Ella te dice qué necesitas de verdad según lo que quieras tejer.",
             },
           ].map((item) => (
             <div key={item.q} className="py-6">

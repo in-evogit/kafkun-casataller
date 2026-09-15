@@ -74,7 +74,7 @@ export default function APedidoPage() {
 
 
       {/* El proceso va DESPUES de la prueba de trabajo: primero se genera el deseo
-          viendo lo que Katy hace, y recien entonces se explica como se consigue. */}
+          viendo lo que Katty hace, y recien entonces se explica como se consigue. */}
       <section className="border-t border-border bg-background">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <div className="max-w-3xl">

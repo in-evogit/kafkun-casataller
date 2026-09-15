@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
 
     if (error) {
       // Si una foto falla se aborta entero. Guardar el encargo diciendo que hay
-      // cinco referencias cuando solo subieron tres deja a Katy buscando fotos
+      // cinco referencias cuando solo subieron tres deja a Katty buscando fotos
       // que no existen.
       console.error("[encargo] fallo la subida de una referencia:", error.message);
       await Promise.all(rutas.map((r) => admin.storage.from(BUCKET).remove([r])));
@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
 
   // ── Avisos ───────────────────────────────────────────────────────────────
   // Sin Resend configurado no se manda nada, y eso se dice en voz alta en los
-  // registros: un encargo guardado del que Katy no se entera es un cliente perdido.
+  // registros: un encargo guardado del que Katty no se entera es un cliente perdido.
   if (!process.env.RESEND_API_KEY) {
     console.warn(
       `[encargo] ${data.id} guardado, pero RESEND_API_KEY no esta configurada: ` +

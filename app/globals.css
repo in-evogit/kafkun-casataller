@@ -292,3 +292,26 @@
     transform: translateY(8px);
   }
 }
+
+/* ─── Urdimbre viva del diario ─────────────────────────────────────────────
+   Los hilos del telar, tensandose de a poco al entrar a la pagina. Es el
+   motivo de la marca dibujado con CSS: nada de librerias de animacion, que
+   costarian 50-70 KB en la ruta mas critica del sitio.
+
+   Cada hilo entra con su propio retardo, que es lo que hace que se lea como
+   una urdimbre montandose y no como una barra de carga. */
+@keyframes urdir {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.hilo-urdimbre {
+  transform-origin: top;
+  animation: urdir 900ms var(--ease-hilo) both;
+}

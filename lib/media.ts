@@ -2,13 +2,13 @@
  * Sistema de medios de Casa Taller Kafkún.
  *
  * Las fotos que hay hoy en public/images/ son DE RELLENO. Las definitivas las consigue
- * Katy después. Por eso ningún componente escribe una ruta de imagen adentro: recibe un
+ * Katty después. Por eso ningún componente escribe una ruta de imagen adentro: recibe un
  * `Media` y lo dibuja. Cuando lleguen las fotos buenas se cambia el dato, no el componente.
  *
  * Regla de proporción, decidida con Gabriel:
  *   VERTICAL   → obras, piezas, productos, trabajos de alumnas, detalle de proceso.
  *                Es como se fotografía una prenda colgada o una pieza en el telar.
- *   HORIZONTAL → hero, portadas de curso y de bloque, fotos de Katy en ambiente.
+ *   HORIZONTAL → hero, portadas de curso y de bloque, fotos de Katty en ambiente.
  *                Es como se fotografía un espacio o una persona trabajando.
  */
 

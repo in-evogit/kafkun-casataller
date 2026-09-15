@@ -1,5 +1,5 @@
 /**
- * Los cinco pasos del encargo, en la voz de Katy.
+ * Los cinco pasos del encargo, en la voz de Katty.
  *
  * Viven aca y no dentro de un componente porque los cuentan DOS lugares: la seccion
  * "El proceso" de la portada y la pagina /a-pedido. Duplicar el texto garantiza que
