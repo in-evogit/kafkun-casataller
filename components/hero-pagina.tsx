@@ -37,7 +37,7 @@ export default function HeroPagina({
       />
       <div className="mx-auto max-w-7xl px-4 pt-24 pb-14 sm:px-6 sm:pt-32 sm:pb-16 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
             {antetitulo}
           </p>
           <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3.25rem]">

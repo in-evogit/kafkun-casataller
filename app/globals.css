@@ -32,6 +32,7 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-burdeos: var(--burdeos);
   --color-tinta: var(--tinta);
   --color-tinta-foreground: var(--tinta-foreground);
   --color-estrella: var(--estrella);
@@ -96,6 +97,13 @@
      esa paleta como de vino en algunos sectores nuevamente". El vino viejo (#7C1D2B)
      era de la paleta anterior al logo; este es de la misma familia pero emparentado
      con el rojo real de Katy (mismo matiz 29). Papel encima da 14.32:1. */
+  /* BURDEOS INTERMEDIO. Gabriel: "los colores estan muy formes, hagamos mas
+     mezclas de rojos burdeos vino, pero nunca tan rojos fuertes; el logo es lo mas
+     rojo que podemos llegar". Entre el carmesi del logo (#C50906) y el vino
+     profundo (#520402) habia un salto enorme y nada en medio, por eso la escala
+     se sentia plana. Este llena el hueco. Papel encima 9.35:1, arena 7.57:1. */
+  --burdeos: oklch(0.40 0.16 29);
+
   --tinta: oklch(0.28 0.11 29);
   /* El texto sobre tinta NO puede ser var(--background): en modo oscuro el fondo es
      casi negro y quedaba texto negro sobre marrón oscuro — 1.20:1, ilegible. La tinta
@@ -317,16 +325,21 @@
 }
 
 /* ─── Hero con scroll ──────────────────────────────────────────────────────
-   Las piezas se juntan y crecen mientras se baja; el texto se va.
+   La secuencia que pidio Gabriel: primero se ven las piezas, y a medida que se
+   baja se juntan, el fondo se oscurece y RECIEN AHI entra el texto.
 
-   Hecho con animaciones ligadas al scroll de CSS y NO con una librería. La
-   razón no es el peso (que también: motion son ~40 KB en la ruta más
-   crítica) sino DÓNDE corre: una librería anima desde el hilo principal, el
-   mismo que está cargando imágenes e hidratando React, justo cuando el hero
-   entra. Ahí es donde se caen los cuadros. Estas corren en el compositor.
+   El primer intento tenia el orden al reves —texto primero, imagenes detras de
+   un velo al 82%— y el resultado era una pantalla negra con letras: las fotos
+   estaban ahi pero no se veian. El velo ahora ARRANCA transparente y se cierra
+   con el scroll, que es lo que deja ver las piezas al entrar.
 
-   Donde el navegador no las soporta —hoy Firefox— no pasa nada malo: las
-   reglas se ignoran y la galería se ve en su estado final, quieta. */
+   Hecho con animaciones ligadas al scroll y NO con una libreria. La razon de
+   fondo no es el peso (motion son ~40 KB en la ruta mas critica) sino DONDE
+   corre: una libreria anima desde el hilo principal, el mismo que en ese momento
+   descarga las fotos e hidrata React. Estas corren en el compositor.
+
+   Donde no hay soporte —hoy Firefox— las reglas quedan dentro del @supports: se
+   ignoran y se ve la galeria con el texto encima, quieta. No hay estado roto. */
 @supports (animation-timeline: view()) {
   .hero-scroll {
     view-timeline-name: --hero-scroll;
@@ -336,34 +349,49 @@
   .hero-celda {
     animation: hero-juntar linear both;
     animation-timeline: --hero-scroll;
-    animation-range: entry 0% cover 55%;
+    animation-range: entry 0% cover 50%;
   }
 
-  .hero-texto {
-    animation: hero-salir linear both;
+  /* El velo nace transparente: al entrar se ven las piezas tal cual. */
+  .hero-velo {
+    animation: hero-oscurecer linear both;
     animation-timeline: --hero-scroll;
-    animation-range: entry 10% cover 40%;
+    animation-range: cover 18% cover 55%;
+  }
+
+  /* Y el texto entra al final, cuando el fondo ya esta oscuro. */
+  .hero-texto {
+    animation: hero-entrar linear both;
+    animation-timeline: --hero-scroll;
+    animation-range: cover 28% cover 62%;
   }
 }
 
 @keyframes hero-juntar {
   from {
-    transform: scale(0.62) translateY(14%);
-    opacity: 0.55;
+    transform: scale(0.78) translateY(9%);
   }
   to {
     transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes hero-oscurecer {
+  from {
+    opacity: 0;
+  }
+  to {
     opacity: 1;
   }
 }
 
-@keyframes hero-salir {
+@keyframes hero-entrar {
   from {
-    transform: scale(1);
-    opacity: 1;
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
   }
   to {
-    transform: scale(0.88);
-    opacity: 0;
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

@@ -214,7 +214,7 @@ export default async function CourseDetailPage({ params }: Props) {
       <section className="border-t border-border bg-background">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
               Resultados
             </p>
             <h2 className="mt-4 text-balance font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-foreground md:text-[2.25rem]">

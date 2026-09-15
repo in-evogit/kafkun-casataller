@@ -4,87 +4,83 @@ import { obrasPublicables } from "@/lib/data/obras";
 import { estaPendiente } from "@/lib/media";
 
 /**
- * Hero con galeria que se junta al bajar.
+ * Hero: las piezas primero, el texto despues.
  *
- * Es el efecto que pidio Gabriel: las piezas de Katty crecen y se juntan mientras se
- * hace scroll, el texto se va, y despues empieza la historia.
+ * La secuencia que pidio Gabriel: al entrar se ven las piezas de Katty en tarjetas;
+ * al bajar se juntan, el fondo se oscurece y RECIEN AHI aparece el texto.
  *
- * SIN LIBRERIA DE ANIMACION, y la razon de fondo no es el peso. Una libreria anima
- * desde el hilo principal — el mismo que en ese momento esta cargando seis fotos e
- * hidratando React. El hero se anima justo cuando el navegador esta mas ocupado, que
- * es exactamente cuando se caen los cuadros. Las animaciones ligadas al scroll de CSS
- * corren en el compositor y no dependen de eso.
+ * El primer intento tenia el orden al reves —texto encima, fotos detras de un velo
+ * radial al 82%— y el resultado era una pantalla negra con letras. Las fotos estaban
+ * ahi, pero nadie las veia. Ahora el velo nace transparente.
  *
- * Donde no hay soporte (hoy Firefox) las reglas se ignoran y la galeria se ve quieta
- * en su estado final. Se ve bien igual: no hay estado roto.
+ * Las fotos son las obras REALES de Katty, no un banco de imagenes: lo primero que se
+ * ve al entrar al sitio es su trabajo.
  *
- * Las fotos son las obras REALES de Katty, no un banco de imagenes. Son las mismas
- * que estan mas abajo en el carrusel, y eso es a proposito: lo primero que se ve al
- * entrar es su trabajo.
+ * Sin libreria de animacion: ver la nota en globals.css, seccion "Hero con scroll".
  */
 export default function HeroScroll() {
   const piezas = obrasPublicables
     .filter((o) => !estaPendiente(o.media))
-    .slice(0, 5)
+    .slice(0, 6)
     .map((o) => ({
       src: (o.media as { src: string }).src,
       alt: (o.media as { alt: string }).alt,
     }));
 
+  // Cada tarjeta con su forma: una grande que manda y cinco alrededor. Una reja
+  // pareja se lee como catalogo; esta se lee como un muestrario desplegado.
+  const formas = [
+    "col-span-2 row-span-2 md:col-span-3 md:row-span-2",
+    "col-span-1 row-span-1 md:col-span-2 md:row-span-1",
+    "col-span-1 row-span-1 md:col-span-2 md:row-span-1",
+    "col-span-1 row-span-1 md:col-span-2 md:row-span-1",
+    "hidden md:col-span-1 md:row-span-1 md:block",
+    "hidden md:col-span-1 md:row-span-1 md:block",
+  ];
+
   return (
     <section className="hero-scroll relative bg-[#0b0b0b]">
-      {/* Alto largo: es el recorrido del scroll. La galeria queda pegada mientras
-          tanto, que es lo que hace que el efecto se lea como una sola escena. */}
-      <div className="h-[220vh] md:h-[260vh]">
+      {/* El alto largo ES el recorrido del scroll. La escena queda pegada mientras
+          tanto, que es lo que hace que se lea como una sola toma y no como tres. */}
+      <div className="h-[200vh] md:h-[240vh]">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            {/* La reja de piezas, al fondo. */}
-            <div className="grid grid-cols-8 grid-rows-[1.1fr_0.55fr_0.55fr] gap-3 opacity-90 md:gap-4">
+          <div className="relative mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div className="grid auto-rows-[minmax(0,1fr)] grid-cols-2 grid-rows-3 gap-2.5 [height:min(78vh,44rem)] md:grid-cols-6 md:grid-rows-2 md:gap-3.5">
               {piezas.map((p, i) => (
                 <div
                   key={p.src}
-                  style={{ animationDelay: `${i * 30}ms` }}
-                  className={[
-                    "hero-celda relative overflow-hidden rounded-[2px] bg-[#1a1a1a]",
-                    i === 0
-                      ? "col-span-8 row-span-3 md:col-span-5"
-                      : i === 1
-                        ? "hidden md:col-span-3 md:row-span-2 md:block"
-                        : i === 2
-                          ? "hidden md:col-span-3 md:block"
-                          : i === 3
-                            ? "hidden md:col-span-2 md:block"
-                            : "hidden md:col-span-1 md:block",
-                  ].join(" ")}
+                  style={{ animationDelay: `${i * 26}ms` }}
+                  className={`hero-celda relative overflow-hidden rounded-[2px] bg-[#1a1a1a] ${formas[i] ?? "hidden"}`}
                 >
                   <Image
                     src={p.src}
                     alt={p.alt}
                     fill
-                    priority={i === 0}
-                    sizes="(max-width: 768px) 100vw, 45vw"
+                    priority={i < 2}
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
               ))}
             </div>
 
-            {/* El velo: sin esto el texto blanco cae sobre lana clara y desaparece. */}
+            {/* El velo. Nace invisible y se cierra con el scroll: por eso al entrar
+                las piezas se ven tal cual, y el texto solo llega cuando ya hay fondo
+                oscuro donde apoyarse. */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.62)_45%,rgba(0,0,0,0.30)_100%)]"
+              className="hero-velo pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.80)_55%,rgba(0,0,0,0.88)_100%)] opacity-0"
             />
 
-            {/* El texto, encima y al centro. Se va mientras las piezas se juntan. */}
-            <div className="hero-texto pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+            <div className="hero-texto pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center opacity-0">
               <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-[var(--tinta-foreground)]/70">
                 Casa Taller Kafkún · Sur de Chile
               </p>
-              <h1 className="mt-5 max-w-[18ch] text-balance font-heading text-[2.5rem] font-light leading-[0.95] tracking-[-0.025em] text-[var(--tinta-foreground)] md:text-[4.25rem]">
+              <h1 className="mt-5 max-w-[18ch] text-balance font-heading text-[2.25rem] font-light leading-[0.98] tracking-[-0.025em] text-[var(--tinta-foreground)] sm:text-[2.875rem] md:text-[4.25rem]">
                 Una pieza tejida{" "}
                 <em className="font-normal italic">para ti</em>, no para una talla.
               </h1>
-              <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-[var(--tinta-foreground)]/85">
+              <p className="mt-6 max-w-[46ch] text-[1.0625rem] leading-relaxed text-[var(--tinta-foreground)]/85">
                 Soy Katty. Tejo a telar, a crochet y a palillo desde el sur de Chile.
               </p>
 
@@ -106,6 +102,16 @@ export default function HeroScroll() {
           </div>
         </div>
       </div>
+
+      {/* SIN SOPORTE DE ANIMACIONES DE SCROLL (hoy Firefox) el velo y el texto se
+          quedarian invisibles con opacity-0, o sea el hero saldria sin titular. Este
+          bloque los devuelve a la vista: se pierde el efecto, no el contenido. */}
+      <style>{`
+        @supports not (animation-timeline: view()) {
+          .hero-scroll .hero-velo,
+          .hero-scroll .hero-texto { opacity: 1 !important; }
+        }
+      `}</style>
     </section>
   );
 }

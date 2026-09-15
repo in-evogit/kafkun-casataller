@@ -24,7 +24,7 @@ export default function SobreMiPage() {
               casi una pantalla entera. */}
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16">
             <div>
-              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
                 Quién teje
               </p>
               <h1 className="mt-4 text-balance font-heading text-[2.5rem] font-light leading-[0.98] tracking-[-0.025em] text-foreground md:text-[4rem]">
@@ -131,7 +131,7 @@ export default function SobreMiPage() {
               />
             </div>
             <div>
-              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
                 Y ahora
               </p>
               <h2 className="mt-4 text-balance font-heading text-[1.875rem] font-light leading-tight tracking-[-0.018em] text-foreground md:text-[2.5rem]">

@@ -44,7 +44,7 @@ export default function ObrasCarrusel({
     <section className="overflow-hidden bg-background">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
             Obras a pedido
           </p>
           <h2 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3rem]">
