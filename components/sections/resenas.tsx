@@ -119,8 +119,13 @@ export default function Resenas() {
                     <span className="block truncate text-[0.9375rem] font-medium text-foreground">
                       {r.nombre}
                     </span>
+                    {/* "Taller presencial" en cada tarjeta, por indicacion de Gabriel
+                        (15-sep): TODAS las resenas que hay son de talleres presenciales,
+                        y el curso que se vende es online grabado. Sin esta etiqueta
+                        alguien las lee, se inscribe al online, y siente que le vendieron
+                        otra cosa. */}
                     <span className="block truncate text-[0.75rem] text-muted-foreground">
-                      {r.taller}
+                      {r.taller} · presencial
                     </span>
                   </span>
                 </figcaption>

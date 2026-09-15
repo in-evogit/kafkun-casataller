@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HeroPagina from "@/components/hero-pagina";
 import CourseCard from "@/components/course-card";
 import { seedCourses } from "@/lib/data/clases";
 
@@ -20,17 +21,11 @@ export default function CursosPage() {
 
   return (
     <main>
-      <section className="bg-secondary">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl font-semibold text-foreground md:text-5xl">
-            Cursos de telar
-          </h1>
-          <p className="mt-3 max-w-xl text-lg text-muted-foreground">
-            Aprender a tejer es para cualquiera. Elige el nivel que te llama y
-            empieza hoy, a tu propio ritmo.
-          </p>
-        </div>
-      </section>
+      <HeroPagina
+        antetitulo="Clases"
+        titulo="Aprende a tejer a tu ritmo"
+        bajada="Clases online grabadas, para verlas cuando puedas y las veces que quieras. Sin fechas ni cupos."
+      />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

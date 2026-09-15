@@ -4,6 +4,7 @@ import { Mail, Scissors } from "lucide-react";
 import IconoInstagram from "@/components/ui/icono-instagram";
 import MenuCircular from "@/components/ui/menu-circular";
 import FormularioContacto from "@/components/formulario-contacto";
+import HeroPagina from "@/components/hero-pagina";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -44,17 +45,13 @@ const canales = [
 export default function ContactoPage() {
   return (
     <main className="bg-background">
-      <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-          Contacto
-        </p>
-        <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3.25rem]">
-          Escríbeme y conversamos
-        </h1>
-        <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted-foreground">
-          Cualquier duda sobre las clases, sobre un encargo, o sobre un pedido que ya está
-          en camino.
-        </p>
+      <HeroPagina
+        antetitulo="Contacto"
+        titulo="Escríbeme y conversamos"
+        bajada="Cualquier duda sobre las clases, sobre un encargo, o sobre un pedido que ya está en camino."
+      />
+
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
 
         <dl className="mt-14 space-y-10">
           {canales.map((c) => (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Urdimbre from "@/components/urdimbre";
+import HeroPagina from "@/components/hero-pagina";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -21,31 +21,11 @@ export default function DiarioPage() {
       {/* Cabecera sin bloque de color. Gabriel: los encabezados de las subsecciones
           "son muy voluminosos y no aportan mucho". Este ocupaba una franja entera para
           decir dos frases. */}
-      {/* Hero con la urdimbre. Gabriel queria "algo mas representativo de la marca,
-          con referencia a lanas". Son los hilos del telar tensandose al entrar,
-          dibujados con CSS — sin framer-motion, que costaria 50-70 KB. */}
-      <section className="relative isolate overflow-hidden border-b border-border bg-background">
-        <Urdimbre className="absolute inset-0 -z-10" />
-        {/* El papel se abre hacia abajo para que el texto no compita con los hilos. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,color-mix(in_oklch,var(--background)_55%,transparent)_0%,var(--background)_78%)]"
-        />
-        <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 sm:pt-32 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              Diario
-            </p>
-            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3.25rem]">
-              Lo que voy aprendiendo, y te lo paso
-            </h1>
-            <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-muted-foreground">
-              Técnicas, materiales y lo que he ido descubriendo tejiendo. Gratis, sin
-              tener que dejarme nada a cambio.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroPagina
+        antetitulo="Diario"
+        titulo="Lo que voy aprendiendo, y te lo paso"
+        bajada="Técnicas, materiales y lo que he ido descubriendo tejiendo. Gratis, sin tener que dejarme nada a cambio."
+      />
 
       {/* ENTRADAS HORIZONTALES, UNA BAJO OTRA. Gabriel: "que sean diarios horizontales
           hacia abajo, no como cuadros".

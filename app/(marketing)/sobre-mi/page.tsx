@@ -18,7 +18,11 @@ export default function SobreMiPage() {
           vuelve más abajo, en la cita, que es donde de verdad pega. */}
       <section className="border-b border-border">
         <div className="mx-auto max-w-7xl px-4 pt-20 pb-14 sm:px-6 sm:pt-28 lg:px-8">
-          <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
+          {/* items-center y no items-end: con items-end el texto se pegaba al pie de
+              una foto vertical muy alta y quedaba un hueco enorme arriba. Y la foto
+              baja de 3:4 a 4:5 con tope de alto, porque a 3:4 en esta columna medía
+              casi una pantalla entera. */}
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16">
             <div>
               <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
                 Quién teje
@@ -33,9 +37,9 @@ export default function SobreMiPage() {
               </p>
             </div>
 
-            <div className="relative aspect-[3/4] overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[4/5] max-h-[30rem] w-full overflow-hidden rounded-[2px]">
               <Image
-                src="/images/katy-chal-gris.jpg"
+                src="/images/katty-chal-gris.jpg"
                 alt="Katty en su taller, con un chal gris tejido por ella"
                 fill
                 priority

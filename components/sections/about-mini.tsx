@@ -13,7 +13,7 @@ import { type Ranura } from "@/lib/media";
  * la imagen más grande de la portada. Queda pendiente hasta tener un retrato real.
  */
 const RETRATO_POR_DEFECTO: Ranura = {
-  src: "/images/katy-chal-gris.jpg",
+  src: "/images/katty-chal-gris.jpg",
   alt: "Katty en su taller, con un chal gris tejido por ella",
   // Vertical y no horizontal: en esta reja de dos columnas la foto vertical llena la
   // mitad de la pantalla, mientras que una horizontal deja aire muerto arriba y abajo.

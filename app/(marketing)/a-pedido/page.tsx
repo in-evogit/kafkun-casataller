@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ObrasCarrusel from "@/components/sections/obras-carrusel";
+import HeroPagina from "@/components/hero-pagina";
 import { familiasEncargo } from "@/lib/data/obras";
 import LineaEncargo from "@/components/linea-encargo";
 
@@ -30,34 +31,19 @@ export default function APedidoPage() {
 
   return (
     <main>
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-4 pt-20 pb-14 sm:px-6 sm:pt-28 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              A pedido
-            </p>
-            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3.25rem]">
-              No tejo un chaleco típico. Tejo el que tú quieres.
-            </h1>
-            {/* La aclaracion de que no estan en venta va ANTES de las fotos, no despues:
-                es lo que evita que alguien las recorra buscando el boton de comprar. */}
-            <p className="mt-5 max-w-[54ch] text-lg leading-relaxed text-muted-foreground">
-              Cada pieza se teje sobre tus medidas y se define conversando. Todo lo que
-              ves aquí abajo ya fue tejido para alguien: está para mostrarte hasta dónde
-              llega el trabajo, no para comprarlo tal cual.
-            </p>
-
-            <div className="mt-9">
-              <Link
-                href="/a-pedido/empezar"
-                className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Empezar mi encargo
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroPagina
+        antetitulo="A pedido"
+        titulo="No tejo un chaleco típico. Tejo el que tú quieres."
+        bajada="Cada pieza se teje sobre tus medidas y se define conversando. Todo lo que ves aquí abajo ya fue tejido para alguien: está para mostrarte hasta dónde llega el trabajo, no para comprarlo tal cual."
+        acciones={
+          <Link
+            href="/a-pedido/empezar"
+            className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] border border-primary bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:border-accent hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Empezar mi encargo
+          </Link>
+        }
+      />
 
       {/* Una familia, un carrusel. La reja mostraba todas las piezas del mismo
           tamano y a la misma distancia, que es como se lee un catalogo; aca se
