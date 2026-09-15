@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Hero from "@/components/sections/hero";
+import HeroScroll from "@/components/sections/hero-scroll";
 import FeaturedCourses from "@/components/sections/featured-courses";
 import AboutMini from "@/components/sections/about-mini";
 import ObrasCarrusel from "@/components/sections/obras-carrusel";
@@ -62,7 +62,7 @@ export default function HomePage() {
           El orden queda: quien es -> que hace -> que ensena -> quien lo dice ->
           que dudas quedan -> ELIGE. Y recien despues el correo, que es lo que se
           pide a quien todavia no esta listo para decidir. */}
-      <Hero />
+      <HeroScroll />
       <AboutMini />
       <ObrasCarrusel
         obras={obrasPublicables}

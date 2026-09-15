@@ -315,3 +315,55 @@
   transform-origin: top;
   animation: urdir 900ms var(--ease-hilo) both;
 }
+
+/* ─── Hero con scroll ──────────────────────────────────────────────────────
+   Las piezas se juntan y crecen mientras se baja; el texto se va.
+
+   Hecho con animaciones ligadas al scroll de CSS y NO con una librería. La
+   razón no es el peso (que también: motion son ~40 KB en la ruta más
+   crítica) sino DÓNDE corre: una librería anima desde el hilo principal, el
+   mismo que está cargando imágenes e hidratando React, justo cuando el hero
+   entra. Ahí es donde se caen los cuadros. Estas corren en el compositor.
+
+   Donde el navegador no las soporta —hoy Firefox— no pasa nada malo: las
+   reglas se ignoran y la galería se ve en su estado final, quieta. */
+@supports (animation-timeline: view()) {
+  .hero-scroll {
+    view-timeline-name: --hero-scroll;
+    view-timeline-axis: block;
+  }
+
+  .hero-celda {
+    animation: hero-juntar linear both;
+    animation-timeline: --hero-scroll;
+    animation-range: entry 0% cover 55%;
+  }
+
+  .hero-texto {
+    animation: hero-salir linear both;
+    animation-timeline: --hero-scroll;
+    animation-range: entry 10% cover 40%;
+  }
+}
+
+@keyframes hero-juntar {
+  from {
+    transform: scale(0.62) translateY(14%);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-salir {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.88);
+    opacity: 0;
+  }
+}
