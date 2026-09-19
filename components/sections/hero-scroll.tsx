@@ -17,9 +17,10 @@ import Link from "next/link";
  * leeria como una sola imagen grande desplazandose; a velocidades distintas se lee
  * como planos a distintas profundidades.
  *
- * FOTOS: fuera los rollos de lana (lanas-1, lanas-2) por indicacion de Gabriel —
- * "esas no se ocupan". Se reemplazan por piezas, que es lo que el hero tiene que
- * mostrar. Y se excluyen a mano las que muestran caras de terceros —obra-clientes,
+ * FOTOS: NADA DE LANA EN ROLLO, por indicacion de Gabriel. Salieron lanas-1, lanas-2
+ * y despues tambien materiales-conos y materiales-caja, que eran las dos cajas de
+ * conos de hilo —una al centro y otra arriba a la derecha—. En su lugar van piezas
+ * terminadas, que es lo que el hero tiene que mostrar: el resultado, no el insumo. Y se excluyen a mano las que muestran caras de terceros —obra-clientes,
  * obra-manta-crema, obra-capucha-mostaza, taller-alumnas, taller-mesa— porque no
  * tenemos su autorizacion por escrito. Las de Katty si van: es su sitio.
  */
@@ -37,7 +38,7 @@ const COLUMNAS: string[][] = [
   [
     "obra-chal-gris",
     "obra-chaleco-cafe-1",
-    "materiales-conos",
+    "prod-bufanda-roja-2",
     "obra-manta-roja-2",
     "prod-bufanda-roja-1",
     "obra-correas-1",
@@ -56,7 +57,7 @@ const COLUMNAS: string[][] = [
   ],
   [
     "prod-chaleco-verde-2",
-    "materiales-caja",
+    "obra-langer-2",
     "obra-correas-2",
     "telar-proceso",
     "prod-bufanda-blanca-2",
