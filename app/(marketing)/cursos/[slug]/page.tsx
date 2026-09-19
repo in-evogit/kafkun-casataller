@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import RanuraVideo from "@/components/ranura-video";
+import TarjetaPrecio from "@/components/ui/tarjeta-precio";
 import Figura from "@/components/figura";
 import { pendiente } from "@/lib/media";
 import Link from "next/link";
@@ -123,21 +124,21 @@ export default async function CourseDetailPage({ params }: Props) {
       />
 
       {/* Hero */}
-      <section className="bg-tinta">
+      <section className="border-b border-border bg-background">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
           <div className="flex flex-col justify-center">
-            <span className="inline-block rounded-full border border-tinta-foreground/40 px-3 py-1 text-xs font-medium text-tinta-foreground/80">
+            <span className="inline-block rounded-full border border-tinta-foreground/40 px-3 py-1 text-xs font-medium text-foreground/80">
               {levelLabel[course.level]}
             </span>
-            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-tinta-foreground md:text-[3rem]">
+            <h1 className="mt-4 text-balance font-heading text-[2.125rem] font-light leading-[1.05] tracking-[-0.018em] text-foreground md:text-[3rem]">
               {course.title}
             </h1>
-            <p className="mt-2 font-heading text-xl text-tinta-foreground/70">
+            <p className="mt-2 font-heading text-xl text-muted-foreground">
               {course.subtitle}
             </p>
-            <p className="mt-4 text-tinta-foreground/70">{course.description}</p>
+            <p className="mt-4 text-muted-foreground">{course.description}</p>
 
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-tinta-foreground/70">
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <Clock className="h-4 w-4" />
                 {formatDuration(course.duration_minutes)}
@@ -149,12 +150,12 @@ export default async function CourseDetailPage({ params }: Props) {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <span className="font-heading text-3xl font-semibold text-tinta-foreground">
+              <span className="font-heading text-3xl font-semibold text-foreground">
                 {formatPrice(course.price_clp)}
               </span>
               <Link
                 href={`/checkout?curso=${course.slug}`}
-                className="inline-flex h-12 items-center justify-center rounded-[2px] border border-tinta-foreground bg-tinta-foreground px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-tinta transition-[background-color,border-color,transform] duration-[var(--dur-color)] hover:bg-tinta-foreground/88 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tinta-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-tinta"
+                className="inline-flex h-12 items-center justify-center rounded-[2px] border border-burdeos bg-burdeos px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-[var(--tinta-foreground)] transition-[background-color,border-color,transform] duration-[var(--dur-color)] hover:border-primary hover:bg-primary active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 Quiero este taller
               </Link>
@@ -162,7 +163,7 @@ export default async function CourseDetailPage({ params }: Props) {
             {/* Respuesta de Gabriel (9-sep-2026): se paga una vez y queda tuyo para
                 siempre. No es suscripcion ni acceso por tiempo limitado, y decirlo
                 completo quita la duda que frena una inscripcion. */}
-            <p className="mt-3 max-w-[46ch] text-[0.8125rem] leading-relaxed text-tinta-foreground/70">
+            <p className="mt-3 max-w-[46ch] text-[0.8125rem] leading-relaxed text-muted-foreground">
               Pago único: lo compras una vez y queda tuyo para siempre. Online y
               grabado, lo ves cuando puedas.
             </p>
@@ -218,31 +219,66 @@ export default async function CourseDetailPage({ params }: Props) {
               Resultados
             </p>
             <h2 className="mt-4 text-balance font-heading text-[1.75rem] font-light leading-tight tracking-[-0.015em] text-foreground md:text-[2.25rem]">
-              Lo que vas a poder tejer al terminar
+              De no saber nada, a esto
             </h2>
             <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-              Piezas hechas por alumnas de este mismo taller, no por Katty.
+              El camino completo, paso a paso. Cada pieza es de una alumna de este mismo taller, no de Katty.
             </p>
           </div>
 
-          <ul className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+          {/* LINEA DE TIEMPO, no una reja de cuatro cuadros. Gabriel: "hagamos un
+              tipo linea de tiempo bien bonita para que el que va a comprar quede como
+              wow".
+
+              Y el cambio no es solo visual: una reja dice "estas cuatro cosas", una
+              linea dice "primero esto, despues esto, y al final vas a poder ESTO".
+              Para alguien que esta decidiendo si puede aprender, ver el CAMINO es lo
+              que convence — no ver el catalogo de resultados. La ultima parada lleva
+              la pieza mas ambiciosa a proposito: es la que se compra.
+
+              Las cuatro ranuras van vacias esperando trabajos DE ALUMNAS. No se
+              llenan con obras de Katty: eso seria vender su nivel como si fuera el
+              que se alcanza en el taller. */}
+          <ol className="mt-12 grid gap-10 md:grid-cols-4 md:gap-6">
             {[
-              "Primera pieza en técnica llano",
-              "Cinta con diseño propio",
-              "Pieza con cambio de color",
-              "Trabajo terminado con flecos",
-            ].map((pie) => (
-              <li key={pie}>
-                <Figura
-                  media={pendiente("vertical", `Trabajo de alumna: ${pie}`)}
-                  sizes="(max-width: 768px) 50vw, 25vw"
+              { n: "01", pie: "Tu primera pieza en técnica llano", texto: "A las pocas clases ya tienes algo tejido con tus manos." },
+              { n: "02", pie: "Una cinta con tu propio diseño", texto: "Eliges los colores y el patrón, y lo montas sola." },
+              { n: "03", pie: "Cambios de color sin cortar el hilo", texto: "Acá se nota el salto: la pieza deja de verse de principiante." },
+              { n: "04", pie: "Una pieza terminada, con flecos", texto: "Lista para usar o para regalar. Esto es lo que te llevas." },
+            ].map((paso, i) => (
+              <li key={paso.n} className="relative">
+                {/* El hilo que une una parada con la siguiente. En la última no va,
+                    porque no hay a dónde seguir. */}
+                {i < 3 && (
+                  <span
+                    aria-hidden
+                    className="absolute left-[7px] top-[calc(100%+0.75rem)] hidden h-10 w-px bg-border md:left-0 md:right-[-1.5rem] md:top-[7px] md:block md:h-px md:w-auto"
+                  />
+                )}
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-[15px] w-[15px] rounded-full border-2 border-burdeos bg-background md:top-0"
                 />
-                <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">
-                  {pie}
-                </p>
+                <div className="pl-8 md:pl-0 md:pt-8">
+                  <span className="block font-heading text-[1.5rem] font-light leading-none text-burdeos">
+                    {paso.n}
+                  </span>
+                  <div className="mt-4">
+                    <Figura
+                      media={pendiente("vertical", `Trabajo de alumna: ${paso.pie}`)}
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                  </div>
+                  <h3 className="mt-4 max-w-[26ch] font-heading text-[1.0625rem] leading-snug text-foreground">
+                    {paso.pie}
+                  </h3>
+                  <p className="mt-2 max-w-[32ch] text-[0.875rem] leading-relaxed text-muted-foreground">
+                    {paso.texto}
+                  </p>
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
@@ -288,24 +324,37 @@ export default async function CourseDetailPage({ params }: Props) {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-primary">
-        <div className="mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-primary-foreground md:text-3xl">
-            ¿Lista para empezar?
-          </h2>
-          <p className="mt-2 text-primary-foreground/80">
-            Pago único · Empiezas cuando quieras
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <span className="font-heading text-2xl font-semibold text-primary-foreground">
-              {formatPrice(course.price_clp)}
-            </span>
-            <Link
-              href={`/checkout?curso=${course.slug}`}
-              className="rounded-md bg-primary-foreground px-8 py-3 font-semibold text-primary transition-opacity hover:opacity-90"
-            >
-              Inscribirme ahora →
-            </Link>
+      {/* Aca iba una franja entera en rojo #C50906 a pantalla completa, que Gabriel
+          encontro "super fuerte". Una banda del color mas saturado de la paleta grita
+          en vez de invitar, y lo que este bloque tiene que hacer es VENDER — que es lo
+          que Gabriel repite que importa. Ahora es una tarjeta que responde al cursor. */}
+      <section className="border-t border-border bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
+                Empezar
+              </p>
+              <h2 className="mt-4 text-balance font-heading text-[1.875rem] font-light leading-tight tracking-[-0.018em] text-foreground md:text-[2.5rem]">
+                Lo compras una vez y queda tuyo
+              </h2>
+              <p className="mt-5 max-w-[48ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+                Sin suscripción, sin fecha de vencimiento y sin cupos. Lo ves cuando
+                puedas, las veces que quieras, y vuelves a la clase que necesites
+                cuando se te olvide un paso.
+              </p>
+            </div>
+
+            <div className="flex justify-center lg:justify-end">
+              <TarjetaPrecio
+                etiqueta={levelLabel[course.level]}
+                precio={formatPrice(course.price_clp)}
+                nota="Pago único · para siempre"
+                detalle={`${course.lessons_count} clases grabadas, ${formatDuration(course.duration_minutes)} de material. Empiezas cuando quieras.`}
+                cta="Quiero este taller"
+                href={`/checkout?curso=${course.slug}`}
+              />
+            </div>
           </div>
         </div>
       </section>

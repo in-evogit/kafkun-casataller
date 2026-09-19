@@ -17,7 +17,9 @@ import Link from "next/link";
  * leeria como una sola imagen grande desplazandose; a velocidades distintas se lee
  * como planos a distintas profundidades.
  *
- * FOTOS: se excluyen a mano las que muestran caras de terceros —obra-clientes,
+ * FOTOS: fuera los rollos de lana (lanas-1, lanas-2) por indicacion de Gabriel —
+ * "esas no se ocupan". Se reemplazan por piezas, que es lo que el hero tiene que
+ * mostrar. Y se excluyen a mano las que muestran caras de terceros —obra-clientes,
  * obra-manta-crema, obra-capucha-mostaza, taller-alumnas, taller-mesa— porque no
  * tenemos su autorizacion por escrito. Las de Katty si van: es su sitio.
  */
@@ -26,7 +28,7 @@ const COLUMNAS: string[][] = [
     "obra-chaleco-mostaza-1",
     "obra-manta-roja-1",
     "obra-chal-rosa-1",
-    "lanas-1",
+    "obra-correas-3",
     "obra-cintas-muestrario",
     "prod-chaleco-verde-1",
     "obra-manta-hojas",
@@ -46,7 +48,7 @@ const COLUMNAS: string[][] = [
     "obra-manta-roja-caja",
     "obra-cinta-amarilla",
     "obra-chaleco-mostaza-2",
-    "lanas-2",
+    "prod-bufanda-blanca-3",
     "prod-bufanda-blanca-1",
     "katty-chal-gris",
     "obra-correas-4",

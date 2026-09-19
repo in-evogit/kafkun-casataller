@@ -99,59 +99,108 @@ export default function SobreMiPage() {
         </div>
       </section>
 
-      {/* EL VINO VUELVE ACÁ. Gabriel lo pidió de vuelta "en algunos sectores", y este
-          es el sector: su principio, dicho por ella. Es lo más fuerte que tiene el
-          sitio y merece el único bloque de peso de la página. Papel sobre este vino
-          da 14.32:1, medido. */}
-      <section className="bg-tinta">
-        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-          <blockquote>
-            <span aria-hidden className="block h-px w-14 bg-tinta-foreground/40" />
-            <p className="mt-8 text-balance font-heading text-[1.625rem] font-light italic leading-[1.25] text-tinta-foreground md:text-[2.5rem]">
-              En mis talleres no me guardo ningún dato. Todo lo que he aprendido desde la
-              práctica, lo enseño — con todos los tips, sin mezquindades.
+      {/* LA CITA, SIN LA FRANJA. Gabriel: "ese recuadro burdeo que pones con la frase
+          como que corta la web". Tenia razon: un bloque de color a pantalla completa en
+          medio de una historia la parte en dos, y la frase de Katty es lo mejor que
+          tiene el sitio — no merece quedar aislada, merece estar dentro del relato.
+
+          Ahora va sobre el papel, con el hilo burdeo al costado y el tamaño de un
+          titular. Sigue siendo el momento mas fuerte de la pagina, pero la historia
+          sigue corriendo a traves de ella. */}
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <blockquote className="border-l-2 border-burdeos pl-7 md:pl-10">
+            <p className="max-w-[30ch] text-balance font-heading text-[1.75rem] font-light italic leading-[1.2] text-foreground md:text-[2.75rem]">
+              En mis talleres no me guardo ningún dato.
             </p>
-            <footer className="mt-8 text-[0.875rem] text-tinta-foreground/60">
+            <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-muted-foreground">
+              Todo lo que he aprendido desde la práctica, lo enseño — con todos los tips,
+              sin mezquindades.
+            </p>
+            <footer className="mt-6 text-[0.875rem] text-muted-foreground">
               Katty · Casa Taller Kafkün
             </footer>
           </blockquote>
         </div>
       </section>
 
-      <section>
+      {/* EL CIERRE. Antes era la foto del telar sola al costado y dos botones: "esa
+          foto pelada del telar se ve mal y el cta es medio fome".
+
+          Lo que se cambia de fondo no es el diseño: es QUE DICE. Un cierre que solo
+          repite los dos botones no vende nada, porque no le da a nadie una razon para
+          apretar. Ahora la ultima frase de la pagina es la promesa concreta de cada
+          camino, y los botones vienen detras de esa promesa.
+
+          Las dos fotos en vez de una: la pieza terminada y el telar en uso. Una sola
+          foto de un telar vacio no dice nada de lo que se puede tener. */}
+      <section className="border-b border-border">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-[2px]">
-              <Image
-                src="/images/telar-proceso.jpg"
-                alt="Telar mapuche de Katty con un tejido en proceso"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-            <div>
-              <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
-                Y ahora
-              </p>
-              <h2 className="mt-4 text-balance font-heading text-[1.875rem] font-light leading-tight tracking-[-0.018em] text-foreground md:text-[2.5rem]">
-                Tejo por encargo y enseño lo que sé
-              </h2>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/a-pedido/empezar"
-                  className="hilo hilo-boton relative inline-flex h-12 items-center justify-center rounded-[2px] border border-primary bg-primary px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-primary-foreground transition-colors duration-[var(--dur-color)] hover:border-accent hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  Encargar una pieza
-                </Link>
-                <Link
-                  href="/cursos"
-                  className="inline-flex h-12 items-center justify-center rounded-[2px] border border-border px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-foreground transition-colors duration-[var(--dur-color)] hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  Ver las clases
-                </Link>
+          <div className="max-w-2xl">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-burdeos">
+              Y ahora
+            </p>
+            <h2 className="mt-4 text-balance font-heading text-[1.875rem] font-light leading-tight tracking-[-0.018em] text-foreground md:text-[2.75rem]">
+              Puedes tener una pieza mía, o aprender a hacer la tuya
+            </h2>
+          </div>
+
+          <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-8">
+            {[
+              {
+                foto: "/images/obra-chaleco-mostaza-1.jpg",
+                alt: "Chaleco tejido en mostaza, sobre maniquí en el campo",
+                titulo: "Encargar una pieza",
+                texto:
+                  "Nos juntamos, me cuentas qué quieres y te tomo las medidas. El precio y el plazo salen al final, con la pieza ya definida entre las dos.",
+                cta: "Empezar mi encargo",
+                href: "/a-pedido/empezar",
+                principal: true,
+              },
+              {
+                foto: "/images/proceso-telar.jpg",
+                alt: "Pieza montada en el telar, en proceso",
+                titulo: "Aprender a tejer",
+                texto:
+                  "Clases grabadas que ves a tu ritmo. Se paga una vez y queda tuyo. Si nunca has tejido en telar, parte por la primera.",
+                cta: "Ver las clases",
+                href: "/cursos",
+                principal: false,
+              },
+            ].map((v) => (
+              <div
+                key={v.titulo}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-[border-color,box-shadow,transform] duration-[var(--dur-color)] hover:-translate-y-0.5 hover:border-burdeos hover:shadow-[0_2px_8px_rgba(44,26,17,0.06),0_18px_40px_-18px_rgba(44,26,17,0.18)]"
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={v.foto}
+                    alt={v.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="font-heading text-[1.4375rem] font-light text-foreground">
+                    {v.titulo}
+                  </h3>
+                  <p className="mt-3 flex-1 max-w-[44ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+                    {v.texto}
+                  </p>
+                  <Link
+                    href={v.href}
+                    className={
+                      v.principal
+                        ? "mt-7 inline-flex h-12 w-fit items-center justify-center rounded-full border border-burdeos bg-burdeos px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-[var(--tinta-foreground)] transition-[background-color,border-color,transform] duration-[var(--dur-color)] hover:border-primary hover:bg-primary active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        : "mt-7 inline-flex h-12 w-fit items-center justify-center rounded-full border border-border px-7 text-[0.9375rem] font-medium tracking-[0.02em] text-foreground transition-[border-color,color,transform] duration-[var(--dur-color)] hover:border-burdeos hover:text-burdeos active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    }
+                  >
+                    {v.cta}
+                  </Link>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
