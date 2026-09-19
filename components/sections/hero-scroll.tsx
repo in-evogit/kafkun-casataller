@@ -13,6 +13,17 @@ import Link from "next/link";
  * siempre hay foto entrando por el borde inferior, porque el recorrido nunca supera
  * el sobrante de la columna.
  *
+ * EL REPARTO DE COLORES NO ES AL AZAR. Gabriel pidio que no quedaran todas las rojas
+ * juntas. Se midio el color dominante de las 31 fotos —promedio ponderado por
+ * saturacion, para que mande la pieza y no el fondo— y salieron 15 calidas y 16
+ * neutras. Cada columna alterna calida/neutra, y las columnas pares arrancan en
+ * calida mientras las impares arrancan en neutra: asi tampoco queda una fila entera
+ * del mismo tono cuando se miran las cuatro juntas.
+ *
+ * Son 31 fotos para 32 espacios, asi que una calida se repite. Se pone lejos de su
+ * primera aparicion: en una galeria que se desplaza no se nota, y es mejor que dejar
+ * una columna corta, que si podria mostrar fondo.
+ *
  * Las columnas viajan distinto a proposito. Si todas fueran a la misma velocidad se
  * leeria como una sola imagen grande desplazandose; a velocidades distintas se lee
  * como planos a distintas profundidades.
@@ -26,44 +37,44 @@ import Link from "next/link";
  */
 const COLUMNAS: string[][] = [
   [
-    "obra-chaleco-mostaza-1",
-    "obra-manta-roja-1",
-    "obra-chal-rosa-1",
-    "obra-correas-3",
-    "obra-cintas-muestrario",
-    "prod-chaleco-verde-1",
-    "obra-manta-hojas",
+    "katty-chal-gris",
     "katy-telar",
-  ],
-  [
+    "katy-taller",
+    "obra-chal-rosa-1",
     "obra-chal-gris",
-    "obra-chaleco-cafe-1",
-    "prod-bufanda-roja-2",
-    "obra-manta-roja-2",
-    "prod-bufanda-roja-1",
-    "obra-correas-1",
-    "proceso-telar",
     "obra-chal-rosa-2",
+    "obra-chaleco-mostaza-1",
+    "obra-chaleco-cafe-1",
   ],
   [
-    "obra-manta-roja-caja",
+    "obra-chaleco-cafe-2",
     "obra-cinta-amarilla",
     "obra-chaleco-mostaza-2",
-    "prod-bufanda-blanca-3",
-    "prod-bufanda-blanca-1",
-    "katty-chal-gris",
+    "obra-cintas-muestrario",
     "obra-correas-4",
-    "obra-chaleco-cafe-2",
+    "obra-correas-1",
+    "obra-langer-1",
+    "obra-correas-2",
   ],
   [
-    "prod-chaleco-verde-2",
-    "obra-langer-2",
-    "obra-correas-2",
-    "telar-proceso",
-    "prod-bufanda-blanca-2",
-    "obra-langer-1",
-    "katy-taller",
     "obra-correas-3",
+    "obra-manta-roja-1",
+    "obra-langer-2",
+    "obra-manta-roja-2",
+    "obra-manta-hojas",
+    "proceso-telar",
+    "obra-manta-roja-caja",
+    "prod-bufanda-blanca-1",
+  ],
+  [
+    "prod-bufanda-blanca-2",
+    "prod-bufanda-roja-1",
+    "prod-bufanda-blanca-3",
+    "prod-bufanda-roja-2",
+    "prod-chaleco-verde-1",
+    "telar-proceso",
+    "prod-chaleco-verde-2",
+    "katty-chal-gris",
   ],
 ];
 
