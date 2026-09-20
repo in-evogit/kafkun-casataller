@@ -8,6 +8,14 @@ import Link from "next/link";
  * pobreza, que no queden espacios negros, el corte redondeado, como cards que se van
  * al cielo".
  *
+ * EL HERO SE ACORTO de 260vh a 118vh (19-sep). Gabriel: "la pagina principal lo mas
+ * rapida posible, la idea es vender", y la gente llega desde Instagram, o sea ya sabe
+ * quien es Katty. Con 260vh habia que recorrer casi tres pantallas antes de encontrar
+ * algo que apretar. Ahora el titular y los botones se ven de entrada y las columnas
+ * siguen moviendose mientras se baja: se conserva el gesto y se gana la venta.
+ *
+ * Por lo mismo el texto y el velo ya NO nacen invisibles esperando al scroll.
+ *
  * QUE NO QUEDEN HUECOS es la parte que hay que cuidar: cada columna lleva ocho fotos
  * y mide bastante mas que la pantalla, y arranca ya desplazada hacia abajo. Al subir
  * siempre hay foto entrando por el borde inferior, porque el recorrido nunca supera
@@ -91,7 +99,7 @@ export default function HeroScroll() {
   return (
     <section className="hero-scroll relative bg-[#0b0b0b]">
       {/* El alto largo ES el recorrido. La escena queda pegada mientras tanto. */}
-      <div className="h-[260vh] md:h-[300vh]">
+      <div className="h-[118vh] md:h-[124vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           {/* Las columnas ocupan TODO el ancho y mas alto que la pantalla. */}
           <div className="absolute inset-0 grid grid-cols-2 gap-2.5 p-2.5 md:grid-cols-4 md:gap-3 md:p-3">
@@ -134,10 +142,10 @@ export default function HeroScroll() {
               cierra con el scroll para que el texto tenga donde apoyarse. */}
           <div
             aria-hidden
-            className="hero-velo pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.70)_0%,rgba(0,0,0,0.82)_50%,rgba(0,0,0,0.90)_100%)] opacity-0"
+            className="hero-velo pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.80)_50%,rgba(0,0,0,0.86)_100%)]"
           />
 
-          <div className="hero-texto pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center opacity-0">
+          <div className="hero-texto pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
             <p className="text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-[var(--tinta-foreground)]/70">
               Casa Taller Kafkún · Sur de Chile
             </p>

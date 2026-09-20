@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import HeroScroll from "@/components/sections/hero-scroll";
-import FeaturedCourses from "@/components/sections/featured-courses";
 import AboutMini from "@/components/sections/about-mini";
 import ObrasCarrusel from "@/components/sections/obras-carrusel";
 import { obrasPublicables } from "@/lib/data/obras";
 import Resenas from "@/components/sections/resenas";
-import DosPuertas from "@/components/sections/dos-puertas";
+import DosOfertas from "@/components/sections/dos-ofertas";
 import FaqSection from "@/components/sections/faq-section";
 import NewsletterForm from "@/components/newsletter-form";
 
@@ -50,37 +49,36 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Orden del embudo, reordenado el 8-sep-2026 con Gabriel.
-          Su frase: "tiene que ser como un embudo de nutricion de info mientras
-          scrolleo, para que cuando llegue al momento de pedir ya no tenga dudas".
+      {/* ORDEN DEL EMBUDO, rehecho el 19-sep con un dato que lo cambia todo.
 
-          Eso cambia DONDE va la bifurcacion. Antes "las dos puertas" estaba en la
-          posicion 4, a media pagina: se le pedia elegir camino a alguien que todavia
-          no sabia quien es Katty, que hace ni si funciona. Ahora baja al final, con
-          toda la informacion ya entregada. La pregunta se hace cuando ya no hay dudas.
+          Gabriel: "la gente llega del mismo Instagram, por lo que ya sabran de Katty",
+          y "la idea es vender". Si ya la conocen, presentarsela otra vez antes de
+          mostrarle donde comprar es hacerle perder el tiempo a alguien que venia
+          decidido.
 
-          El orden queda: quien es -> que hace -> que ensena -> quien lo dice ->
-          que dudas quedan -> ELIGE. Y recien despues el correo, que es lo que se
-          pide a quien todavia no esta listo para decidir. */}
+          Por eso las OFERTAS CON PRECIO van segundas, inmediatamente despues del hero,
+          antes de las obras y mucho antes de la historia. Es lo mismo que hace la
+          referencia que paso (bordacolores): primer boton de compra en el hero,
+          precios en la tercera seccion.
+
+          "Quien teje" baja: sigue estando, porque no todos llegan de Instagram, pero
+          deja de ser el peaje que hay que pagar para llegar al precio.
+
+          Se eliminan DosPuertas y FeaturedCourses: los dos decian lo mismo que la
+          seccion de ofertas, uno sin precio y el otro con el curso repetido. */}
       <HeroScroll />
-      <AboutMini />
+      <DosOfertas />
       <ObrasCarrusel
         obras={obrasPublicables}
         titulo="No tejo un chaleco típico. Tejo el que tú quieres."
         bajada="Tus medidas, la forma y el diseño conversados, y la lana elegida después de tocarla."
       />
-      <FeaturedCourses />
       <Resenas />
+      <AboutMini />
       <FaqSection />
-      {/* Aca iba tambien FinalCta ("Dos maneras de empezar"), que decia EXACTAMENTE
-          lo mismo que DosPuertas: encargar vs aprender, dos botones, con veinte lineas
-          de distancia. Lo cazo Gabriel. Se elimina el duplicado; DosPuertas se queda
-          porque tiene las cajas marcadas y los dos botones con contorno. */}
-      <DosPuertas />
 
-      {/* El correo va al FINAL del todo, despues del cierre: es el premio de consuelo
-          para quien bajo entera la pagina y aun asi no se decidio. Ponerlo antes le
-          ofrece una salida barata a alguien que estaba a punto de encargar. */}
+      {/* El correo al final del todo: es para quien bajo entera la pagina y aun asi
+          no se decidio. Antes ofrecia una salida barata a alguien a punto de comprar. */}
       <section className="border-t border-border bg-background">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
           <h2 className="font-heading text-[1.5rem] font-light text-foreground sm:text-[1.75rem]">

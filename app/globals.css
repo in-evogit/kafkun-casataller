@@ -352,17 +352,7 @@
     animation-range: cover 0% cover 100%;
   }
 
-  .hero-velo {
-    animation: hero-oscurecer linear both;
-    animation-timeline: --hero-scroll;
-    animation-range: cover 12% cover 48%;
-  }
 
-  .hero-texto {
-    animation: hero-entrar linear both;
-    animation-timeline: --hero-scroll;
-    animation-range: cover 22% cover 56%;
-  }
 }
 
 /* Cada columna recorre lo suyo. --viaje lo define el componente. */
