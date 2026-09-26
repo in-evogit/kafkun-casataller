@@ -34,6 +34,12 @@ export default async function AdminLayout({
         <nav className="flex flex-col gap-0.5 p-2">
           {[
             { href: "/admin", label: "Dashboard" },
+            // Los tres primeros son lo que llega de gente de fuera y espera
+            // respuesta. Van arriba: es lo que hay que mirar al entrar, no el
+            // catalogo, que casi nunca cambia.
+            { href: "/admin/encargos", label: "Encargos" },
+            { href: "/admin/mensajes", label: "Mensajes" },
+            { href: "/admin/suscriptores", label: "Suscriptores" },
             { href: "/admin/cursos", label: "Cursos" },
             { href: "/admin/productos", label: "Productos" },
             { href: "/admin/ordenes", label: "Órdenes" },
