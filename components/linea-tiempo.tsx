@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefiereMenosMovimiento } from "@/lib/hooks/navegador";
 
 /**
  * Linea de tiempo que se va llenando al bajar.
@@ -33,22 +34,21 @@ export default function LineaTiempo({
   className?: string;
 }) {
   const contenedor = useRef<HTMLOListElement>(null);
-  const [activos, setActivos] = useState<boolean[]>(() => hitos.map(() => false));
-  const [menosMovimiento, setMenosMovimiento] = useState(false);
+  const [vistos, setVistos] = useState<boolean[]>(() => hitos.map(() => false));
+
+  // Leido con useSyncExternalStore, no con un efecto que llama setState: eso es un
+  // error en React 19 y ademas dibujaba un fotograma con movimiento antes de
+  // enterarse de que la persona pidio que no lo hubiera.
+  const menosMovimiento = usePrefiereMenosMovimiento();
+
+  // DERIVADO, no un estado que un efecto rellena: con "reducir movimiento" la linea
+  // sale completa desde el primer render. Antes eran los dos —un estado y un efecto
+  // que lo sobrescribia—, que es de donde salia el segundo render en cascada.
+  const activos = menosMovimiento ? hitos.map(() => true) : vistos;
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const leer = () => setMenosMovimiento(mq.matches);
-    leer();
-    mq.addEventListener("change", leer);
-    return () => mq.removeEventListener("change", leer);
-  }, []);
+    if (menosMovimiento) return;
 
-  useEffect(() => {
-    if (menosMovimiento) {
-      setActivos(hitos.map(() => true));
-      return;
-    }
     const el = contenedor.current;
     if (!el) return;
     const items = Array.from(el.querySelectorAll("[data-hito]"));
@@ -56,7 +56,7 @@ export default function LineaTiempo({
     // elemento entra, sin correr codigo en cada pixel de desplazamiento.
     const obs = new IntersectionObserver(
       (entradas) => {
-        setActivos((prev) => {
+        setVistos((prev) => {
           const copia = [...prev];
           let cambio = false;
           for (const e of entradas) {

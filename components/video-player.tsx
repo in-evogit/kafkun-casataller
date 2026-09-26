@@ -16,14 +16,17 @@ type Props = {
 export default function VideoPlayer({ playbackId, courseSlug, thumbnailUrl, title }: Props) {
   const [token, setToken] = useState<string | null>(null);
   const [devMode, setDevMode] = useState(false);
-  const [loading, setLoading] = useState(true);
+
+  // Arranca cargando SOLO si hay algo que pedir. Antes arrancaba siempre en true y
+  // el efecto lo apagaba con setState —error de React 19 (set-state-in-effect), y
+  // ademas un parpadeo: se pintaba el esqueleto de carga para un video que no
+  // existe—. Sin playbackId no hay nada que esperar, y el render de abajo ya
+  // resuelve ese caso con `|| !playbackId`.
+  const [loading, setLoading] = useState(!!playbackId);
 
   useEffect(() => {
-    if (!playbackId) {
-      setDevMode(true);
-      setLoading(false);
-      return;
-    }
+    if (!playbackId) return;
+
     fetch(`/api/video-token?playback_id=${playbackId}&course_slug=${courseSlug}`)
       .then((r) => r.json())
       .then((data) => {

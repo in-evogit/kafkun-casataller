@@ -15,7 +15,7 @@ function formatPrice(clp: number) {
 }
 
 function CuponInput() {
-  const { coupon, setCoupon, subtotal } = useCart();
+  const { coupon, setCoupon } = useCart();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

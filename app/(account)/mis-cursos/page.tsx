@@ -11,14 +11,6 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-function formatPrice(clp: number) {
-  return new Intl.NumberFormat("es-CL", {
-    style: "currency",
-    currency: "CLP",
-    maximumFractionDigits: 0,
-  }).format(clp);
-}
-
 export default async function MisCursosPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

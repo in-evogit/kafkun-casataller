@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import RanuraVideo from "@/components/ranura-video";
 import TarjetaPrecio from "@/components/ui/tarjeta-precio";
 import Figura from "@/components/figura";
