@@ -3,9 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroPagina from "@/components/hero-pagina";
 import { getAllPosts } from "@/lib/blog";
+import NewsletterForm from "@/components/newsletter-form";
 
 export const metadata: Metadata = {
-  title: "Diario de telar · Casa Taller Kafkun",
+  title: "Newsletter y diario de telar · Casa Taller Kafkün",
   description:
     "Consejos, técnicas y materiales para tejer. Aprende con Katty, instructora de telar en Chile.",
   alternates: {
@@ -21,10 +22,17 @@ export default function DiarioPage() {
       {/* Cabecera sin bloque de color. Gabriel: los encabezados de las subsecciones
           "son muy voluminosos y no aportan mucho". Este ocupaba una franja entera para
           decir dos frases. */}
+      {/* ANTETITULO "NEWSLETTER" Y EL FORMULARIO ACA ARRIBA, 26-sep-2026.
+          Gabriel pidio que el enlace del menu dijera "Newsletter" en vez de "Diario".
+          Cambiar solo la etiqueta habria dejado un enlace que miente: promete
+          suscribirse y lleva a una lista de articulos. Con el formulario en la
+          cabecera, quien viene a dejar su correo lo encuentra sin buscar, y quien
+          viene a leer baja y lee. El enlace cumple las dos cosas. */}
       <HeroPagina
-        antetitulo="Diario"
+        antetitulo="Newsletter"
         titulo="Lo que voy aprendiendo, y te lo paso"
-        bajada="Técnicas, materiales y lo que he ido descubriendo tejiendo. Gratis, sin tener que dejarme nada a cambio."
+        bajada="Técnicas, materiales y lo que he ido descubriendo tejiendo. Déjame tu correo y te aviso cuando publique algo nuevo o abra cupos para un taller."
+        acciones={<NewsletterForm origen="newsletter" alineacion="izquierda" />}
       />
 
       {/* ENTRADAS HORIZONTALES, UNA BAJO OTRA. Gabriel: "que sean diarios horizontales

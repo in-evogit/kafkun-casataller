@@ -19,7 +19,7 @@ export default async function Navbar() {
         <nav className="hidden items-center gap-6 lg:flex">
           <NavEnlace href="/cursos">Cursos</NavEnlace>
           <NavEnlace href="/a-pedido">A pedido</NavEnlace>
-          <NavEnlace href="/diario">Diario</NavEnlace>
+          <NavEnlace href="/diario">Newsletter</NavEnlace>
           <NavEnlace href="/sobre-mi">Sobre mí</NavEnlace>
           <NavEnlace href="/contacto">Contacto</NavEnlace>
         </nav>

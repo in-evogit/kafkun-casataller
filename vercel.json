@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/latido",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

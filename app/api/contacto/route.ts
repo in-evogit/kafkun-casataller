@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { contactLimiter, rateLimit } from "@/lib/ratelimit";
+import { sendContactoAviso } from "@/lib/email";
 import { z } from "zod";
 
 const esquema = z.object({
@@ -28,15 +29,23 @@ export async function POST(req: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const { error } = await admin.from("audit_log").insert({
-    action: "contacto",
-    entity_type: "mensaje",
-    metadata: parsed.data,
-  });
 
-  // A diferencia de /api/newsletter, aca SI se revisa el error. Responder ok cuando
-  // la escritura fallo es peor que fallar: la persona cree que escribio y se queda
-  // esperando una respuesta que nadie va a mandar.
+  // Tabla propia desde el 26-sep-2026. Antes caia en `audit_log`, el registro de
+  // eventos del sistema: el mensaje quedaba escrito pero no habia donde anotar
+  // "a esta persona ya le respondi", ni listar lo que esta sin contestar.
+  const { data, error } = await admin
+    .from("mensajes_contacto")
+    .insert({
+      nombre: parsed.data.nombre,
+      email: parsed.data.email,
+      mensaje: parsed.data.mensaje,
+    })
+    .select("id")
+    .single();
+
+  // Se revisa el error SIEMPRE. Responder ok cuando la escritura fallo es peor
+  // que fallar: la persona cree que escribio y se queda esperando una respuesta
+  // que nadie va a mandar.
   if (error) {
     console.error("[contacto] no se pudo guardar:", error.message);
     return NextResponse.json(
@@ -45,11 +54,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    console.warn(
-      "[contacto] mensaje guardado, pero RESEND_API_KEY no esta configurada: " +
-        "nadie recibio aviso. Revisar audit_log a mano."
-    );
+  // El mensaje ya esta guardado: si el correo falla, no se le dice nada a la
+  // persona. El fallo queda en los registros.
+  try {
+    await sendContactoAviso({ id: data.id, ...parsed.data });
+  } catch (e) {
+    console.error(`[contacto] ${data.id} guardado pero sin aviso:`, e);
   }
 
   return NextResponse.json({ ok: true });

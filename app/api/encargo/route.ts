@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { contactLimiter, rateLimit } from "@/lib/ratelimit";
 import { MAX_REFERENCIAS, MAX_PESO_MB } from "@/lib/encargo";
+import { sendEncargoAviso, sendEncargoConfirmacion } from "@/lib/email";
 import { z } from "zod";
 
 const BUCKET = "referencias-encargo";
@@ -135,12 +136,42 @@ export async function POST(req: NextRequest) {
   }
 
   // ── Avisos ───────────────────────────────────────────────────────────────
-  // Sin Resend configurado no se manda nada, y eso se dice en voz alta en los
-  // registros: un encargo guardado del que Katty no se entera es un cliente perdido.
-  if (!process.env.RESEND_API_KEY) {
-    console.warn(
-      `[encargo] ${data.id} guardado, pero RESEND_API_KEY no esta configurada: ` +
-        `nadie recibio aviso. Revisar la tabla encargos a mano.`
+  // DOS correos: el aviso a Katty (sin este, un encargo guardado es un cliente
+  // perdido) y la confirmacion a quien encargo (sin este, la persona manda el
+  // formulario y no tiene ninguna prueba de que llego).
+  //
+  // allSettled y no await suelto: el encargo YA esta guardado. Si Resend esta
+  // caido, la persona no tiene por que ver un error y volver a mandarlo todo
+  // —terminariamos con el encargo duplicado y la hora ocupada dos veces—.
+  // El fallo queda en los registros para poder responder a mano.
+  const datosCorreo = {
+    id: data.id,
+    nombre: datos.nombre,
+    email: datos.email,
+    telefono: datos.telefono || null,
+    tipo: datos.tipo,
+    descripcion: datos.descripcion,
+    plazo: datos.plazo || null,
+    horaIso: datos.prefiere_mensaje ? null : datos.hora_iso,
+    prefiereMensaje: datos.prefiere_mensaje,
+    cantidadReferencias: rutas.length,
+  };
+
+  const [aviso, confirmacion] = await Promise.allSettled([
+    sendEncargoAviso(datosCorreo),
+    sendEncargoConfirmacion(datosCorreo),
+  ]);
+
+  if (aviso.status === "rejected") {
+    console.error(
+      `[encargo] ${data.id} GUARDADO PERO SIN AVISO a Katty:`,
+      aviso.reason
+    );
+  }
+  if (confirmacion.status === "rejected") {
+    console.error(
+      `[encargo] ${data.id} sin confirmacion a ${datos.email}:`,
+      confirmacion.reason
     );
   }
 
