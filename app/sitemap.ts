@@ -13,6 +13,10 @@ const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kafkun-casataller.verc
  * y le dice al buscador que el sitio esta descuidado.
  *
  * Cuando /contacto exista, se vuelve a agregar aca. No antes.
+ *
+ * Las legales entran el 26-sep-2026, ya construidas, con prioridad baja: tienen que
+ * ser encontrables —MercadoPago las pide y la gente las busca— pero no compiten con
+ * las paginas que venden.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const estaticas: MetadataRoute.Sitemap = [
@@ -23,6 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/diario`, lastModified: new Date(), priority: 0.7, changeFrequency: "weekly" },
     { url: `${base}/sobre-mi`, lastModified: new Date(), priority: 0.6, changeFrequency: "monthly" },
     { url: `${base}/contacto`, lastModified: new Date(), priority: 0.5, changeFrequency: "monthly" },
+    { url: `${base}/terminos`, lastModified: new Date(), priority: 0.3, changeFrequency: "yearly" },
+    { url: `${base}/privacidad`, lastModified: new Date(), priority: 0.3, changeFrequency: "yearly" },
+    { url: `${base}/devoluciones`, lastModified: new Date(), priority: 0.3, changeFrequency: "yearly" },
   ];
 
   const cursos: MetadataRoute.Sitemap = seedCourses.map((c) => ({

@@ -29,7 +29,7 @@ const columnas = [
     enlaces: [
       { href: "/cursos", texto: "Todas las clases" },
       { href: "/cursos/tu-primer-telar", texto: "Taller inicial de telar" },
-      { href: "/diario", texto: "Diario" },
+      { href: "/diario", texto: "Newsletter" },
     ],
   },
   {
@@ -133,9 +133,29 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-tinta-foreground/15 pt-7 text-[0.8125rem] text-tinta-foreground/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Casa Taller Kafkún · Chile</p>
-          {/* Los enlaces legales se quitan hasta que existan: enlazar a 404 desde el
-              pie es peor que no tenerlos. Vuelven cuando Katty entregue sus datos. */}
-          <p className="text-tinta-foreground/40">Tejido a mano, pieza por pieza.</p>
+
+          {/* LOS ENLACES LEGALES VUELVEN (26-sep-2026). Estuvieron quitados porque las
+              tres paginas daban 404 y enlazar a un 404 desde el pie es peor que no
+              tenerlos. Ahora existen.
+
+              Van en el pie y no en el menu a proposito: es donde la gente las busca,
+              y en el menu le quitarian espacio a lo que vende. */}
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            {[
+              { href: "/terminos", texto: "Términos" },
+              { href: "/privacidad", texto: "Privacidad" },
+              { href: "/devoluciones", texto: "Devoluciones" },
+            ].map((e) => (
+              <Link
+                key={e.href}
+                href={e.href}
+                className="group relative inline-block transition-colors duration-[var(--dur-color)] hover:text-tinta-foreground/80 focus-visible:text-tinta-foreground/80 focus-visible:outline-none"
+              >
+                {e.texto}
+                <Hilo />
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

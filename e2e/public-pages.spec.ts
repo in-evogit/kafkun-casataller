@@ -77,6 +77,24 @@ test.describe("Paginas publicas", () => {
     await expect(page.getByRole("button", { name: /avísame/i }).first()).toBeVisible();
   });
 
+  test("las tres paginas legales existen y el pie las enlaza", async ({ page }) => {
+    // Sin estas, MercadoPago no aprueba la cuenta y cualquier reclamo lo pierde
+    // Katty por defecto. Estuvieron dando 404 durante meses.
+    for (const ruta of ["/terminos", "/privacidad", "/devoluciones"]) {
+      const res = await page.goto(ruta);
+      expect(res?.status(), `${ruta} deberia responder 200`).toBe(200);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    }
+
+    // Y que se puedan encontrar: una pagina legal que existe pero no esta enlazada
+    // desde ningun lado es igual de inutil que no tenerla.
+    await page.goto("/");
+    const pie = page.locator("footer");
+    await expect(pie.getByRole("link", { name: /^términos$/i })).toBeVisible();
+    await expect(pie.getByRole("link", { name: /^privacidad$/i })).toBeVisible();
+    await expect(pie.getByRole("link", { name: /^devoluciones$/i })).toBeVisible();
+  });
+
   test("sitemap y robots responden", async ({ page }) => {
     for (const ruta of ["/sitemap.xml", "/robots.txt"]) {
       const res = await page.goto(ruta);
